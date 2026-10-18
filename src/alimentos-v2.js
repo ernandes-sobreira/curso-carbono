@@ -46,7 +46,7 @@ const css=document.createElement("style");css.textContent=
 document.head.appendChild(css);
 const root=document.createElement("section");root.id="food2";root.hidden=true;
 root.innerHTML=
-'<div class="f2-heading"><div><h2>Meu prato e minha água</h2><p>Compare um indicador por vez. Valores médios publicados por kg de alimento.</p></div>'+
+'<div class="f2-heading"><div><h2>O impacto de cada alimento</h2><p>Compare um indicador por vez. Valores médios publicados por kg de alimento.</p></div>'+
 '<div class="f2-tabs"><button type="button" data-f2-nav="ssp">Cenários IPCC</button><button type="button" data-f2-nav="lev">Alavancas</button></div></div>'+
 '<div class="f2-grid"><section class="f2-panel"><div class="f2-heading"><strong id="f2-metric-name"></strong>'+
 '<div class="f2-tabs"><button type="button" data-f2-metric="carbon">Emissões</button><button type="button" data-f2-metric="water">Água</button></div></div>'+
@@ -98,6 +98,8 @@ root.querySelectorAll("[data-f2-nav]").forEach(b=>b.addEventListener("click",()=
 }));
 function sync(){
  const active=model.view==="me";
+ if(active)document.getElementById("title").textContent="Meu prato e minha água";
+ else document.getElementById("title").textContent=slide.title;
  stage.classList.toggle("food2-on",active);
  root.hidden=!active;
  if(active){local.kg=model.personal.beefKg;local.swap=model.personal.swap;redraw();}
