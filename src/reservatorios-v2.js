@@ -65,8 +65,29 @@ root.querySelectorAll('[data-flow]').forEach(b=>b.addEventListener('click',()=>{
 }));
 slide.title='Onde está guardado o carbono?';
 slide.lede='Compare seis reservatórios e descubra por onde o carbono passa.';
-slide.build=function(){ctrl.replaceChildren();originalCard.style.display='none';originalCard.classList.remove('show');scale.style.display='none'};
-slide.enter=function(){scene.style.display='block';const gl=document.getElementById('gl');if(gl)gl.style.display='none';choose(selected);};
-slide.exit=function(){scene.style.display='none';originalCard.classList.remove('show');scale.style.display='none';const gl=document.getElementById('gl');if(gl&&api.hasGL)gl.style.display='block';};
+const stage=document.getElementById('stage');
+function hideLegacy(){
+ // Oculta permanentemente as escalas e controles herdados da versão antiga.
+ for(const el of [originalCard,scale]){
+  el.style.setProperty('display','none','important');
+  el.setAttribute('aria-hidden','true');
+  el.inert=true;
+ }
+ ctrl.replaceChildren();
+}
+slide.build=function(){hideLegacy();};
+slide.enter=function(){
+ stage.classList.add('rv-active');
+ hideLegacy();
+ scene.style.display='block';
+ const gl=document.getElementById('gl');if(gl)gl.style.display='none';
+ choose(selected);
+};
+slide.exit=function(){
+ stage.classList.remove('rv-active');
+ scene.style.display='none';
+ hideLegacy();
+ const gl=document.getElementById('gl');if(gl&&api.hasGL)gl.style.display='block';
+};
 window.__carbonoReservatorios={select:choose,items,flows};
 })();
