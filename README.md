@@ -2,7 +2,7 @@
 
 Apresentação interativa em português sobre carbono, do átomo ao clima, às cidades e aos cenários de mitigação. **Onze telas**, Three.js r169 já empacotado no arquivo original recebido, modo 2D de contingência e exploração de fontes em `Veja mais`.
 
-**Endereço planejado, ainda não publicado:** https://ernandes-sobreira.github.io/carbono-sbfa/
+**Curso publicado:** https://ernandes-sobreira.github.io/curso-carbono/
 
 ## Começo rápido
 
@@ -20,7 +20,7 @@ Apresentação interativa em português sobre carbono, do átomo ao clima, às c
 - `FONTES.md`, `AUDITORIA.md`, `TESTES.md`, `IMAGENS.md`: o que foi verificado e o que ficou pendente.
 - `CARBONO_SBFA_apoio.pdf` e `resources/pdf-captures/`: PDF de apoio visual (11 telas e página de fontes) e capturas usadas para reproduzi-lo.
 - `data_raw/`: única transcrição de dados primários nova; arquivos CSV originais anteriores **não foram recebidos**.
-- `.github/workflows/pages.yml`: publicação automática para GitHub Pages após o repositório ser criado e Pages habilitado.
+- `.github/workflows/integridade.yml`: validação automática do HTML e da sintaxe a cada push. O GitHub Pages publica da branch `main`.
 
 ## Instalar e construir
 
@@ -34,7 +34,7 @@ Sem bibliotecas NPM em tempo de execução: o Three.js já está no bundle forne
 
 ## Publicação no GitHub (gratuito)
 
-O GitHub Pages é grátis em **repositório público** no plano GitHub Free. Crie primeiro o repositório **vazio** `carbono-sbfa`, dono `ernandes-sobreira`, no GitHub, com visibilidade `Public` e sem README inicial. Não reutilize outro repositório. Depois faça upload/push deste pacote para a branch `main` e habilite em Settings → Pages → Build and deployment → Source → `GitHub Actions`. A URL deve passar a ser https://ernandes-sobreira.github.io/carbono-sbfa/ **somente após deploy confirmado**.
+O GitHub Pages é grátis em **repositório público** no plano GitHub Free. O repositório **existente** é `ernandes-sobreira/curso-carbono`, branch `main`. O Pages usa a publicação de branch e seu link é https://ernandes-sobreira.github.io/curso-carbono/. A cada atualização, verifique a ação `Verificar integridade do Carbono`: ela checa a sintaxe do JavaScript e a correspondência entre `index.html` e o resultado do build. Não publique um HTML compilado incompleto.
 
 ### Windows (PowerShell com Git instalado)
 
@@ -46,7 +46,7 @@ git init
 git checkout -b main
 git add .
 git commit -m "Publicar Carbono SBFA com auditoria e Pages"
-git remote add origin https://github.com/ernandes-sobreira/carbono-sbfa.git
+git remote add origin https://github.com/ernandes-sobreira/curso-carbono.git
 git push -u origin main
 ```
 
@@ -64,7 +64,7 @@ git init
 git checkout -b main
 git add .
 git commit -m "Publicar Carbono SBFA"
-git remote add origin https://github.com/ernandes-sobreira/carbono-sbfa.git
+git remote add origin https://github.com/ernandes-sobreira/curso-carbono.git
 git push -u origin main
 ```
 
