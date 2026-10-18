@@ -24,7 +24,7 @@ const local={metric:"carbon",all:false,kg:model.personal.beefKg,swap:model.perso
 const f=(n,d=1)=>new Intl.NumberFormat('pt-BR',{maximumFractionDigits:d}).format(n);
 const css=document.createElement("style");css.textContent=
 "#stage.food2-on #c2d,#stage.food2-on #gl,#stage.food2-on #chart,#stage.food2-on #readout,#stage.food2-on #ctrl{display:none!important}"+
-"#stage.food2-on .head{z-index:12;max-width:88%}#stage.food2-on .foot{z-index:12}"+
+"#stage.food2-on .head{z-index:12;max-width:88%}#stage.food2-on .foot{z-index:12}#stage.food2-on .lede{display:none!important}"+
 "#food2{position:absolute;inset:0 0 50px;background:#fff;overflow-y:auto;overscroll-behavior:contain;padding:116px 24px 24px;z-index:8;color:#12233a}"+
 "#food2 h2{font:800 clamp(17px,2vw,24px) Sora,sans-serif;line-height:1.2;margin:0 0 6px}"+
 "#food2 p{font-size:13px;line-height:1.5;color:#3f5970;margin:7px 0}"+
