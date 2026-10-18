@@ -1,0 +1,28 @@
+name: Testar telas 8 e 10 no Chromium
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  navegador:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install playwright==1.58.0
+          python -m playwright install chromium
+      - name: Testar experiência 8 e 10 em duas telas
+        run: python test/visual_mobile.py
+      - name: Salvar capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capturas-ilha-calor-e-alimentos
+          path: _checks/*_v*.png
+          if-no-files-found: ignore
