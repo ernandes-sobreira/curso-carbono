@@ -164,12 +164,44 @@
  legend.innerHTML='<span><i class="gh-solar-dot"></i>Luz solar</span><span><i class="gh-reflect-dot"></i>Luz refletida</span><span><i class="gh-ir-dot"></i>Infravermelho</span>';
  mini.after(legend);
 
+ // Ilustração ampliada: abundância relativa de moléculas é intencionalmente exagerada.
+ // Quantidades gráficas são simbólicas, não ppm nem contagem física de fótons.
+ const NS='http://www.w3.org/2000/svg';
+ function makeLayer(svg,mobile){
+  if(!svg)return;
+  const g=document.createElementNS(NS,'g');g.setAttribute('data-co2-visual','');g.setAttribute('aria-hidden','true');
+  const count=mobile?37:63;
+  for(let i=0;i<count;i++){
+   const m=document.createElementNS(NS,'g');
+   m.setAttribute('data-co2-dot','');
+   const x=mobile?190+(i*41%168):510+(i*53%350);
+   const y=mobile?113+(i*29%126):126+(i*47%188);
+   m.setAttribute('transform','translate('+x+' '+y+')');
+   const c=document.createElementNS(NS,'circle');c.setAttribute('r',mobile?'2.5':'3.6');c.setAttribute('cx','0');c.setAttribute('cy','0');c.setAttribute('fill','#37485c');
+   const a=document.createElementNS(NS,'circle');a.setAttribute('r',mobile?'2.5':'3.6');a.setAttribute('cx',mobile?'-5':'-7');a.setAttribute('fill','#dc5b45');
+   const b=document.createElementNS(NS,'circle');b.setAttribute('r',mobile?'2.5':'3.6');b.setAttribute('cx',mobile?'5':'7');b.setAttribute('fill','#dc5b45');
+   m.append(c,a,b);g.append(m);
+  }
+  svg.append(g);
+ }
+ makeLayer(E.querySelector('.gh-graphic svg'),false);
+ makeLayer(mini.querySelector('svg'),true);
+ function refreshMolecules(){
+  const levels={'1750':.22,'2019':.58,'2x':.95};
+  E.querySelectorAll('[data-co2-visual]').forEach(g=>{
+   const all=[...g.querySelectorAll('[data-co2-dot]')];
+   const active=currentStep>=3?Math.round(all.length*levels[currentPreset]):0;
+   all.forEach((m,i)=>{m.style.opacity=i<active?'.86':'0'});
+  });
+  E.querySelectorAll('.gh-extra-mol,.gh-extra-down').forEach(m=>{m.style.opacity=currentStep===4?'1':'0'});
+ }
+
  const steps=[
   ['A luz do Sol chega à Terra','Grande parte da radiação solar atravessa a atmosfera e aquece o solo e os oceanos. Luz solar é majoritariamente radiação de onda curta.',['solar']],
   ['Nem toda a luz é absorvida','Nuvens, aerossóis e superfícies claras refletem parte da radiação solar de volta ao espaço. Reflexão da luz solar não é efeito estufa.',['solar','reflection']],
   ['A superfície emite infravermelho','A Terra aquecida emite radiação térmica, principalmente infravermelho. Não são barras de calor sólido: são fluxos de energia por radiação.',['surface']],
   ['A atmosfera absorve e emite radiação','CO₂, vapor de água, CH₄ e nuvens absorvem radiação infravermelha em determinadas bandas e emitem infravermelho em várias direções. A emissão para baixo contribui para aquecer a superfície.',['surface','gases']],
-  ['Mais CO₂ altera o balanço radiativo','Com mais CO₂, mudam a absorção e a emissão no infravermelho. Inicialmente diminui a energia que escapa para o espaço, para a mesma temperatura. O sistema aquece até ajustar seu balanço.',['surface','gases','co2']]
+  ['Mais CO₂ dificulta a saída do infravermelho','Com mais CO₂, uma fração menor do infravermelho escapa diretamente. A atmosfera absorve e reemite infravermelho em várias direções, inclusive para baixo, e o planeta aquece até reajustar seu balanço. As moléculas foram ampliadas didaticamente.',['surface','gases','co2']]
  ];
  const examples={
   '1750':{co2:277.15,ch4:731.41,n2o:273.87,caption:'Concentrações de referência pré-industriais'},
@@ -184,7 +216,7 @@
   E.dataset.step=String(n);
   E.querySelectorAll('[data-gh-step]').forEach(b=>{let active=Number(b.dataset.ghStep)===n;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
   E.querySelectorAll('[data-gh-part]').forEach(g=>{const key=g.dataset.ghPart;g.classList.toggle('gh-muted',!steps[n][2].includes(key))});
-  E.querySelectorAll('.gh-extra-mol').forEach(m=>m.style.opacity=n===4?'1':'0');
+  refreshMolecules();
  }
  function setPreset(id){
   currentPreset=id;
@@ -197,6 +229,7 @@
   $('gh-forcing').textContent=`ΔF = ${f.total>=0?'+':''}${f.total.toFixed(2).replace('.',',')} W/m² vs. 1750 · CO₂, CH₄ e N₂O`;
   $('gh-forcing').title='Forçamento radiativo efetivo aproximado dos três gases, calculado pelo modelo anterior. Não equivale à temperatura observada.';
   E.querySelectorAll('[data-gh-preset]').forEach(b=>{const on=b.dataset.ghPreset===id;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on))});
+  refreshMolecules();
  }
  E.querySelectorAll('[data-gh-step]').forEach(b=>b.addEventListener('click',()=>setStep(Number(b.dataset.ghStep))));
  E.querySelectorAll('[data-gh-preset]').forEach(b=>b.addEventListener('click',()=>setPreset(b.dataset.ghPreset)));
@@ -207,7 +240,7 @@
   // A cena didática usa SVG; não inicializa uma GPU extra ou o antigo globo nessa tela.
   const ctrl=$('ctrl');ctrl.innerHTML='';
   $('readout').innerHTML='';
-  setStep(3);setPreset('2019');
+  setStep(4);setPreset('2019');
  };
  budgetSlide.enter=function(){
   stage.classList.add('budget-redesign');
