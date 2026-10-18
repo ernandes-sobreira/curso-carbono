@@ -10,7 +10,7 @@ const num=v=>new Intl.NumberFormat("pt-BR").format(v);
 const style=document.createElement("style");
 style.textContent="#stage.u3-on #c2d,#stage.u3-on #chart,#stage.u3-on #readout,#stage.u3-on #uhiCard,#stage.u3-on #city{display:none!important}"+
 "#stage.u3-on #ctrl{max-width:none;width:calc(100% - 48px);left:24px;bottom:56px;z-index:6}"+
-"#uhi{background:#fff;overflow:hidden}#uhi .u3-view{position:absolute;inset:0 0 52px;overflow:auto;padding:125px 24px 135px;color:#12233a}"+
+"#uhi{background:#fff;overflow:hidden}#uhi .u3-view{position:absolute;inset:0 0 52px;overflow:auto;padding:170px 24px 135px;color:#12233a}"+
 "#uhi .u3-lead{font-size:13px;line-height:1.5;color:#36536b;max-width:870px;margin:0 0 13px}"+
 "#uhi .u3-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}#uhi .u3-panel{border:1px solid #d9e4f0;border-radius:16px;padding:12px;min-width:0;background:#fff}"+
 "#uhi .u3-panel h3{font:800 clamp(14px,1.6vw,22px) Sora,sans-serif;margin:0 0 5px}#uhi .u3-panel p{font-size:12px;line-height:1.5;color:#3b5771;margin:6px 0}"+
@@ -22,7 +22,7 @@ style.textContent="#stage.u3-on #c2d,#stage.u3-on #chart,#stage.u3-on #readout,#
 "#ctrl .u3-line{flex:1;display:grid;grid-template-columns:67px 1fr 70px;gap:7px;align-items:center;min-width:180px}"+
 "#ctrl .u3-line label,#ctrl .u3-line output{font-size:11px;font-weight:800}#ctrl .u3-line output{text-align:right}#ctrl .u3-line input{width:100%;accent-color:#0a6b62}"+
 "#ctrl .u3-city{display:flex;gap:5px}#ctrl .u3-city button{background:#fff;border:1px solid #b4cbe0;padding:8px;border-radius:16px;font-size:11px;font-weight:800;cursor:pointer}"+
-"@media(max-width:850px){#uhi .u3-view{padding:110px 12px 225px;bottom:50px}#uhi .u3-grid{grid-template-columns:1fr}#uhi .u3-panel{padding:9px}"+
+"@media(max-width:850px){#uhi .u3-view{padding:150px 12px 225px;bottom:50px}#uhi .u3-grid{grid-template-columns:1fr}#uhi .u3-panel{padding:9px}"+
 "#uhi .u3-panel svg{max-height:200px}#stage.u3-on #ctrl{left:10px;right:10px;width:calc(100% - 20px);bottom:51px;max-height:185px;overflow:auto}"+
 "#ctrl .u3-controls{gap:6px;padding:8px}#ctrl .u3-line{flex:1 1 100%;grid-template-columns:70px 1fr 75px}}";
 document.head.appendChild(style);
