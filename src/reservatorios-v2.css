@@ -47,3 +47,6 @@
 #resv{isolation:isolate}
 #resv .rv-card[aria-pressed=true]{box-shadow:0 0 0 2px rgba(42,120,214,.18)}
 #resv .rv-flows button[aria-pressed=true]{box-shadow:0 0 0 2px rgba(38,114,190,.16)}
+
+/* Durante a experiência 5, a navegação inferior continua; controles legados não. */
+#stage.rv-active #ctrl,#stage.rv-active #scale,#stage.rv-active #rescard{display:none!important;visibility:hidden!important;pointer-events:none!important}
