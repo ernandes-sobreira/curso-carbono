@@ -8,7 +8,7 @@ const state={pop:650000,precip:1400,green:.35},oldExit=slide.exit;
 const population=v=>v>=1e6?(v/1e6).toFixed(1).replace(".",",")+" milhão":Math.round(v/1000)+" mil";
 const num=v=>new Intl.NumberFormat("pt-BR").format(v);
 const style=document.createElement("style");
-style.textContent="#stage.u3-on #c2d,#stage.u3-on #chart,#stage.u3-on #readout,#stage.u3-on #uhiCard,#stage.u3-on #city{display:none!important}"+
+style.textContent="#stage.u3-on #c2d,#stage.u3-on #chart,#stage.u3-on #readout,#stage.u3-on #uhiCard,#stage.u3-on #city{display:none!important}#stage.u3-on .lede{display:none!important}"+
 "#stage.u3-on #ctrl{max-width:none;width:calc(100% - 48px);left:24px;bottom:56px;z-index:6}"+
 "#uhi{background:#fff;overflow:hidden}#uhi .u3-view{position:absolute;inset:0 0 52px;overflow:auto;padding:170px 24px 135px;color:#12233a}"+
 "#uhi .u3-lead{font-size:13px;line-height:1.5;color:#36536b;max-width:870px;margin:0 0 13px}"+
