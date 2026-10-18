@@ -39,3 +39,11 @@
 #resv .rv-intro{font-size:13px}
 }
 @media(max-width:370px){#resv{padding:108px 10px 10px}#resv .rv-icon{height:43px}#resv .rv-number{font-size:14px}}
+
+/* A experiência 5 não usa mais o gráfico de escalas da versão antiga.
+ * Os nós permanecem no DOM por compatibilidade com o bundle legado,
+ * mas NUNCA podem ficar visíveis ou interceptar cliques. */
+#scale,#rescard{display:none!important;visibility:hidden!important;pointer-events:none!important}
+#resv{isolation:isolate}
+#resv .rv-card[aria-pressed=true]{box-shadow:0 0 0 2px rgba(42,120,214,.18)}
+#resv .rv-flows button[aria-pressed=true]{box-shadow:0 0 0 2px rgba(38,114,190,.16)}
