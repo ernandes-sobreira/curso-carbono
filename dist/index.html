@@ -245,6 +245,48 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 #greenhouse-lesson .gh-part[data-gh-part="reflection"] .gh-raylabel{fill:#286DAE}
 @media(max-aspect-ratio:1/1){#greenhouse-lesson .gh-color-legend{gap:6px 12px;margin:4px 0 2px;font-size:.66rem}}
 
+#res>svg{display:none!important}#res{background:#fff;overflow:hidden}
+#resv{position:absolute;inset:0 0 52px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:clamp(122px,16%,155px) clamp(18px,3.2%,50px) 18px;z-index:2;color:#12233a}
+#resv .rv-intro{max-width:700px;font-size:clamp(13px,1.1vw,16px);line-height:1.45;color:#38546c;margin:0 0 8px}
+#resv .rv-unit{display:inline-block;background:#eef4fc;border:1px solid #d9e7f4;padding:7px 11px;border-radius:10px;font-size:12px;color:#36536b;margin:0 0 14px}
+#resv .rv-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,1fr);gap:15px;align-items:start}
+#resv .rv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#resv .rv-card{display:flex;flex-direction:column;gap:2px;text-align:left;background:#fff;border:1.5px solid #dbe5f0;border-radius:14px;min-width:0;min-height:154px;padding:9px;cursor:pointer;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+#resv .rv-card[aria-pressed=true]{background:#f0f7ff;border:2px solid #2a78d6;padding:8.5px}
+#resv .rv-card:hover{background:#f6fbff}
+#resv button:focus-visible{outline:3px solid #205da6;outline-offset:2px}
+#resv .rv-icon{display:block;width:100%;height:64px;overflow:hidden;border-radius:9px}
+#resv .rv-icon svg{display:block;width:100%;height:100%}
+#resv .rv-title{font-family:Sora,system-ui,sans-serif;font-weight:800;font-size:clamp(12px,1.1vw,15px);line-height:1.25}
+#resv .rv-number{color:#206cbb;font-weight:800;font-size:clamp(15px,1.45vw,20px);line-height:1.25;white-space:nowrap}
+#resv .rv-label{color:#566d81;font-size:11px;line-height:1.3}
+#resv .rv-detail{background:#f6f9fd;border:1px solid #d8e5f1;border-radius:16px;padding:17px}
+#resv .rv-tag{display:block;color:#0a6b62;font-size:11px;font-weight:800;letter-spacing:.06em;margin-bottom:9px}
+#resv .rv-detail h3{font-size:clamp(18px,1.5vw,23px);margin:0 0 6px}
+#resv .rv-big{font-family:Sora,system-ui,sans-serif;color:#216dbd;font-size:clamp(24px,2.5vw,34px)}
+#resv .rv-detail p{color:#2c4a61;line-height:1.5;font-size:13px;margin:9px 0}
+#resv .rv-source{font-size:11px!important;color:#61758a!important}
+#resv .rv-flows{display:flex;flex-wrap:wrap;gap:7px}
+#resv .rv-flows button{background:#fff;border:1px solid #c4d7e9;border-radius:999px;padding:9px 12px;font-size:11px;font-weight:700;cursor:pointer;color:#294e70}
+#resv .rv-flows button[aria-pressed=true]{background:#2672be;border-color:#2672be;color:white}
+#resv .rv-flowtext{min-height:36px}
+#resv .rv-footer{font-size:11px;color:#566f86;margin:12px 0}
+@media(max-width:850px){
+#resv{padding:118px 16px 15px;bottom:60px}
+#resv .rv-layout{grid-template-columns:1fr;gap:12px}
+#resv .rv-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#resv .rv-card{min-height:115px;padding:7px;border-radius:12px}
+#resv .rv-card[aria-pressed=true]{padding:6.5px}
+#resv .rv-icon{height:49px}
+#resv .rv-title{font-size:12px}
+#resv .rv-number{font-size:16px}
+#resv .rv-label{font-size:10px}
+#resv .rv-detail{padding:13px}
+#resv .rv-detail p{font-size:12px}
+#resv .rv-intro{font-size:13px}
+}
+@media(max-width:370px){#resv{padding:108px 10px 10px}#resv .rv-icon{height:43px}#resv .rv-number{font-size:14px}}
+
 </style>
 </head>
 <body>
@@ -4495,12 +4537,44 @@ three/build/three.module.js:
  legend.innerHTML='<span><i class="gh-solar-dot"></i>Luz solar</span><span><i class="gh-reflect-dot"></i>Luz refletida</span><span><i class="gh-ir-dot"></i>Infravermelho</span>';
  mini.after(legend);
 
+ // Ilustração ampliada: abundância relativa de moléculas é intencionalmente exagerada.
+ // Quantidades gráficas são simbólicas, não ppm nem contagem física de fótons.
+ const NS='http://www.w3.org/2000/svg';
+ function makeLayer(svg,mobile){
+  if(!svg)return;
+  const g=document.createElementNS(NS,'g');g.setAttribute('data-co2-visual','');g.setAttribute('aria-hidden','true');
+  const count=mobile?37:63;
+  for(let i=0;i<count;i++){
+   const m=document.createElementNS(NS,'g');
+   m.setAttribute('data-co2-dot','');
+   const x=mobile?190+(i*41%168):510+(i*53%350);
+   const y=mobile?113+(i*29%126):126+(i*47%188);
+   m.setAttribute('transform','translate('+x+' '+y+')');
+   const c=document.createElementNS(NS,'circle');c.setAttribute('r',mobile?'2.5':'3.6');c.setAttribute('cx','0');c.setAttribute('cy','0');c.setAttribute('fill','#37485c');
+   const a=document.createElementNS(NS,'circle');a.setAttribute('r',mobile?'2.5':'3.6');a.setAttribute('cx',mobile?'-5':'-7');a.setAttribute('fill','#dc5b45');
+   const b=document.createElementNS(NS,'circle');b.setAttribute('r',mobile?'2.5':'3.6');b.setAttribute('cx',mobile?'5':'7');b.setAttribute('fill','#dc5b45');
+   m.append(c,a,b);g.append(m);
+  }
+  svg.append(g);
+ }
+ makeLayer(E.querySelector('.gh-graphic svg'),false);
+ makeLayer(mini.querySelector('svg'),true);
+ function refreshMolecules(){
+  const levels={'1750':.22,'2019':.58,'2x':.95};
+  E.querySelectorAll('[data-co2-visual]').forEach(g=>{
+   const all=[...g.querySelectorAll('[data-co2-dot]')];
+   const active=currentStep>=3?Math.round(all.length*levels[currentPreset]):0;
+   all.forEach((m,i)=>{m.style.opacity=i<active?'.86':'0'});
+  });
+  E.querySelectorAll('.gh-extra-mol,.gh-extra-down').forEach(m=>{m.style.opacity=currentStep===4?'1':'0'});
+ }
+
  const steps=[
   ['A luz do Sol chega à Terra','Grande parte da radiação solar atravessa a atmosfera e aquece o solo e os oceanos. Luz solar é majoritariamente radiação de onda curta.',['solar']],
   ['Nem toda a luz é absorvida','Nuvens, aerossóis e superfícies claras refletem parte da radiação solar de volta ao espaço. Reflexão da luz solar não é efeito estufa.',['solar','reflection']],
   ['A superfície emite infravermelho','A Terra aquecida emite radiação térmica, principalmente infravermelho. Não são barras de calor sólido: são fluxos de energia por radiação.',['surface']],
   ['A atmosfera absorve e emite radiação','CO₂, vapor de água, CH₄ e nuvens absorvem radiação infravermelha em determinadas bandas e emitem infravermelho em várias direções. A emissão para baixo contribui para aquecer a superfície.',['surface','gases']],
-  ['Mais CO₂ altera o balanço radiativo','Com mais CO₂, mudam a absorção e a emissão no infravermelho. Inicialmente diminui a energia que escapa para o espaço, para a mesma temperatura. O sistema aquece até ajustar seu balanço.',['surface','gases','co2']]
+  ['Mais CO₂ dificulta a saída do infravermelho','Com mais CO₂, uma fração menor do infravermelho escapa diretamente. A atmosfera absorve e reemite infravermelho em várias direções, inclusive para baixo, e o planeta aquece até reajustar seu balanço. As moléculas foram ampliadas didaticamente.',['surface','gases','co2']]
  ];
  const examples={
   '1750':{co2:277.15,ch4:731.41,n2o:273.87,caption:'Concentrações de referência pré-industriais'},
@@ -4515,7 +4589,7 @@ three/build/three.module.js:
   E.dataset.step=String(n);
   E.querySelectorAll('[data-gh-step]').forEach(b=>{let active=Number(b.dataset.ghStep)===n;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
   E.querySelectorAll('[data-gh-part]').forEach(g=>{const key=g.dataset.ghPart;g.classList.toggle('gh-muted',!steps[n][2].includes(key))});
-  E.querySelectorAll('.gh-extra-mol').forEach(m=>m.style.opacity=n===4?'1':'0');
+  refreshMolecules();
  }
  function setPreset(id){
   currentPreset=id;
@@ -4528,6 +4602,7 @@ three/build/three.module.js:
   $('gh-forcing').textContent=`ΔF = ${f.total>=0?'+':''}${f.total.toFixed(2).replace('.',',')} W/m² vs. 1750 · CO₂, CH₄ e N₂O`;
   $('gh-forcing').title='Forçamento radiativo efetivo aproximado dos três gases, calculado pelo modelo anterior. Não equivale à temperatura observada.';
   E.querySelectorAll('[data-gh-preset]').forEach(b=>{const on=b.dataset.ghPreset===id;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on))});
+  refreshMolecules();
  }
  E.querySelectorAll('[data-gh-step]').forEach(b=>b.addEventListener('click',()=>setStep(Number(b.dataset.ghStep))));
  E.querySelectorAll('[data-gh-preset]').forEach(b=>b.addEventListener('click',()=>setPreset(b.dataset.ghPreset)));
@@ -4538,7 +4613,7 @@ three/build/three.module.js:
   // A cena didática usa SVG; não inicializa uma GPU extra ou o antigo globo nessa tela.
   const ctrl=$('ctrl');ctrl.innerHTML='';
   $('readout').innerHTML='';
-  setStep(3);setPreset('2019');
+  setStep(4);setPreset('2019');
  };
  budgetSlide.enter=function(){
   stage.classList.add('budget-redesign');
@@ -4561,6 +4636,78 @@ three/build/three.module.js:
  };
  window.__carbonoGreenhouse={setStep,setPreset,steps,examples};
 })();
-</script>
+
+(function(){
+'use strict';
+const api=window.__carbono;
+if(!api) throw new Error('Interface Carbono nao encontrada');
+const slide=api.slides.find(s=>s.id==='res');
+if(!slide) throw new Error('Tela de reservatorios nao encontrada');
+const scene=document.getElementById('res');
+const ctrl=document.getElementById('ctrl');
+const originalCard=document.getElementById('rescard');
+const scale=document.getElementById('scale');
+const items=[
+ ['atm','Atmosfera','870 PgC','CO₂ e CH₄ no ar','O carbono gasoso participa do efeito estufa.','IPCC AR6 WGI, Fig. 5.12 e Tabela 5.1'],
+ ['veg','Vegetação','450 PgC','Folhas, troncos e raízes','Plantas incorporam carbono pela fotossíntese.','IPCC AR6 WGI, Fig. 5.12'],
+ ['soil','Solos','2.900 PgC','Matéria orgânica no solo','Raízes, restos vegetais e organismos armazenam carbono.','IPCC AR6 WGI, Fig. 5.12'],
+ ['ocean','Oceanos','38.700 PgC','Carbono dissolvido na água','O CO₂ entra e sai do oceano. Grande parte fica dissolvida como bicarbonato e carbonato.','IPCC AR6 WGI, Fig. 5.12'],
+ ['fossil','Combustíveis fósseis','930 PgC','Carvão, petróleo e gás','A combustão transfere carbono geológico para a atmosfera. Estoque aproximado de reservas recuperáveis.','IPCC AR6 WGI, Fig. 5.12; BGR 2020'],
+ ['rock','Rochas','≈ 75 milhões PgC','Carbonatos e sedimentos','O carbono geológico circula muito lentamente. Valor apenas em ordem de grandeza.','Falkowski et al. 2000, DOI:10.1126/science.290.5490.291']
+];
+const art={
+ atm:'<rect width="150" height="72" fill="#dceffc"/><path d="M12 45 Q12 31 29 31 Q41 12 58 27 Q77 16 86 38 Q106 34 110 48 L12 48Z" fill="white"/><text x="16" y="64" font-size="13" font-weight="700" fill="#2068b5">CO₂</text><text x="92" y="24" font-size="12" font-weight="700" fill="#2068b5">CH₄</text>',
+ veg:'<rect width="150" height="72" fill="#eaf8e9"/><rect y="58" width="150" height="14" fill="#93cdac"/><path d="M42 27v35M108 32v30" stroke="#855e36" stroke-width="8"/><circle cx="42" cy="27" r="20" fill="#19806a"/><circle cx="26" cy="34" r="13" fill="#2c9970"/><circle cx="108" cy="30" r="20" fill="#36a277"/><circle cx="122" cy="36" r="13" fill="#18705b"/>',
+ soil:'<rect width="150" height="72" fill="#eef9e6"/><rect y="18" width="150" height="54" fill="#99734f"/><path d="M0 41h150" stroke="#d6b78b" stroke-width="9"/><path d="M75 18v43m0-15l-19 16m19-21l21 12" stroke="#e8ceb0" stroke-width="3" fill="none"/><path d="M75 22q-23-24-32-10q9 15 32 10m0 0q23-24 34-9q-13 15-34 9" fill="#338a62"/>',
+ ocean:'<rect width="150" height="72" fill="#ddf3ff"/><path d="M0 17 Q18 8 36 17 T72 17 T108 17 T150 17 V72H0Z" fill="#327eb6"/><path d="M0 36q19-8 37 0t37 0t38 0t38 0" fill="none" stroke="#a4d9f1" stroke-width="4"/><path d="M58 51q15-13 30 0q-15 12-30 0l-10 7V44z" fill="#d4eff9"/>',
+ fossil:'<rect width="150" height="72" fill="#e1eaf0"/><rect y="19" width="150" height="53" fill="#71818b"/><path d="M0 39q38-16 75 0t75 0v25H0z" fill="#263645"/><path d="M0 57q28-7 57 0t56 0t37 0" fill="none" stroke="#d9a76d" stroke-width="4"/><path d="M79 6v38m-13-23h26" stroke="#337598" stroke-width="5" />',
+ rock:'<rect width="150" height="72" fill="#edf4f9"/><path d="M0 60L32 28l23 16L84 10l30 31l21-13l15 19v25H0Z" fill="#8195a5"/><path d="M68 29L84 10l17 20l-17-6z" fill="#fff"/><path d="M0 65q40-14 80 0t70 0" stroke="#e1e9f0" stroke-width="6" fill="none"/>'
+};
+const root=document.createElement('section');
+root.id='resv';root.setAttribute('aria-label','Principais reservatórios de carbono');
+root.innerHTML='<p class="rv-intro">O carbono também está nas plantas, no solo, no oceano e nas rochas. <b>Toque em cada ambiente.</b></p>'+
+'<p class="rv-unit"><b>PgC</b> significa petagrama de carbono: 1 PgC = 1 bilhão de toneladas de carbono.</p>'+
+'<div class="rv-layout"><div class="rv-grid">'+items.map(a=>
+'<button type="button" class="rv-card" data-rv="'+a[0]+'" aria-pressed="false">'+
+'<span class="rv-icon"><svg viewBox="0 0 150 72" aria-hidden="true">'+art[a[0]]+'</svg></span>'+
+'<span class="rv-title">'+a[1]+'</span><span class="rv-number">'+a[2]+'</span><span class="rv-label">'+a[3]+'</span></button>').join('')+
+'</div><aside class="rv-detail" aria-live="polite"><span class="rv-tag">RESERVATÓRIO SELECIONADO</span>'+
+'<h3 id="rv-name"></h3><strong class="rv-big" id="rv-amount"></strong><p id="rv-text"></p>'+
+'<p class="rv-source" id="rv-source"></p><strong class="rv-tag">Como o carbono circula?</strong>'+
+'<div class="rv-flows"><button data-flow="0" type="button">Ar → planta → solo</button>'+
+'<button data-flow="1" type="button">Fósseis → atmosfera</button>'+
+'<button data-flow="2" type="button">Atmosfera ↔ oceano</button></div>'+
+'<p id="rv-flowtext" class="rv-flowtext">Selecione um percurso.</p></aside></div>'+
+'<p class="rv-footer">Desenhos didáticos, não proporcionais. Estoque é quantidade armazenada; fluxo é transferência entre ambientes.</p>';
+scene.appendChild(root);
+const flows=[
+ [['atm','veg','soil'],'A fotossíntese retira CO₂ do ar e forma tecidos vegetais. Parte chega ao solo quando raízes, folhas e organismos morrem.'],
+ [['fossil','atm'],'A extração e a queima de carvão, petróleo e gás devolvem carbono geológico à atmosfera em pouco tempo.'],
+ [['atm','ocean'],'O oceano absorve e também libera CO₂. Parte do carbono é armazenada na água por muito tempo.']
+];
+let selected='atm';
+function choose(id,mark){
+ const a=items.find(x=>x[0]===id);if(!a)return;
+ selected=id;
+ root.querySelectorAll('.rv-card').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rv===id)));
+ root.querySelector('#rv-name').textContent=a[1];root.querySelector('#rv-amount').textContent=a[2];
+ root.querySelector('#rv-text').textContent=a[4];
+ root.querySelector('#rv-source').textContent='Fonte: '+a[5];
+ if(mark!==false){root.querySelectorAll('[data-flow]').forEach(b=>b.setAttribute('aria-pressed','false'));root.querySelector('#rv-flowtext').textContent='Selecione um percurso.';}
+}
+root.querySelectorAll('.rv-card').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.rv)));
+root.querySelectorAll('[data-flow]').forEach(b=>b.addEventListener('click',()=>{
+ const f=flows[Number(b.dataset.flow)];
+ root.querySelectorAll('[data-flow]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+ root.querySelectorAll('.rv-card').forEach(x=>x.setAttribute('aria-pressed',String(f[0].includes(x.dataset.rv))));
+ root.querySelector('#rv-flowtext').textContent=f[1];
+}));
+slide.title='Onde está guardado o carbono?';
+slide.lede='Compare seis reservatórios e descubra por onde o carbono passa.';
+slide.build=function(){ctrl.replaceChildren();originalCard.style.display='none';originalCard.classList.remove('show');scale.style.display='none'};
+slide.enter=function(){scene.style.display='block';const gl=document.getElementById('gl');if(gl)gl.style.display='none';choose(selected);};
+slide.exit=function(){scene.style.display='none';originalCard.classList.remove('show');scale.style.display='none';const gl=document.getElementById('gl');if(gl&&api.hasGL)gl.style.display='block';};
+window.__carbonoReservatorios={select:choose,items,flows};
+})();</script>
 </body>
 </html>
