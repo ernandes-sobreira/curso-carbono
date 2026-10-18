@@ -1,0 +1,91 @@
+/* Experiência 4: um diagrama, um argumento, cinco etapas. */
+#greenhouse-lesson[hidden]{display:none!important}
+#greenhouse-lesson{position:absolute;inset:118px 30px 64px;z-index:3;background:#fff;overflow:auto;scrollbar-width:thin}
+#stage.budget-redesign #gl,#stage.budget-redesign #c2d,#stage.budget-redesign #readout,#stage.budget-redesign #ctrl,#stage.budget-redesign #hint{display:none!important}
+#stage.budget-redesign .head{max-width:80%;z-index:5}
+#stage.budget-redesign .foot{z-index:6;background:rgba(255,255,255,.96);border-top:1px solid #d9e4f0}
+#stage.budget-redesign .drawer{z-index:8}
+#greenhouse-lesson .gh-shell{height:100%;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,.82fr);gap:22px;align-items:center;max-width:1590px;margin:0 auto}
+#greenhouse-lesson .gh-graphic{min-width:0;align-self:center;display:flex;flex-direction:column;align-items:stretch}
+#greenhouse-lesson svg{width:100%;height:auto;display:block;overflow:visible}
+#greenhouse-lesson .gh-mobile-visual{display:none}
+#greenhouse-lesson svg text{font-family:Inter,Arial,sans-serif;fill:#12233A;paint-order:stroke}
+#greenhouse-lesson .gh-svg-caption{font-size:14px;font-weight:750;fill:#477794;letter-spacing:2px}
+#greenhouse-lesson .gh-raylabel{font-size:18px;font-weight:800;letter-spacing:.5px}
+#greenhouse-lesson .gh-rayhelp{font-size:14px;font-weight:500;fill:#4b6379}
+#greenhouse-lesson .gh-surface-title{font-family:Sora,Inter,sans-serif;font-size:19px;font-weight:800;letter-spacing:1px}
+#greenhouse-lesson .gh-surface-note{font-size:14px;font-weight:500;fill:#d2eee9}
+#greenhouse-lesson .gh-legend-svg text{font-size:12px;font-weight:800;fill:#4b6379}
+#greenhouse-lesson .gh-ray{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14 13;animation:gh-flow 2s linear infinite}
+@keyframes gh-flow{to{stroke-dashoffset:-54}}
+#greenhouse-lesson [data-gh-part]{transition:opacity .24s ease}
+#greenhouse-lesson [data-gh-part].gh-muted{opacity:.62}
+#greenhouse-lesson .gh-diagram-note{font-size:.67rem;color:#526b82;text-align:center;padding-top:5px}
+#greenhouse-lesson .gh-panel{background:#fff;border:1px solid #d9e4f0;border-radius:18px;padding:20px 22px;box-shadow:0 12px 35px rgba(18,35,58,.055);min-width:0}
+#greenhouse-lesson .gh-overline{margin:0 0 10px;font-size:.64rem;letter-spacing:.13em;font-weight:800;color:#2A78D6}
+#greenhouse-lesson #gh-step-title{font-size:clamp(1.06rem,1.75vw,1.52rem);letter-spacing:-.025em;line-height:1.2;margin:0 0 11px;max-width:24ch}
+#greenhouse-lesson #gh-step-desc{font-size:clamp(.79rem,1.04vw,.93rem);line-height:1.6;margin:0 0 16px;min-height:7em;color:#314c68}
+#greenhouse-lesson .gh-stagebuttons{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px}
+#greenhouse-lesson button{cursor:pointer;transition:background .2s,color .2s,border-color .2s;border-radius:30px}
+#greenhouse-lesson .gh-stagebuttons button{padding:8px 10px;border:1px solid #cfddea;background:#F5F8FC;color:#314f6e;font-size:.75rem;font-weight:750}
+#greenhouse-lesson .gh-stagebuttons button.is-active{border-color:#2A78D6;background:#2A78D6;color:#fff}
+#greenhouse-lesson .gh-compare{border-top:1px solid #d9e4f0;padding-top:14px}
+#greenhouse-lesson .gh-small-label{font-weight:750;font-size:.71rem;color:#48627e;margin-bottom:8px}
+#greenhouse-lesson .gh-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+#greenhouse-lesson .gh-presets button{padding:7px 12px;border:1px solid #d1deed;background:white;font-weight:750;font-size:.76rem;color:#12233A}
+#greenhouse-lesson .gh-presets button.is-active{border-color:#0A6B62;color:#fff;background:#0A6B62}
+#greenhouse-lesson .gh-kpi{display:flex;flex-direction:column;gap:3px;background:#F5F8FC;border-radius:13px;padding:10px 12px}
+#greenhouse-lesson .gh-kpi strong{font-family:Sora,Inter,sans-serif;font-size:1.02rem}
+#greenhouse-lesson .gh-kpi span{font-size:.74rem;line-height:1.4;color:#405a75}
+#greenhouse-lesson .gh-numbers{margin-top:12px;font-size:.74rem;line-height:1.55;color:#314c68}
+#greenhouse-lesson .gh-numbers summary{cursor:pointer;font-weight:750;color:#2A78D6;list-style:revert}
+#greenhouse-lesson .gh-numbers p{margin:8px 0 0}
+#greenhouse-lesson :is(button,summary):focus-visible{outline:3px solid #0A6B62;outline-offset:3px}
+@media(min-aspect-ratio:1/1) and (max-width:1050px){#greenhouse-lesson{inset:109px 20px 59px}#greenhouse-lesson .gh-shell{gap:8px;grid-template-columns:1.3fr 1fr}#greenhouse-lesson .gh-panel{padding:10px 12px}#greenhouse-lesson #gh-step-desc{min-height:0}#greenhouse-lesson .gh-stagebuttons button{padding:6px 8px}}
+@media(max-aspect-ratio:1/1){
+ #stage.budget-redesign .head{left:18px;top:13px;max-width:calc(100% - 38px)}
+ #stage.budget-redesign .title{font-size:clamp(1.37rem,5.5vw,1.9rem);line-height:1.1}
+ #stage.budget-redesign .lede{display:block;font-size:.73rem;max-width:95%;margin-top:5px;line-height:1.4}
+ #greenhouse-lesson{inset:120px 12px 53px;overflow:auto;overscroll-behavior:contain}
+ #greenhouse-lesson .gh-shell{height:auto;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+ #greenhouse-lesson .gh-graphic{width:100%;flex:none}
+ #greenhouse-lesson .gh-graphic > svg{display:none}
+ #greenhouse-lesson .gh-mobile-visual{display:block}
+ #greenhouse-lesson .gh-mobile-visual svg{width:100%;height:auto;max-height:40vh}
+ #greenhouse-lesson .ghm-label{font-family:Sora,Inter,Arial,sans-serif;font-size:12px;font-weight:800;fill:#12233A}
+ #greenhouse-lesson .ghm-small{font-size:11px;fill:#4b627a}
+ #greenhouse-lesson .ghm-lightlabel{font-size:10px;letter-spacing:1.5px;fill:#4b627a;font-weight:800}
+ #greenhouse-lesson .ghm-red{fill:#ad3c2d}
+ #greenhouse-lesson .ghm-earth-title{font-size:13px;fill:#fff;font-weight:800;letter-spacing:.5px}
+ #greenhouse-lesson .ghm-earth-note{font-size:11px;fill:#d2eee9}
+ #greenhouse-lesson .gh-panel{padding:12px 14px;box-shadow:none;border-radius:16px}
+ #greenhouse-lesson .gh-overline{font-size:.63rem;margin-bottom:6px}
+ #greenhouse-lesson #gh-step-title{max-width:none;font-size:1.08rem;margin-bottom:5px}
+ #greenhouse-lesson #gh-step-desc{font-size:.78rem;min-height:0;margin-bottom:11px;line-height:1.45}
+ #greenhouse-lesson .gh-stagebuttons{margin-bottom:11px;gap:4px}
+ #greenhouse-lesson .gh-stagebuttons button{padding:7px 8px;font-size:.70rem}
+ #greenhouse-lesson .gh-compare{padding-top:9px}
+ #greenhouse-lesson .gh-small-label{font-size:.7rem;margin-bottom:6px}
+ #greenhouse-lesson .gh-presets{margin-bottom:8px}
+ #greenhouse-lesson .gh-presets button{padding:6px 12px;font-size:.71rem}
+ #greenhouse-lesson .gh-kpi{flex-direction:row;align-items:center;justify-content:space-between;gap:9px;padding:9px 11px}
+ #greenhouse-lesson .gh-kpi strong{font-size:.85rem;min-width:105px}
+ #greenhouse-lesson .gh-kpi span{font-size:.63rem;text-align:right}
+ #greenhouse-lesson .gh-diagram-note{font-size:.59rem;padding:1px 0 5px}
+ #greenhouse-lesson .gh-numbers{font-size:.72rem}
+}
+@media(max-width:380px){#greenhouse-lesson{inset:124px 10px 52px}#greenhouse-lesson .gh-stagebuttons button{padding:5px 7px;font-size:.64rem}#greenhouse-lesson .gh-mobile-visual svg{max-height:38vh}}
+@media(prefers-reduced-motion:reduce){#greenhouse-lesson .gh-ray{animation:none}}
+
+#greenhouse-lesson .gh-color-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 20px;margin:7px 0 2px;font-size:.7rem;color:#3b536b;font-weight:750}
+#greenhouse-lesson .gh-color-legend span{display:flex;gap:6px;align-items:center}
+#greenhouse-lesson .gh-color-legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+#greenhouse-lesson .gh-solar-dot{background:#C1880D}
+#greenhouse-lesson .gh-reflect-dot{background:#367DC6}
+#greenhouse-lesson .gh-ir-dot{background:#D6533B}
+#greenhouse-lesson .gh-legend-svg{display:none}
+#greenhouse-lesson .gh-ground .gh-surface-title{fill:#ffffff}
+#greenhouse-lesson .gh-ground .gh-surface-note{fill:#e1f7f3}
+#greenhouse-lesson .gh-part[data-gh-part="surface"] .gh-raylabel,#greenhouse-lesson .gh-part[data-gh-part="gases"] .gh-raylabel{fill:#9a3426}
+#greenhouse-lesson .gh-part[data-gh-part="reflection"] .gh-raylabel{fill:#286DAE}
+@media(max-aspect-ratio:1/1){#greenhouse-lesson .gh-color-legend{gap:6px 12px;margin:4px 0 2px;font-size:.66rem}}

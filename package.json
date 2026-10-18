@@ -1,0 +1,11 @@
+{
+  "name": "carbono-sbfa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Apresentação científica Carbono SBFA, arquivo HTML único com melhorias auditáveis",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test/static.mjs"
+  },
+  "license": "UNLICENSED"
+}
