@@ -83,3 +83,14 @@ Configure `git config --global user.name "Seu nome"` e `git config --global user
 A apresentação agora possui **Como funciona o efeito estufa?** como experiência 4. Em vez de um globo coberto por barras, há um esquema autoral com versões horizontal (projetor) e vertical (celular) e cinco etapas interativas: Sol, Reflexão, Calor, Gases e Mais CO₂. A comparação entre concentrações de 1750, 2019 e duplicação de CO₂ mantém o cálculo do bundle original. Os números de balanço energético do IPCC aparecem em seção expansível. Esta experiência 4 não exige WebGL; para a origem de cada valor, consulte FONTES.md.
 
 Arquivos acrescentados: `src/greenhouse.js`, `src/greenhouse.css` e `test/greenhouse_check.py`. `build.mjs` concatena as melhorias depois do JavaScript original e incorpora o CSS diretamente no arquivo único `index.html`.
+
+## Experiência 8 revisada: uma comparação científica, não um termômetro fictício
+
+A tela **A mesma cidade. Dois microclimas.** contém título e controles dentro de um único painel rolável, sem sobreposição do cabeçalho e da navegação. Os arquivos mantidos são `src/ilha-calor-v4.js` e `src/ilha-calor-v4.css`. O desenho anterior `v3` permanece somente para rastreabilidade, com o v4 substituindo a implementação no build.
+
+- **Porte da cidade:** altera apenas os edifícios desenhados, nas duas condições;
+- **Cobertura das árvores:** altera número de copas, sombra e o halo gráfico de aquecimento;
+- **Chuva média anual:** altera a representação qualitativa de disponibilidade hídrica e evapotranspiração, não a chuva do dia;
+- **Próximo/anterior:** funciona fora do painel rolável, sem controles flutuantes sobre os botões.
+
+A tela é didática e não faz estimativas numéricas de temperatura; detalhes científicos em `FONTES.md`. O workflow de teste visual tira capturas nos tamanhos 320 px, 393 px e desktop, e a verificação de integridade compara o HTML publicado com o resultado do build.
