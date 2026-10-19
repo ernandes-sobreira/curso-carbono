@@ -1,0 +1,35 @@
+name: Importar arte aprovada da ilha de calor
+on:
+  push:
+    paths:
+      - .github/workflows/importar-arte.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixar e conferir ilustração
+        env:
+          IMAGE_URL: 'https://media.canva.com/v2/image-resize/format:PNG/height:941/quality:100/uri:ifs%3A%2F%2FM%2F04ae2679-ec2f-40a7-8dd3-fbbbfbdd1da7/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAAMoX8-EqwWrJzuN0MuCSPgRu5EI4Odgp35ST4Ky6x0Ro&exp=1792460899&osig=AAAAAAAAAAAAAAAAAAAAACQM5OXRlVDFQk3uizYF9hMhquL6Sibla8dxS7e1BVQ9&signer=media-rpc&token=AAIAAU0AJDA0YWUyNjc5LWVjMmYtNDBhNy04ZGQzLWZiYmJmYmRkMWRhNwAAAAABoVb-wrjYTJFfw_bUENOuBOgDUHovcxhbDiZbH-iD3A9L28zBZw&x-canva-quality=thumbnail'
+        run: |
+          mkdir -p assets
+          curl -fL --retry 2 --max-time 45 "$IMAGE_URL" -o assets/ilha-calor-arvores.png
+          python3 - <<'PY'
+          from pathlib import Path
+          from struct import unpack
+          x=Path('assets/ilha-calor-arvores.png').read_bytes()
+          assert x[:8]==b'\x89PNG\r\n\x1a\n', 'Resposta não é PNG'
+          w,h=unpack('>II',x[16:24])
+          print(f'Arte importada: {w} x {h}, {len(x)} bytes')
+          assert w>=1200 and h>=670, 'Recusando miniatura, precisamos da arte original'
+          PY
+      - name: Preservar imagem no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/ilha-calor-arvores.png
+          git commit -m "Armazenar ilustração aprovada da ilha de calor" || exit 0
+          git push
