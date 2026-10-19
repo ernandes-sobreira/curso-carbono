@@ -3,9 +3,15 @@ Não equivale a testar um aparelho Android ou iOS físico.
 """
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+import threading
+import os
 
 ROOT=Path(__file__).resolve().parents[1]
-HTML=(ROOT/"index.html").read_text(encoding="utf-8")
+os.chdir(ROOT)
+server=ThreadingHTTPServer(("127.0.0.1",0), SimpleHTTPRequestHandler)
+threading.Thread(target=server.serve_forever,daemon=True).start()
+URL=f"http://127.0.0.1:{server.server_port}/index.html"
 OUT=ROOT/"_checks"
 OUT.mkdir(exist_ok=True)
 
@@ -15,7 +21,7 @@ with sync_playwright() as p:
         page=browser.new_page(viewport={"width":width,"height":height})
         errors=[]
         page.on("pageerror",lambda e:errors.append(str(e)))
-        page.set_content(HTML,wait_until="domcontentloaded",timeout=70000)
+        page.goto(URL,wait_until="domcontentloaded",timeout=70000)
         page.evaluate("window.__carbono.go(7)")
         page.wait_for_timeout(300)
         assert page.locator("#stage.uhi-image-slide").count()==1, "Slide novo não ativado"
@@ -47,3 +53,4 @@ with sync_playwright() as p:
         print(f"{name}: slide de ilha de calor, zoom, navegação e alimentos OK")
         page.close()
     browser.close()
+    server.shutdown()
