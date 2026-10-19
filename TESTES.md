@@ -39,3 +39,17 @@ Execução: **18/10/2026**, ambiente local isolado de testes, Node.js **22.16.0*
 - **Chromium headless com viewport móvel 390 × 844, toque emulado:** botão `5 · Mais CO₂` atualizou o título; seleção `2 × CO₂` mostrou 554,3 ppm; seletor `2019` retornou 409,9 ppm. `window.pageerror=[]`. Screenshot em `_checks/greenhouse-mobile.png`. O painel de explicação é rolável e não há garantias de desempenho em hardware real. Teste reproduzível em `python test/greenhouse_check.py`.
 - **Navegação geral de 11 telas:** teste `python test/browser_check.py` passou novamente, 0 erros JS e cinco setores de MT com dados SEEG. `npm test` passou.
 - **Ainda não testado:** Chrome real Android com GPU ativa, iOS Safari, FPS, WebGL da antiga cena. A nova experiência 4 não precisa de WebGL.
+
+## Revisão operacional, Experiência 8, 18/10/2026
+
+Workflow: `Testar telas 8 e 10 no Chromium`, executado em 320 × 568, 393 × 852 e 1280 × 720 (viewport emulado, **não aparelhos físicos**). Teste automatizado: `test/visual_mobile.py`.
+
+Verificações que passaram:
+- População de mínimo a máximo: quantidade de edifícios esquemáticos aumentou nas duas paisagens;
+- Arborização de 5% a 80%: mais copas foram criadas e o resultado da régua foi atualizado;
+- Chuva média anual de 200 a 3000 mm: a indicação de condição climática mudou de seca para úmida; o desenho de evapotranspiração foi alterado;
+- Botão Cáceres: atualizou os controles de porte e clima; botões de próximo/anterior responderam ao clique após o uso das réguas;
+- Título antigo e controles antigos ficaram ocultos; cinco e dez barras do painel alimentar foram testadas; nenhum erro JavaScript durante o fluxo.
+- Build reproduzível: `node build.mjs` passou e produziu `index.html` idêntico à versão publicada.
+
+**Pendente:** teste tátil em Chrome Android físico, Safari iOS e inspeção de FPS; os testes via Chromium não certificam performance nos dispositivos.
