@@ -298,7 +298,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 /* Durante a experiência 5, a navegação inferior continua; controles legados não. */
 #stage.rv-active #ctrl,#stage.rv-active #scale,#stage.rv-active #rescard{display:none!important;visibility:hidden!important;pointer-events:none!important}
 
-
 /* Slide 8: ocupa toda a apresentação e cobre os controles antigos, independente do estado do bundle. */
 #heat-slide-cover{position:absolute;inset:0;z-index:9000;display:none;background:#fff;color:#12233a;overflow:hidden;font-family:Inter,system-ui,sans-serif}
 #heat-slide-cover.active{display:flex;flex-direction:column}
@@ -4769,7 +4768,6 @@ slide.exit=function(){
 };
 window.__carbonoReservatorios={select:choose,items,flows};
 })();
-
 /* Experiência 10, gráfico acessível de pegadas alimentares sem Canvas comprimido. */
 (function(){
 "use strict";
@@ -4883,7 +4881,6 @@ slide.exit=function(){stage.classList.remove("food2-on");root.hidden=true;previo
 ctrl.addEventListener("click",()=>queueMicrotask(sync));
 window.__food2={factors,local,sync,redraw};
 })();
-
 /* Substituição definitiva do slide 8. 
  * O overlay independente cobre cabeçalho e réguas legados, inclusive sob hash/deep link.
  */
