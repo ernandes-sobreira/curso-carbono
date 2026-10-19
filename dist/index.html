@@ -299,86 +299,33 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 #stage.rv-active #ctrl,#stage.rv-active #scale,#stage.rv-active #rescard{display:none!important;visibility:hidden!important;pointer-events:none!important}
 
 
-#stage.uhi4-on #c2d,#stage.uhi4-on #gl,#stage.uhi4-on #readout,
-#stage.uhi4-on #ctrl,#stage.uhi4-on .head,#stage.uhi4-on #chart,
-#stage.uhi4-on #city,#stage.uhi4-on #uhiCard{display:none!important}
-#stage.uhi4-on #uhi{display:block!important;z-index:12;background:#fff;overflow:hidden}
-#stage.uhi4-on .foot{z-index:40;background:rgba(255,255,255,.98);border-top:1px solid #dbe6f0}
-#stage.uhi4-on .drawer{z-index:70}
-#uhi .u4-scroll{height:calc(100% - 51px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;touch-action:pan-y;padding:28px 24px 90px;color:#12233a;background:#fff}
-#uhi .u4-eyebrow{font:800 11px Inter,sans-serif;letter-spacing:.14em;color:#2a78d6;text-transform:uppercase}
-#uhi .u4-title{font:800 clamp(23px,2.7vw,34px)/1.12 Sora,system-ui,sans-serif;letter-spacing:-.03em;margin:7px 0 10px;max-width:26ch}
-#uhi .u4-deck{font:500 14px/1.45 Inter,sans-serif;color:#36536b;margin:0 0 12px;max-width:74ch}
-#uhi .u4-message{font:700 13px/1.45 Inter,sans-serif;color:#0a6b62;background:#eff8f5;border:1px solid #c9e9e0;border-radius:12px;padding:11px 14px;margin-bottom:14px}
-#uhi .u4-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:10px;border:1px solid #dae6f1;border-radius:16px;background:#f8fbfe}
-#uhi .u4-field{min-width:0;display:grid;gap:5px;background:#fff;border:1px solid #e1eaf3;border-radius:12px;padding:10px}
-#uhi .u4-fieldhead{display:flex;align-items:center;justify-content:space-between;gap:5px}
-#uhi .u4-fieldhead label{font-weight:800;font-size:12px;color:#12233a}
-#uhi .u4-fieldhead output{font-weight:800;color:#2a78d6;text-align:right;font-size:12px}
-#uhi .u4-field input{display:block;width:100%;margin:2px 0;accent-color:#0a6b62}
-#uhi .u4-helper{font-size:10px;line-height:1.4;color:#57708a}
-#uhi .u4-actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px;align-items:center}
-#uhi .u4-actions span{font-size:11px;font-weight:700;color:#51677c}
-#uhi .u4-actions button{background:#fff;border:1px solid #bfd1e3;border-radius:999px;color:#36536b;padding:7px 12px;font-size:11px;font-weight:800;cursor:pointer}
-#uhi .u4-actions button[aria-pressed=true]{background:#2a78d6;color:#fff}
-#uhi button:focus-visible,#uhi input:focus-visible{outline:3px solid #0a6b62;outline-offset:2px}
-#uhi .u4-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-#uhi .u4-panel{min-width:0;border:1px solid #d7e5f0;border-radius:16px;background:#fff;padding:12px;box-shadow:0 4px 12px #12233a08}
-#uhi .u4-panelheader{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:8px}
-#uhi .u4-panelheader h3{margin:0;font:800 clamp(14px,1.35vw,20px) Sora,sans-serif}
-#uhi .u4-chip{border-radius:999px;padding:6px 8px;background:#ebf5fe;color:#206dbb;font-size:10px;font-weight:800;white-space:nowrap}
-#uhi .u4-panel:nth-child(2) .u4-chip{color:#086b60;background:#eaf7f3}
-#uhi .u4-visual{background:#edf5fb;border-radius:10px;overflow:hidden}
-#uhi .u4-visual svg{display:block;width:100%;height:auto}
-#uhi .u4-paneldesc{font-size:12px;line-height:1.45;margin:9px 0 0;color:#3c566d}
-#uhi .u4-insight{margin-top:12px;border-radius:14px;background:#f4f8fc;border:1px solid #d9e5ef;padding:12px 14px}
-#uhi .u4-insight b{font-size:13px}#uhi .u4-insight p{font-size:12px;line-height:1.55;margin:4px 0;color:#3a5670}
-#uhi .u4-footnote{font-size:10px;line-height:1.5;color:#62798e;margin:11px 0}
-@media(max-width:900px){
-#uhi .u4-scroll{padding:15px 12px 90px}
-#uhi .u4-title{font-size:23px;max-width:none}
-#uhi .u4-controls{grid-template-columns:1fr;gap:7px;padding:8px}
-#uhi .u4-field{padding:8px;gap:4px}
-#uhi .u4-actions{margin:8px 0 12px}
-#uhi .u4-duo{gap:7px}
-#uhi .u4-panel{padding:7px;border-radius:12px}
-#uhi .u4-panelheader{display:block}
-#uhi .u4-panelheader h3{font-size:13px}
-#uhi .u4-chip{display:inline-block;margin:5px 0 0;font-size:9px;padding:4px 6px}
-#uhi .u4-paneldesc{font-size:10px}
-#uhi .u4-deck{font-size:12px;margin-bottom:10px}
-#uhi .u4-message{font-size:12px;padding:9px 10px}
+/* Slide 8: ocupa toda a apresentação e cobre os controles antigos, independente do estado do bundle. */
+#heat-slide-cover{position:absolute;inset:0;z-index:9000;display:none;background:#fff;color:#12233a;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+#heat-slide-cover.active{display:flex;flex-direction:column}
+#heat-slide-cover .heat-main{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px clamp(14px,2.5vw,36px) 8px;gap:10px;overflow:auto;overscroll-behavior:contain}
+#heat-slide-cover .heat-kicker{font-size:clamp(11px,1vw,14px);text-transform:uppercase;letter-spacing:.14em;color:#2a78d6;font-weight:800;align-self:stretch}
+#heat-slide-cover .heat-title{font-family:Sora,system-ui,sans-serif;font-size:clamp(19px,2vw,32px);margin:0;line-height:1.1;text-align:center}
+#heat-slide-cover .heat-graphic{display:block;width:100%;max-width:1420px;max-height:calc(100% - 75px);height:auto;min-height:0;object-fit:contain;cursor:zoom-in}
+#heat-slide-cover .heat-footer{flex:0 0 auto;min-height:56px;border-top:1px solid #dce6ef;display:flex;align-items:center;justify-content:space-between;gap:9px;padding:8px clamp(14px,2.5vw,36px);background:#fff}
+#heat-slide-cover .heat-footnote{color:#465f79;max-width:58ch;font-size:11px;line-height:1.35}
+#heat-slide-cover button{background:#fff;color:#12233a;border:1px solid #c7d8e8;border-radius:999px;padding:10px 15px;cursor:pointer;font:700 12px Inter,system-ui,sans-serif;white-space:nowrap}
+#heat-slide-cover button:hover,#heat-slide-cover button:focus-visible{background:#eaf3fc;outline-offset:2px}
+#heat-slide-cover .heat-nav{display:flex;flex-wrap:nowrap;align-items:center;gap:6px}
+#heat-slide-cover .heat-nav .heat-primary{background:#2a78d6;color:#fff;border-color:#2a78d6}
+#heat-slide-cover .heat-zoom{position:absolute;inset:0;z-index:10;display:none;background:#fff;overflow:auto;overscroll-behavior:contain}
+#heat-slide-cover .heat-zoom.open{display:block}
+#heat-slide-cover .heat-zoom img{display:block;width:max(1180px,100%);height:auto;max-width:none}
+#heat-slide-cover .heat-zoom-close{position:sticky;top:14px;left:14px;z-index:12;box-shadow:0 2px 12px #12233a33}
+@media(max-width:780px){
+ #heat-slide-cover .heat-main{justify-content:flex-start;padding:20px 8px 8px;gap:10px}
+ #heat-slide-cover .heat-title{font-size:18px}
+ #heat-slide-cover .heat-graphic{width:100%;max-height:none;flex:none}
+ #heat-slide-cover .heat-footer{padding:8px 7px;gap:4px}
+ #heat-slide-cover .heat-footnote{display:none}
+ #heat-slide-cover button{padding:9px 10px;font-size:11px}
+ #heat-slide-cover .heat-nav{width:100%;justify-content:space-between}
 }
-@media(max-width:340px){#uhi .u4-duo{grid-template-columns:1fr}}
 
-/* Exp. 8 – layout único. Nenhum componente da simulação antiga permanece. */
-#stage.uhi-image-slide #gl,
-#stage.uhi-image-slide #c2d,
-#stage.uhi-image-slide #city,
-#stage.uhi-image-slide #uhiCard,
-#stage.uhi-image-slide .head,
-#stage.uhi-image-slide #readout,
-#stage.uhi-image-slide #ctrl,
-#stage.uhi-image-slide #chart{display:none!important}
-#stage.uhi-image-slide #uhi{display:block!important;background:#fff;z-index:15;overflow:hidden}
-#stage.uhi-image-slide .foot{z-index:30;background:rgba(255,255,255,.97);border-top:1px solid #dde5ee}
-#stage.uhi-image-slide .drawer{z-index:60}
-#uhi .uhi-image-only{position:absolute;inset:0 0 55px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:12px;overflow:auto;overscroll-behavior:contain;background:#fff}
-#uhi .uhi-figure{max-width:100%;min-width:0;max-height:100%;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-#uhi .uhi-figure img{display:block;max-width:100%;max-height:min(76vh,calc(100dvh - 145px));width:auto;height:auto;object-fit:contain;border-radius:8px}
-#uhi .uhi-figure figcaption{font-size:12px;line-height:1.5;text-align:center;color:#435b71;max-width:85ch}
-#uhi #uhi-zoom{border:1px solid #b6c8db;border-radius:50px;padding:9px 18px;background:#fff;color:#12233a;cursor:pointer;font-weight:700}
-#uhi #uhi-zoom:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
-@media(max-width:760px){
- #uhi .uhi-image-only{inset:0 0 54px;justify-content:flex-start;padding:14px 10px 16px;gap:8px}
- #uhi .uhi-figure{flex:none;width:100%}
- #uhi .uhi-figure img{width:100%;height:auto;max-height:none;object-fit:contain}
- #uhi .uhi-figure figcaption{font-size:11px}
- #uhi .uhi-image-only.uhi-zoomed{display:block;overflow:auto}
- #uhi .uhi-zoomed .uhi-figure{width:1000px;max-width:none}
- #uhi .uhi-zoomed .uhi-figure img{width:1000px;max-width:none}
- #uhi .uhi-zoomed #uhi-zoom{position:sticky;bottom:4px;left:10px}
-}
 </style>
 </head>
 <body>
@@ -4822,91 +4769,7 @@ slide.exit=function(){
 };
 window.__carbonoReservatorios={select:choose,items,flows};
 })();
-/* Experiência 8, comparação entre mesma cidade com pouco e muito verde. */
-(function(){
-"use strict";
-const app=window.__carbono, slide=app&&app.slides.find(s=>s.id==="uhi");
-if(!slide)return;
-const stage=document.getElementById("stage"), scene=document.getElementById("uhi"),ctrl=document.getElementById("ctrl");
-const state={pop:650000,precip:1400,green:.35},oldExit=slide.exit;
-const population=v=>v>=1e6?(v/1e6).toFixed(1).replace(".",",")+" milhão":Math.round(v/1000)+" mil";
-const num=v=>new Intl.NumberFormat("pt-BR").format(v);
-const style=document.createElement("style");
-style.textContent="#stage.u3-on #c2d,#stage.u3-on #chart,#stage.u3-on #readout,#stage.u3-on #uhiCard,#stage.u3-on #city{display:none!important}#stage.u3-on .lede{display:none!important}"+
-"#stage.u3-on #ctrl{max-width:none;width:calc(100% - 48px);left:24px;bottom:56px;z-index:6}"+
-"#uhi{background:#fff;overflow:hidden}#uhi .u3-view{position:absolute;inset:0 0 52px;overflow:auto;padding:170px 24px 135px;color:#12233a}"+
-"#uhi .u3-lead{font-size:13px;line-height:1.5;color:#36536b;max-width:870px;margin:0 0 13px}"+
-"#uhi .u3-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}#uhi .u3-panel{border:1px solid #d9e4f0;border-radius:16px;padding:12px;min-width:0;background:#fff}"+
-"#uhi .u3-panel h3{font:800 clamp(14px,1.6vw,22px) Sora,sans-serif;margin:0 0 5px}#uhi .u3-panel p{font-size:12px;line-height:1.5;color:#3b5771;margin:6px 0}"+
-"#uhi .u3-panel svg{display:block;width:100%;height:auto;border-radius:10px;background:#f3f8fd}#uhi .u3-status{font-weight:800!important;font-size:13px!important}"+
-"#uhi .u3-hot .u3-status{color:#a6402b!important}#uhi .u3-cool .u3-status{color:#08685c!important}"+
-"#uhi .u3-explain{margin-top:10px;padding:12px 14px;background:#f5f8fc;border:1px solid #d9e4f0;border-radius:14px;font-size:13px;line-height:1.55;color:#314c63}"+
-"#uhi .u3-source{font-size:10px;color:#58718a;margin:8px 0}"+
-"#ctrl .u3-controls{background:#fff;border:1px solid #d7e4f2;border-radius:16px;display:flex;flex-wrap:wrap;gap:10px;padding:10px;box-shadow:0 4px 20px #12233a18}"+
-"#ctrl .u3-line{flex:1;display:grid;grid-template-columns:67px 1fr 70px;gap:7px;align-items:center;min-width:180px}"+
-"#ctrl .u3-line label,#ctrl .u3-line output{font-size:11px;font-weight:800}#ctrl .u3-line output{text-align:right}#ctrl .u3-line input{width:100%;accent-color:#0a6b62}"+
-"#ctrl .u3-city{display:flex;gap:5px}#ctrl .u3-city button{background:#fff;border:1px solid #b4cbe0;padding:8px;border-radius:16px;font-size:11px;font-weight:800;cursor:pointer}"+
-"@media(max-width:850px){#uhi .u3-view{padding:150px 12px 225px;bottom:50px}#uhi .u3-grid{grid-template-columns:1fr}#uhi .u3-panel{padding:9px}"+
-"#uhi .u3-panel svg{max-height:200px}#stage.u3-on #ctrl{left:10px;right:10px;width:calc(100% - 20px);bottom:51px;max-height:185px;overflow:auto}"+
-"#ctrl .u3-controls{gap:6px;padding:8px}#ctrl .u3-line{flex:1 1 100%;grid-template-columns:70px 1fr 75px}}";
-document.head.appendChild(style);
-const view=document.createElement("section");view.className="u3-view";
-view.innerHTML='<p class="u3-lead"><b>Mesma cidade. Mesmo clima. Duas coberturas vegetais.</b> Compare uma área com pouco verde com a mesma cidade arborizada. Este desenho não prevê temperaturas.</p>'+
-'<div class="u3-grid"><article class="u3-panel u3-hot"><h3>Pouco verde</h3><p>5% de cobertura arbórea</p><div data-u3-scene="a"></div><p class="u3-status">Mais concreto ao sol, maior aquecimento</p></article>'+
-'<article class="u3-panel u3-cool"><h3>Mais verde</h3><p data-u3-caption></p><div data-u3-scene="b"></div><p class="u3-status">Mais sombra e evapotranspiração, menor aquecimento</p></article></div>'+
-'<p class="u3-explain" aria-live="polite"></p><p class="u3-source">Esquema autoral sem temperaturas calculadas. Base conceitual: Manoli et al. (2019), Nature, DOI 10.1038/s41586-019-1512-9.</p>';
-scene.appendChild(view);
-function renderScene(g){
- const n=13,treesCount=Math.round(3+g*42);
- let buildings="",trees="";
- for(let i=0;i<n;i++){const x=20+i*39,h=60+i*29%93;
- buildings+='<rect x="'+x+'" y="'+(217-h)+'" width="'+(20+i*7%14)+'" height="'+h+'" rx="3" fill="'+(i%2?'#8da2b8':'#72899f')+'"/>';}
- for(let i=0;i<treesCount;i++){const x=19+i*59%505,y=217+i%3*2;
- trees+='<rect x="'+(x-2)+'" y="'+y+'" width="4" height="13" fill="#795637"/><circle cx="'+x+'" cy="'+(y-7)+'" r="'+(7+i%3*3)+'" fill="'+(i%2?'#0a6b62':'#289779')+'"/>';}
- const hot=g<.09, heat=hot?.27:.075;
- return '<svg viewBox="0 0 540 260" role="img" aria-label="'+(hot?'Cidade com poucas árvores':'Cidade com mais árvores')+'">'+
- '<rect width="540" height="260" fill="#f4f9fc"/><circle cx="468" cy="39" r="23" fill="#ffe3a2" stroke="#ebc16b" stroke-width="3"/>'+
- buildings+'<rect y="220" width="540" height="40" fill="#d9e1e9"/><rect x="0" y="220" width="540" height="12" fill="#71808f"/>'+
- '<rect x="0" y="220" width="'+Math.round(g*540)+'" height="12" fill="#b0d9b2"/>'+trees+
- '<ellipse cx="270" cy="206" rx="'+(hot?240:125)+'" ry="'+(hot?70:36)+'" fill="#d9553b" opacity="'+heat+'"/>'+
- '<g stroke="#d9553b" opacity="'+(hot?.7:.16)+'" fill="none" stroke-width="5" stroke-linecap="round">'+
- '<path d="M128 215q-13-18 4-33q12-14 0-24"/><path d="M272 215q-13-18 4-33q12-14 0-24"/><path d="M398 215q-13-18 4-33q12-14 0-24"/></g>'+
- '<text x="270" y="251" text-anchor="middle" font-size="12" font-family="Inter" fill="#405971">'+population(state.pop)+' habitantes, mesmo tecido urbano</text></svg>';
-}
-function redraw(){
- view.querySelector('[data-u3-scene="a"]').innerHTML=renderScene(.05);
- view.querySelector('[data-u3-scene="b"]').innerHTML=renderScene(state.green);
- view.querySelector('[data-u3-caption]').textContent=Math.round(state.green*100)+'% de cobertura arbórea (cenário didático)';
- view.querySelector('.u3-explain').innerHTML='<b>O verde ajuda, mesmo numa cidade grande.</b> Com mais árvores, cresce a área sombreada e pode aumentar a evapotranspiração. Isso reduz o aquecimento das superfícies e pode atenuar a ilha de calor. Nas duas imagens: '+population(state.pop)+' moradores e '+num(state.precip)+' mm/ano de chuva. Chuva anual é contexto climático, não chuva ocorrendo neste instante.';
- for(const k of ['pop','precip','green']){
- const inp=ctrl.querySelector('[data-u3="'+k+'"]');if(inp)inp.value=state[k];
- }
- for(const [k,v] of [['pop',population(state.pop)],['precip',num(state.precip)+' mm'],['green',Math.round(state.green*100)+'%']]){
- const out=ctrl.querySelector('[data-u3out="'+k+'"]');if(out)out.textContent=v;
- }
-}
-function build(){
- ctrl.innerHTML='<div class="u3-controls">'+
- '<div class="u3-line"><label for="u3-pop">População</label><input id="u3-pop" data-u3="pop" type="range" min="10000" max="20000000" step="10000"><output data-u3out="pop"></output></div>'+
- '<div class="u3-line"><label for="u3-rain">Chuva anual</label><input id="u3-rain" data-u3="precip" type="range" min="200" max="3000" step="50"><output data-u3out="precip"></output></div>'+
- '<div class="u3-line"><label for="u3-green">Verde</label><input id="u3-green" data-u3="green" type="range" min="0" max=".6" step=".01"><output data-u3out="green"></output></div>'+
- '<div class="u3-city"><button data-city="cac">Cáceres</button><button data-city="cba">Cuiabá</button><button data-city="sp">São Paulo</button></div></div>';
- ctrl.querySelectorAll('[data-u3]').forEach(input=>input.addEventListener('input',()=>{state[input.dataset.u3]=Number(input.value);redraw()}));
- const cities={cac:[95000,1300],cba:[650000,1400],sp:[12000000,1500]};
- ctrl.querySelectorAll('[data-city]').forEach(button=>button.addEventListener('click',()=>{const p=cities[button.dataset.city];state.pop=p[0];state.precip=p[1];redraw()}));
- redraw();
-}
-slide.title='Ilhas de calor: o efeito das árvores na cidade';
-slide.lede='Compare a mesma cidade com pouco e muito verde.';
-slide.build=build;
-slide.enter=function(){stage.classList.add('u3-on');scene.style.display='block';if(!ctrl.querySelector('.u3-controls'))build();redraw()};
-slide.exit=function(){stage.classList.remove('u3-on');scene.style.display='none';if(typeof oldExit==='function'){try{oldExit()}catch(e){}}};
-slide.more=function(){return '<h2>Ilha de calor e cobertura verde</h2>'+
- '<p>Árvores produzem sombra e favorecem evapotranspiração. Isso tende a reduzir a temperatura das superfícies e atenuar a ilha de calor. A intensidade depende da disponibilidade de água, do padrão de arborização, do material das superfícies, das condições meteorológicas e da forma da cidade.</p>'+
- '<p><b>Não existe aqui cálculo de quantos graus seriam reduzidos por 60% de verde.</b> Sem medições locais e modelo calibrado, esse número seria invenção. População e chuva média anual são condições de contexto, não preditores suficientes de temperatura em um bairro específico.</p>'+
- '<p>Manoli et al. (2019), <em>Magnitude of urban heat islands largely explained by climate and population</em>, Nature 573, 55–60. <a href="https://doi.org/10.1038/s41586-019-1512-9" target="_blank" rel="noopener">DOI verificável</a>.</p>'};
-window.__uhi3={state,redraw};
-})();
+
 /* Experiência 10, gráfico acessível de pegadas alimentares sem Canvas comprimido. */
 (function(){
 "use strict";
@@ -5020,179 +4883,107 @@ slide.exit=function(){stage.classList.remove("food2-on");root.hidden=true;previo
 ctrl.addEventListener("click",()=>queueMicrotask(sync));
 window.__food2={factors,local,sync,redraw};
 })();
-/* Experiência 8 | visualização científica responsiva, revisão 4.
- * Estoques e fluxos visuais qualitativos; NÃO calcula °C.
+
+/* Substituição definitiva do slide 8. 
+ * O overlay independente cobre cabeçalho e réguas legados, inclusive sob hash/deep link.
  */
 (function(){
-"use strict";
-const app=window.__carbono;
-const slide=app&&app.slides.find(s=>s.id==="uhi");
+'use strict';
+const api=window.__carbono;
+const slide=api?.slides?.find(s=>s.id==='uhi');
 if(!slide)return;
-const stage=document.getElementById("stage");
-const host=document.getElementById("uhi");
-const controls=document.getElementById("ctrl");
-const value={population:650000,green:45,rain:1400};
-const presets={cac:[95000,1300],cba:[650000,1400],sp:[12000000,1500]};
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-const money=n=>new Intl.NumberFormat("pt-BR",{maximumFractionDigits:0}).format(n);
-const human=n=>n>=1000000?(n/1000000).toFixed(1).replace(".",",")+" mi":money(Math.round(n/1000))+" mil";
-const expPos=p=>100*(Math.log(p)-Math.log(10000))/(Math.log(20000000)-Math.log(10000));
-const fromPos=p=>Math.round(Math.exp(Math.log(10000)+p/100*(Math.log(20000000)-Math.log(10000)))/1000)*1000;
-const moisture=()=>value.rain<800?0:value.rain<1600?1:2;
-const moistName=()=>["seco","intermediário","úmido"][moisture()];
-host.innerHTML='<div class="u4-scroll" id="uhi4" aria-label="Ilha de calor urbana, comparação interativa">'+
-'<div class="u4-eyebrow">Experiência 8 · Física ambiental</div>'+
-'<h2 class="u4-title">A mesma cidade. Dois microclimas.</h2>'+
-'<p class="u4-deck">O que muda quando aumentamos a sombra e a vegetação? Compare duas versões da mesma paisagem urbana.</p>'+
-'<div class="u4-message">Mais árvores favorecem sombra e, quando há água disponível, evapotranspiração. Menos solo exposto tende a reduzir o aquecimento local.</div>'+
-'<div class="u4-controls">'+
-'<div class="u4-field"><div class="u4-fieldhead"><label for="u4-pop">Porte da cidade</label><output id="u4-out-pop"></output></div>'+
-'<input type="range" id="u4-pop" min="0" max="100" step="1"><span class="u4-helper">Muda o número de prédios nos dois cenários. Não prevê °C.</span></div>'+
-'<div class="u4-field"><div class="u4-fieldhead"><label for="u4-green">Cobertura das árvores</label><output id="u4-out-green"></output></div>'+
-'<input type="range" id="u4-green" min="5" max="80" step="5"><span class="u4-helper">Muda as copas, as sombras e a área exposta à radiação solar.</span></div>'+
-'<div class="u4-field"><div class="u4-fieldhead"><label for="u4-rain">Chuva média anual</label><output id="u4-out-rain"></output></div>'+
-'<input type="range" id="u4-rain" min="200" max="3000" step="100"><span class="u4-helper">Muda a condição climática de água, não a chuva de hoje.</span></div>'+
-'</div>'+
-'<div class="u4-actions"><span>Exemplos de porte e clima:</span>'+
-'<button type="button" data-u4-city="cac">Cáceres</button>'+
-'<button type="button" data-u4-city="cba">Cuiabá</button>'+
-'<button type="button" data-u4-city="sp">São Paulo</button></div>'+
-'<div class="u4-duo">'+
-'<article class="u4-panel"><div class="u4-panelheader"><h3>Pouco verde</h3><span class="u4-chip">5% de copas</span></div>'+
-'<div class="u4-visual" data-u4-scene="a"></div><p class="u4-paneldesc">Mais superfícies diretamente expostas ao Sol.</p></article>'+
-'<article class="u4-panel"><div class="u4-panelheader"><h3>Mais verde</h3><span class="u4-chip" id="u4-green-chip"></span></div>'+
-'<div class="u4-visual" data-u4-scene="b"></div><p class="u4-paneldesc" id="u4-cooling"></p></article>'+
-'</div>'+
-'<div class="u4-insight" aria-live="polite"><b>O que mudou?</b><p id="u4-summary"></p></div>'+
-'<p class="u4-footnote">Esquema conceitual autoral, não proporcional, sem cálculo de graus Celsius. O verde tem efeitos reais, mas 60% de copas NÃO significa redução de 60% da temperatura. Fonte: Manoli et al. (2019), Nature 573, 55–60, DOI 10.1038/s41586-019-1512-9.</p>'+
-'</div>';
-const $=x=>host.querySelector(x);
-const pop=$("#u4-pop"),green=$("#u4-green"),rain=$("#u4-rain");
-function draw(cover){
- const wet=moisture();
- const urban=clamp((Math.log10(value.population)-4)/3.3,0,1);
- const count=Math.round(5+urban*17);
- const treeCount=Math.round(2+cover*.40);
- let buildings="",trees="",shadow="",vapour="";
- for(let i=0;i<count;i++){
-  const x=15+i*555/count;
-  const ht=Math.round(45+urban*40+(i*43)%99);
-  buildings+='<rect x="'+x.toFixed(1)+'" y="'+(231-ht)+'" width="'+(24+i*11%12)+'" height="'+ht+'" rx="3" fill="'+(i%3==0?"#687e94":"#8c9fb4")+'"/>';
- }
- for(let i=0;i<treeCount;i++){
-  const x=21+(i*83)%560;
-  const col=wet===0?"#83987a":wet===1?"#378f75":"#0e826d";
-  shadow+='<ellipse cx="'+x+'" cy="234" rx="20" ry="5" fill="#183f48" opacity="'+(.07+cover*.003).toFixed(2)+'"/>';
-  trees+='<rect x="'+(x-2)+'" y="222" width="4" height="16" fill="#745338"/>'+
-    '<circle cx="'+x+'" cy="215" r="'+(11+i%3*3)+'" fill="'+col+'"/>';
- }
- const eCount=wet===0?0:wet===1?Math.round(treeCount/7):Math.round(treeCount/4);
- for(let i=0;i<eCount;i++){
-  const x=43+(i*99)%520;
-  vapour+='<path d="M'+x+' 194q-5-11 0-20q5-12 0-21" stroke="#2a78d6" opacity=".68" stroke-width="3" fill="none" stroke-linecap="round"/>';
- }
- const surface=wet===0?"#bcad83":wet===1?"#92b19a":"#82b6bf";
- const halo=Math.max(.055,Math.min(.32,.09+.18*urban*(1-cover/100)+.13*(1-cover/100)));
- const heatSize=Math.round(42+urban*40+(1-cover/100)*20);
- return '<svg viewBox="0 0 600 268" role="img" aria-label="'+count+' edifícios e '+treeCount+' árvores ilustradas; umidade '+moistName()+'">'+
- '<rect width="600" height="268" fill="#f2f8fd"/><circle cx="536" cy="36" r="23" fill="#ffe2a0" stroke="#efc766" stroke-width="4"/>'+
- '<rect y="220" width="600" height="48" fill="'+surface+'" opacity=".34"/>'+
- buildings+'<rect x="0" y="232" width="600" height="14" fill="#778491"/>'+
- shadow+'<ellipse cx="300" cy="227" rx="'+(175+110*urban)+'" ry="'+heatSize+'" fill="#d9553b" opacity="'+halo.toFixed(3)+'"/>'+
- trees+vapour+'</svg>';
+const stage=document.getElementById('stage');
+const oldHost=document.getElementById('uhi');
+// A paisagem antiga, suas réguas e cartões não fazem mais parte desta experiência.
+oldHost.replaceChildren();
+const ctrl=document.getElementById('ctrl');
+const oldExit=slide.exit;
+const slideIdx=api.slides.indexOf(slide);
+const cover=document.createElement('section');
+cover.id='heat-slide-cover';
+cover.setAttribute('aria-label','Experiência 8: árvores e ilhas de calor');
+cover.innerHTML='<div class="heat-main">'+
+ '<span class="heat-kicker">Experiência 8 · Física ambiental</span>'+
+ '<h2 class="heat-title">Mais árvores, menor ilha de calor</h2>'+
+ '<img class="heat-graphic" id="heat-graphic" src="assets/ilha-calor-arvores.png" alt="Comparação ilustrada. Pouco verde e mais concreto deixam a cidade mais quente. Árvores aumentam a sombra, favorecem a evapotranspiração e reduzem a ilha de calor." decoding="async">'+
+ '</div>'+
+ '<footer class="heat-footer"><span class="heat-footnote">Esquema didático, sem valores de temperatura. A eficácia da arborização depende também da água disponível.</span>'+
+ '<nav class="heat-nav" aria-label="Navegação da apresentação">'+
+ '<button type="button" data-heat-action="prev" aria-label="Slide anterior">‹</button>'+
+ '<button type="button" data-heat-action="zoom" class="heat-primary">Ampliar imagem</button>'+
+ '<button type="button" data-heat-action="more">Veja mais</button>'+
+ '<button type="button" data-heat-action="next" aria-label="Próximo slide">›</button>'+
+ '</nav></footer>'+
+ '<div class="heat-zoom" id="heat-zoom" aria-hidden="true">'+
+ '<button type="button" class="heat-zoom-close" data-heat-action="close">Fechar imagem ampliada</button>'+
+ '<img src="assets/ilha-calor-arvores.png" alt="Ilustração ampliada de uma cidade com pouco verde versus a mesma cidade com muitas árvores.">'+
+ '</div>';
+stage.appendChild(cover);
+const zoom=cover.querySelector('#heat-zoom');
+const title=document.getElementById('title');
+const drawer=document.getElementById('drawer');
+let current=false;
+function closeZoom(){
+ zoom.classList.remove('open');
+ zoom.setAttribute('aria-hidden','true');
 }
-function render(){
- pop.value=String(expPos(value.population));
- green.value=String(value.green);
- rain.value=String(value.rain);
- $("#u4-out-pop").textContent=human(value.population)+" hab.";
- $("#u4-out-green").textContent=value.green+"%";
- $("#u4-out-rain").textContent=money(value.rain)+" mm";
- $('[data-u4-scene="a"]').innerHTML=draw(5);
- $('[data-u4-scene="b"]').innerHTML=draw(value.green);
- $("#u4-green-chip").textContent=value.green+"% de copas";
- $("#u4-cooling").textContent=moisture()===0?
- "Mais sombra. Com pouca água, a evapotranspiração pode ser limitada.":
- "Mais sombra e transpiração vegetal potencial, graças à água disponível.";
- $("#u4-summary").textContent="O porte urbano representa "+human(value.population)+
- " habitantes e modifica os edifícios nos dois desenhos. A cobertura arbórea passa de 5% para "+
- value.green+"%. Chuva anual: "+money(value.rain)+" mm (clima "+moistName()+
- "). As linhas azuis indicam evapotranspiração potencial, não chuva instantânea. A mancha avermelhada é simbólica, não um mapa de temperatura.";
- $("#uhi4").dataset.buildings=String(Math.round(5+clamp((Math.log10(value.population)-4)/3.3,0,1)*17));
- $("#uhi4").dataset.green=String(value.green);
- $("#uhi4").dataset.moisture=String(moisture());
- host.querySelectorAll("[data-u4-city]").forEach(b=>{
-  const v=presets[b.dataset.u4City];
-  b.setAttribute("aria-pressed",String(v[0]===value.population&&v[1]===value.rain));
- });
+function show(){
+ if(current)return;
+ current=true;
+ cover.classList.add('active');
+ ctrl.replaceChildren();
+ closeZoom();
 }
-pop.addEventListener("input",()=>{value.population=fromPos(+pop.value);render()});
-green.addEventListener("input",()=>{value.green=+green.value;render()});
-rain.addEventListener("input",()=>{value.rain=+rain.value;render()});
-host.querySelectorAll("[data-u4-city]").forEach(b=>b.addEventListener("click",()=>{
- const v=presets[b.dataset.u4City];
- value.population=v[0];value.rain=v[1];render();
-}));
-slide.title="Ilhas de calor e cobertura verde";
-slide.lede="A mesma cidade, duas paisagens.";
-slide.build=()=>{controls.replaceChildren();render()};
-slide.enter=()=>{
- stage.classList.remove("u3-on");
- stage.classList.add("uhi4-on");
- host.style.display="block";
- controls.replaceChildren();
- render();
-};
-slide.exit=()=>{stage.classList.remove("uhi4-on");host.style.display="none";};
-slide.more=()=>'<h2>O que esta experiência mostra</h2>'+
- '<p>Ilha de calor é a diferença térmica entre áreas urbanas e seu entorno. A comparação não representa o efeito estufa atmosférico nem permite prever a temperatura em uma cidade.</p>'+
- '<p>Árvores interceptam radiação solar, criam sombra e, quando há água, favorecem evapotranspiração. A disponibilidade hídrica, os materiais urbanos, o vento e a geometria da cidade influenciam o resfriamento. O mesmo percentual verde pode resultar em padrões distintos de temperatura conforme a distribuição espacial das árvores.</p>'+
- '<p><b>Controles:</b> a população representa hipoteticamente o porte edificado das duas paisagens, sem ser um estimador de °C. A chuva é uma categoria climática indicativa, não precipitação no instante da ilustração. Não se aplica coeficiente inventado de resfriamento.</p>'+
- '<p>Referência: Manoli et al. (2019), <em>Magnitude of urban heat islands largely explained by climate and population</em>, Nature 573, 55–60, <a href="https://doi.org/10.1038/s41586-019-1512-9" rel="noopener" target="_blank">DOI 10.1038/s41586-019-1512-9</a>.</p>';
-render();
-window.__uhi4={state:value,render,fromPos};
-})();
-/* Slide 8: a arte aprovada substitui integralmente a antiga simulação. */
-(function () {
-  'use strict';
-  const api=window.__carbono;
-  const slide=api&&api.slides.find(s=>s.id==='uhi');
-  if(!slide) return;
-  const stage=document.getElementById('stage');
-  const host=document.getElementById('uhi');
-  const ctrl=document.getElementById('ctrl');
-  host.replaceChildren();
-  const section=document.createElement('section');
-  section.className='uhi-image-only';
-  section.setAttribute('aria-label','Ilha de calor: pouco verde e muitas árvores');
-  section.innerHTML='<figure class="uhi-figure"><img id="uhi-approved-image" src="assets/ilha-calor-arvores.png" alt="Comparação de uma mesma cidade. Com pouco verde, muito concreto exposto e maior ilha de calor. Com mais árvores, mais sombra e evapotranspiração e uma ilha de calor menor."><figcaption>Árvores reduzem o aquecimento urbano por sombra e evapotranspiração. Esquema ilustrativo, sem valores de temperatura.</figcaption></figure><button type="button" id="uhi-zoom" aria-pressed="false" aria-label="Ampliar ou reduzir imagem">Ampliar imagem</button>';
-  host.append(section);
-  const zoom=section.querySelector('#uhi-zoom');
-  const image=section.querySelector('#uhi-approved-image');
-  zoom.addEventListener('click',()=>{
-    const on=section.classList.toggle('uhi-zoomed');
-    zoom.textContent=on?'Mostrar imagem inteira':'Ampliar imagem';
-    zoom.setAttribute('aria-pressed',String(on));
-    section.scrollTo({top:0,left:0});
-  });
-  slide.title='Árvores e ilha de calor';
-  slide.lede='Mais sombra, menor aquecimento urbano.';
-  slide.build=()=>{ctrl.replaceChildren();};
-  slide.enter=()=>{
-    stage.classList.remove('u3-on','uhi4-on');
-    stage.classList.add('uhi-image-slide');
-    ctrl.replaceChildren();
-    host.style.display='block';
-    section.classList.remove('uhi-zoomed');
-    zoom.textContent='Ampliar imagem';
-    zoom.setAttribute('aria-pressed','false');
-  };
-  slide.exit=()=>{
-    stage.classList.remove('uhi-image-slide');
-    host.style.display='none';
-  };
-  slide.more=()=>'<h2>Como as árvores reduzem a ilha de calor urbana</h2><p>Em áreas urbanizadas, as superfícies expostas absorvem energia solar, armazenam calor e podem manter temperaturas mais altas que o entorno. A arborização cria sombra e, havendo água disponível, favorece evapotranspiração.</p><p>A imagem compara esquematicamente uma cidade com pouco verde e a mesma cidade com mais arborização. Não é um mapa de temperatura nem uma previsão numérica. A forma urbana, a ventilação, o regime hídrico e a distribuição das árvores influenciam o resultado.</p><p><strong>Referência:</strong> Manoli et al. (2019), <em>Magnitude of urban heat islands largely explained by climate and population</em>, Nature 573, 55–60. <a href="https://doi.org/10.1038/s41586-019-1512-9" target="_blank" rel="noopener noreferrer">DOI 10.1038/s41586-019-1512-9</a>.</p><p>Arte didática autoral produzida com IA para esta apresentação. Não representa observação de uma cidade específica.</p>';
-  window.__carbonoHeatImage={section,image};
+function hide(){
+ if(!current)return;
+ current=false;
+ cover.classList.remove('active');
+ closeZoom();
+}
+function sync(){
+ const visible=window.getComputedStyle(oldHost).display!=='none';
+ if(visible)show(); else hide();
+}
+function jump(offset){
+ closeZoom();
+ hide();
+ api.go(slideIdx+offset);
+}
+cover.addEventListener('click',ev=>{
+ const b=ev.target.closest('[data-heat-action]');
+ if(!b){
+  if(ev.target.id==='heat-graphic') zoom.classList.add('open'),zoom.setAttribute('aria-hidden','false');
+  return;
+ }
+ const action=b.dataset.heatAction;
+ if(action==='zoom'){zoom.classList.add('open');zoom.setAttribute('aria-hidden','false')}
+ if(action==='close')closeZoom();
+ if(action==='prev')jump(-1);
+ if(action==='next')jump(1);
+ if(action==='more'){
+  const more=document.getElementById('more');
+  const body=document.getElementById('drawerBody');
+  if(body)body.innerHTML=slide.more();
+  if(drawer){drawer.style.zIndex='11000';drawer.classList.add('open')}
+  if(more)more.setAttribute('aria-expanded','true');
+ }
+});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&zoom.classList.contains('open')){closeZoom();e.stopImmediatePropagation()}},true);
+slide.title='Árvores e ilha de calor';
+slide.lede='Mais sombra e evapotranspiração, menor aquecimento urbano.';
+slide.build=()=>{ctrl.replaceChildren()};
+slide.enter=()=>{oldHost.style.display='block';show()};
+slide.exit=()=>{hide();oldHost.style.display='none'};
+slide.more=()=>'<h2>Por que as árvores reduzem o aquecimento urbano?</h2>'+
+'<p>Copas interceptam a luz solar, reduzem a energia absorvida pela superfície e, quando há água disponível, favorecem a evapotranspiração. O resultado depende também de ventilação, materiais e distribuição da cobertura verde.</p>'+
+'<p>Ilha de calor não é sinônimo de efeito estufa: aqui comparamos microclimas urbanos. Esta ilustração não é um mapa de temperatura nem uma previsão em graus Celsius.</p>'+
+'<p>Referência: <a target="_blank" rel="noopener noreferrer" href="https://doi.org/10.1038/s41586-019-1512-9">Manoli et al. (2019), Nature 573, 55–60</a>. Ilustração didática autoral gerada com IA, sem dados espaciais medidos.</p>';
+const observer=new MutationObserver(sync);
+observer.observe(oldHost,{attributes:true,attributeFilter:['style','class']});
+const marker=document.getElementById('eyebrow');
+if(marker)observer.observe(marker,{childList:true,subtree:true});
+sync();
+window.__heatSlide={show,hide,sync,cover};
 })();</script>
 </body>
 </html>
