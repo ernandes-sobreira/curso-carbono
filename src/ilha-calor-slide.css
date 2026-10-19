@@ -1,28 +1,26 @@
-/* Exp. 8 – layout único. Nenhum componente da simulação antiga permanece. */
-#stage.uhi-image-slide #gl,
-#stage.uhi-image-slide #c2d,
-#stage.uhi-image-slide #city,
-#stage.uhi-image-slide #uhiCard,
-#stage.uhi-image-slide .head,
-#stage.uhi-image-slide #readout,
-#stage.uhi-image-slide #ctrl,
-#stage.uhi-image-slide #chart{display:none!important}
-#stage.uhi-image-slide #uhi{display:block!important;background:#fff;z-index:15;overflow:hidden}
-#stage.uhi-image-slide .foot{z-index:30;background:rgba(255,255,255,.97);border-top:1px solid #dde5ee}
-#stage.uhi-image-slide .drawer{z-index:60}
-#uhi .uhi-image-only{position:absolute;inset:0 0 55px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:12px;overflow:auto;overscroll-behavior:contain;background:#fff}
-#uhi .uhi-figure{max-width:100%;min-width:0;max-height:100%;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-#uhi .uhi-figure img{display:block;max-width:100%;max-height:min(76vh,calc(100dvh - 145px));width:auto;height:auto;object-fit:contain;border-radius:8px}
-#uhi .uhi-figure figcaption{font-size:12px;line-height:1.5;text-align:center;color:#435b71;max-width:85ch}
-#uhi #uhi-zoom{border:1px solid #b6c8db;border-radius:50px;padding:9px 18px;background:#fff;color:#12233a;cursor:pointer;font-weight:700}
-#uhi #uhi-zoom:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
-@media(max-width:760px){
- #uhi .uhi-image-only{inset:0 0 54px;justify-content:flex-start;padding:14px 10px 16px;gap:8px}
- #uhi .uhi-figure{flex:none;width:100%}
- #uhi .uhi-figure img{width:100%;height:auto;max-height:none;object-fit:contain}
- #uhi .uhi-figure figcaption{font-size:11px}
- #uhi .uhi-image-only.uhi-zoomed{display:block;overflow:auto}
- #uhi .uhi-zoomed .uhi-figure{width:1000px;max-width:none}
- #uhi .uhi-zoomed .uhi-figure img{width:1000px;max-width:none}
- #uhi .uhi-zoomed #uhi-zoom{position:sticky;bottom:4px;left:10px}
+/* Slide 8: ocupa toda a apresentação e cobre os controles antigos, independente do estado do bundle. */
+#heat-slide-cover{position:absolute;inset:0;z-index:9000;display:none;background:#fff;color:#12233a;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+#heat-slide-cover.active{display:flex;flex-direction:column}
+#heat-slide-cover .heat-main{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px clamp(14px,2.5vw,36px) 8px;gap:10px;overflow:auto;overscroll-behavior:contain}
+#heat-slide-cover .heat-kicker{font-size:clamp(11px,1vw,14px);text-transform:uppercase;letter-spacing:.14em;color:#2a78d6;font-weight:800;align-self:stretch}
+#heat-slide-cover .heat-title{font-family:Sora,system-ui,sans-serif;font-size:clamp(19px,2vw,32px);margin:0;line-height:1.1;text-align:center}
+#heat-slide-cover .heat-graphic{display:block;width:100%;max-width:1420px;max-height:calc(100% - 75px);height:auto;min-height:0;object-fit:contain;cursor:zoom-in}
+#heat-slide-cover .heat-footer{flex:0 0 auto;min-height:56px;border-top:1px solid #dce6ef;display:flex;align-items:center;justify-content:space-between;gap:9px;padding:8px clamp(14px,2.5vw,36px);background:#fff}
+#heat-slide-cover .heat-footnote{color:#465f79;max-width:58ch;font-size:11px;line-height:1.35}
+#heat-slide-cover button{background:#fff;color:#12233a;border:1px solid #c7d8e8;border-radius:999px;padding:10px 15px;cursor:pointer;font:700 12px Inter,system-ui,sans-serif;white-space:nowrap}
+#heat-slide-cover button:hover,#heat-slide-cover button:focus-visible{background:#eaf3fc;outline-offset:2px}
+#heat-slide-cover .heat-nav{display:flex;flex-wrap:nowrap;align-items:center;gap:6px}
+#heat-slide-cover .heat-nav .heat-primary{background:#2a78d6;color:#fff;border-color:#2a78d6}
+#heat-slide-cover .heat-zoom{position:absolute;inset:0;z-index:10;display:none;background:#fff;overflow:auto;overscroll-behavior:contain}
+#heat-slide-cover .heat-zoom.open{display:block}
+#heat-slide-cover .heat-zoom img{display:block;width:max(1180px,100%);height:auto;max-width:none}
+#heat-slide-cover .heat-zoom-close{position:sticky;top:14px;left:14px;z-index:12;box-shadow:0 2px 12px #12233a33}
+@media(max-width:780px){
+ #heat-slide-cover .heat-main{justify-content:flex-start;padding:20px 8px 8px;gap:10px}
+ #heat-slide-cover .heat-title{font-size:18px}
+ #heat-slide-cover .heat-graphic{width:100%;max-height:none;flex:none}
+ #heat-slide-cover .heat-footer{padding:8px 7px;gap:4px}
+ #heat-slide-cover .heat-footnote{display:none}
+ #heat-slide-cover button{padding:9px 10px;font-size:11px}
+ #heat-slide-cover .heat-nav{width:100%;justify-content:space-between}
 }
