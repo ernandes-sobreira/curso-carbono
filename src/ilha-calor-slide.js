@@ -8,6 +8,8 @@ const slide=api?.slides?.find(s=>s.id==='uhi');
 if(!slide)return;
 const stage=document.getElementById('stage');
 const oldHost=document.getElementById('uhi');
+// A paisagem antiga, suas réguas e cartões não fazem mais parte desta experiência.
+oldHost.replaceChildren();
 const ctrl=document.getElementById('ctrl');
 const oldExit=slide.exit;
 const slideIdx=api.slides.indexOf(slide);
