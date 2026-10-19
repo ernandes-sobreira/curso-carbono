@@ -1,0 +1,28 @@
+/* Exp. 8 – layout único. Nenhum componente da simulação antiga permanece. */
+#stage.uhi-image-slide #gl,
+#stage.uhi-image-slide #c2d,
+#stage.uhi-image-slide #city,
+#stage.uhi-image-slide #uhiCard,
+#stage.uhi-image-slide .head,
+#stage.uhi-image-slide #readout,
+#stage.uhi-image-slide #ctrl,
+#stage.uhi-image-slide #chart{display:none!important}
+#stage.uhi-image-slide #uhi{display:block!important;background:#fff;z-index:15;overflow:hidden}
+#stage.uhi-image-slide .foot{z-index:30;background:rgba(255,255,255,.97);border-top:1px solid #dde5ee}
+#stage.uhi-image-slide .drawer{z-index:60}
+#uhi .uhi-image-only{position:absolute;inset:0 0 55px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:12px;overflow:auto;overscroll-behavior:contain;background:#fff}
+#uhi .uhi-figure{max-width:100%;min-width:0;max-height:100%;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#uhi .uhi-figure img{display:block;max-width:100%;max-height:min(76vh,calc(100dvh - 145px));width:auto;height:auto;object-fit:contain;border-radius:8px}
+#uhi .uhi-figure figcaption{font-size:12px;line-height:1.5;text-align:center;color:#435b71;max-width:85ch}
+#uhi #uhi-zoom{border:1px solid #b6c8db;border-radius:50px;padding:9px 18px;background:#fff;color:#12233a;cursor:pointer;font-weight:700}
+#uhi #uhi-zoom:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
+@media(max-width:760px){
+ #uhi .uhi-image-only{inset:0 0 54px;justify-content:flex-start;padding:14px 10px 16px;gap:8px}
+ #uhi .uhi-figure{flex:none;width:100%}
+ #uhi .uhi-figure img{width:100%;height:auto;max-height:none;object-fit:contain}
+ #uhi .uhi-figure figcaption{font-size:11px}
+ #uhi .uhi-image-only.uhi-zoomed{display:block;overflow:auto}
+ #uhi .uhi-zoomed .uhi-figure{width:1000px;max-width:none}
+ #uhi .uhi-zoomed .uhi-figure img{width:1000px;max-width:none}
+ #uhi .uhi-zoomed #uhi-zoom{position:sticky;bottom:4px;left:10px}
+}
