@@ -351,6 +351,35 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 }
 @media(max-width:340px){#uhi .u4-duo{grid-template-columns:1fr}}
 
+
+/* Exp. 8 – layout único. Nenhum componente da simulação antiga permanece. */
+#stage.uhi-image-slide #gl,
+#stage.uhi-image-slide #c2d,
+#stage.uhi-image-slide #city,
+#stage.uhi-image-slide #uhiCard,
+#stage.uhi-image-slide .head,
+#stage.uhi-image-slide #readout,
+#stage.uhi-image-slide #ctrl,
+#stage.uhi-image-slide #chart{display:none!important}
+#stage.uhi-image-slide #uhi{display:block!important;background:#fff;z-index:15;overflow:hidden}
+#stage.uhi-image-slide .foot{z-index:30;background:rgba(255,255,255,.97);border-top:1px solid #dde5ee}
+#stage.uhi-image-slide .drawer{z-index:60}
+#uhi .uhi-image-only{position:absolute;inset:0 0 55px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:12px;overflow:auto;overscroll-behavior:contain;background:#fff}
+#uhi .uhi-figure{max-width:100%;min-width:0;max-height:100%;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#uhi .uhi-figure img{display:block;max-width:100%;max-height:min(76vh,calc(100dvh - 145px));width:auto;height:auto;object-fit:contain;border-radius:8px}
+#uhi .uhi-figure figcaption{font-size:12px;line-height:1.5;text-align:center;color:#435b71;max-width:85ch}
+#uhi #uhi-zoom{border:1px solid #b6c8db;border-radius:50px;padding:9px 18px;background:#fff;color:#12233a;cursor:pointer;font-weight:700}
+#uhi #uhi-zoom:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
+@media(max-width:760px){
+ #uhi .uhi-image-only{inset:0 0 54px;justify-content:flex-start;padding:14px 10px 16px;gap:8px}
+ #uhi .uhi-figure{flex:none;width:100%}
+ #uhi .uhi-figure img{width:100%;height:auto;max-height:none;object-fit:contain}
+ #uhi .uhi-figure figcaption{font-size:11px}
+ #uhi .uhi-image-only.uhi-zoomed{display:block;overflow:auto}
+ #uhi .uhi-zoomed .uhi-figure{width:1000px;max-width:none}
+ #uhi .uhi-zoomed .uhi-figure img{width:1000px;max-width:none}
+ #uhi .uhi-zoomed #uhi-zoom{position:sticky;bottom:4px;left:10px}
+}
 </style>
 </head>
 <body>
@@ -5123,6 +5152,48 @@ slide.more=()=>'<h2>O que esta experiência mostra</h2>'+
  '<p>Referência: Manoli et al. (2019), <em>Magnitude of urban heat islands largely explained by climate and population</em>, Nature 573, 55–60, <a href="https://doi.org/10.1038/s41586-019-1512-9" rel="noopener" target="_blank">DOI 10.1038/s41586-019-1512-9</a>.</p>';
 render();
 window.__uhi4={state:value,render,fromPos};
+})();
+/* Slide 8: a arte aprovada substitui integralmente a antiga simulação. */
+(function () {
+  'use strict';
+  const api=window.__carbono;
+  const slide=api&&api.slides.find(s=>s.id==='uhi');
+  if(!slide) return;
+  const stage=document.getElementById('stage');
+  const host=document.getElementById('uhi');
+  const ctrl=document.getElementById('ctrl');
+  host.replaceChildren();
+  const section=document.createElement('section');
+  section.className='uhi-image-only';
+  section.setAttribute('aria-label','Ilha de calor: pouco verde e muitas árvores');
+  section.innerHTML='<figure class="uhi-figure"><img id="uhi-approved-image" src="assets/ilha-calor-arvores.png" alt="Comparação de uma mesma cidade. Com pouco verde, muito concreto exposto e maior ilha de calor. Com mais árvores, mais sombra e evapotranspiração e uma ilha de calor menor."><figcaption>Árvores reduzem o aquecimento urbano por sombra e evapotranspiração. Esquema ilustrativo, sem valores de temperatura.</figcaption></figure><button type="button" id="uhi-zoom" aria-pressed="false" aria-label="Ampliar ou reduzir imagem">Ampliar imagem</button>';
+  host.append(section);
+  const zoom=section.querySelector('#uhi-zoom');
+  const image=section.querySelector('#uhi-approved-image');
+  zoom.addEventListener('click',()=>{
+    const on=section.classList.toggle('uhi-zoomed');
+    zoom.textContent=on?'Mostrar imagem inteira':'Ampliar imagem';
+    zoom.setAttribute('aria-pressed',String(on));
+    section.scrollTo({top:0,left:0});
+  });
+  slide.title='Árvores e ilha de calor';
+  slide.lede='Mais sombra, menor aquecimento urbano.';
+  slide.build=()=>{ctrl.replaceChildren();};
+  slide.enter=()=>{
+    stage.classList.remove('u3-on','uhi4-on');
+    stage.classList.add('uhi-image-slide');
+    ctrl.replaceChildren();
+    host.style.display='block';
+    section.classList.remove('uhi-zoomed');
+    zoom.textContent='Ampliar imagem';
+    zoom.setAttribute('aria-pressed','false');
+  };
+  slide.exit=()=>{
+    stage.classList.remove('uhi-image-slide');
+    host.style.display='none';
+  };
+  slide.more=()=>'<h2>Como as árvores reduzem a ilha de calor urbana</h2><p>Em áreas urbanizadas, as superfícies expostas absorvem energia solar, armazenam calor e podem manter temperaturas mais altas que o entorno. A arborização cria sombra e, havendo água disponível, favorece evapotranspiração.</p><p>A imagem compara esquematicamente uma cidade com pouco verde e a mesma cidade com mais arborização. Não é um mapa de temperatura nem uma previsão numérica. A forma urbana, a ventilação, o regime hídrico e a distribuição das árvores influenciam o resultado.</p><p><strong>Referência:</strong> Manoli et al. (2019), <em>Magnitude of urban heat islands largely explained by climate and population</em>, Nature 573, 55–60. <a href="https://doi.org/10.1038/s41586-019-1512-9" target="_blank" rel="noopener noreferrer">DOI 10.1038/s41586-019-1512-9</a>.</p><p>Arte didática autoral produzida com IA para esta apresentação. Não representa observação de uma cidade específica.</p>';
+  window.__carbonoHeatImage={section,image};
 })();</script>
 </body>
 </html>
