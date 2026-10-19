@@ -18,47 +18,22 @@ with sync_playwright() as p:
         page.set_content(HTML,wait_until="domcontentloaded",timeout=70000)
         page.evaluate("window.__carbono.go(7)")
         page.wait_for_timeout(300)
-        assert page.locator("#stage.uhi4-on").count()==1
-        assert page.locator("#uhi4 .u4-panel").count()==2
-        assert not page.locator(".head").is_visible(), "Título antigo sobrepõe cena"
-        assert not page.locator("#ctrl").is_visible(), "Controles antigos cobrem cena"
-        assert page.locator("#next").is_visible(), "Navegação indisponível"
-
-        pop=page.locator("#u4-pop")
-        page.locator("#u4-pop").evaluate("""e=>{e.value='0';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        before=int(page.locator("#uhi4").get_attribute("data-buildings"))
-        page.locator("#u4-pop").evaluate("""e=>{e.value='100';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        after=int(page.locator("#uhi4").get_attribute("data-buildings"))
-        assert after>before+10,(before,after)
-        assert "20,0 mi" in page.locator("#u4-out-pop").inner_text()
-
-        green=page.locator("#u4-green")
-        green.evaluate("""e=>{e.value='5';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        fewer=page.locator('[data-u4-scene="b"] circle').count()
-        green.evaluate("""e=>{e.value='80';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        more=page.locator('[data-u4-scene="b"] circle').count()
-        assert more>fewer+25,(fewer,more)
-        assert "80%" in page.locator("#u4-out-green").inner_text()
-
-        rain=page.locator("#u4-rain")
-        rain.evaluate("""e=>{e.value='200';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        dry=int(page.locator("#uhi4").get_attribute("data-moisture"))
-        drypaths=page.locator('[data-u4-scene="b"] path').count()
-        rain.evaluate("""e=>{e.value='3000';e.dispatchEvent(new Event('input',{bubbles:true}));}""")
-        wet=int(page.locator("#uhi4").get_attribute("data-moisture"))
-        wetpaths=page.locator('[data-u4-scene="b"] path').count()
-        assert dry==0 and wet==2 and wetpaths>drypaths,(drypaths,wetpaths)
-
-        page.locator('[data-u4-city="cac"]').click()
-        assert "95 mil" in page.locator("#u4-out-pop").inner_text()
-        # Scroll da experiência não pode interceptar navegação inferior.
-        page.locator("#next").click(timeout=12000)
-        assert page.locator("#stage.uhi4-on").count()==0,"Próximo travado"
-        page.locator("#prev").click(timeout=12000)
-        assert page.locator("#stage.uhi4-on").count()==1,"Anterior travado"
-        page.locator("#uhi4").evaluate("e=>e.scrollTo(0,0)")
-        page.screenshot(path=str(OUT/f"{name}_uhi_v4.png"),full_page=False)
-
+        assert page.locator("#stage.uhi-image-slide").count()==1, "Slide novo não ativado"
+        assert page.locator("#uhi .uhi-image-only").count()==1, "Imagem aprovada ausente"
+        assert not page.locator("#uhi .u4-scroll").count(), "Slide antigo permanece"
+        assert not page.locator("#ctrl").is_visible(), "Régua antiga visível"
+        assert page.locator("#uhi-approved-image").is_visible(), "Imagem não visível"
+        assert page.locator("#uhi-approved-image").evaluate("im=>im.complete && im.naturalWidth>0"), "Imagem não carregou"
+        assert page.locator("#next").is_visible(), "Botão Próximo não visível"
+        page.locator("#uhi-zoom").click()
+        assert page.locator("#uhi .uhi-zoomed").count()==1, "Zoom não funciona"
+        page.locator("#uhi-zoom").click()
+        assert page.locator("#uhi .uhi-zoomed").count()==0, "Zoom não reverte"
+        page.screenshot(path=str(OUT/f"{name}_uhi_slide.png"),full_page=False)
+        page.locator("#next").click()
+        assert page.locator("#stage.uhi-image-slide").count()==0, "Navegação travada"
+        page.locator("#prev").click()
+        assert page.locator("#stage.uhi-image-slide").count()==1, "Voltar ao slide falhou"
         page.evaluate("window.__scen.scen.view='me';window.__carbono.go(8)")
         page.wait_for_timeout(200)
         assert page.locator("#stage.food2-on").count()==1
@@ -69,6 +44,6 @@ with sync_playwright() as p:
         assert page.locator("#food2 .f2-row").count()==10
         page.screenshot(path=str(OUT/f"{name}_food_v2.png"),full_page=False)
         assert not errors,errors
-        print(f"{name}: população {before}->{after} edifícios, árvores {fewer}->{more}, clima {dry}->{wet}, navegação e alimentos OK")
+        print(f"{name}: slide de ilha de calor, zoom, navegação e alimentos OK")
         page.close()
     browser.close()
