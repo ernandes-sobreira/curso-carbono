@@ -23,23 +23,30 @@ with sync_playwright() as p:
         page.on("pageerror",lambda e:errors.append(str(e)))
         page.goto(URL,wait_until="domcontentloaded",timeout=70000)
         page.evaluate("window.__carbono.go(7)")
-        page.wait_for_timeout(300)
-        assert page.locator("#stage.uhi-image-slide").count()==1, "Slide novo não ativado"
-        assert page.locator("#uhi .uhi-image-only").count()==1, "Imagem aprovada ausente"
-        assert not page.locator("#uhi .u4-scroll").count(), "Slide antigo permanece"
-        assert not page.locator("#ctrl").is_visible(), "Régua antiga visível"
-        assert page.locator("#uhi-approved-image").is_visible(), "Imagem não visível"
-        assert page.locator("#uhi-approved-image").evaluate("im=>im.complete && im.naturalWidth>0"), "Imagem não carregou"
-        assert page.locator("#next").is_visible(), "Botão Próximo não visível"
-        page.locator("#uhi-zoom").click()
-        assert page.locator("#uhi .uhi-zoomed").count()==1, "Zoom não funciona"
-        page.locator("#uhi-zoom").click()
-        assert page.locator("#uhi .uhi-zoomed").count()==0, "Zoom não reverte"
+        page.wait_for_timeout(330)
+        assert page.locator("#heat-slide-cover.active").count()==1, "Slide novo não cobriu o layout antigo"
+        assert page.locator("#heat-slide-cover .heat-title").is_visible()
+        assert page.locator("#uhi .uhi-image-only").count()==0, "Componente anterior ainda presente"
+        assert page.locator("#uhi #city").count()==0, "Cena antiga ainda existe"
+        assert page.locator("#heat-slide-cover .heat-graphic").evaluate("im=>im.complete && im.naturalWidth>0"), "Imagem não carrega"
+        assert page.locator("#heat-slide-cover .heat-graphic").is_visible(), "Imagem não aparece"
+        dims=page.evaluate("""() => {
+          const cover=document.getElementById('heat-slide-cover');
+          const img=cover.querySelector('.heat-graphic');
+          const r=img.getBoundingClientRect();
+          return {width:r.width,stage:document.getElementById('stage').getBoundingClientRect().width};
+        }""")
+        assert dims["width"]>=dims["stage"]*.78, f"Ilustração pequena demais: {dims}"
+        assert not page.locator("#ctrl").evaluate("el=>el.contains(document.elementFromPoint(window.innerWidth/2,window.innerHeight/2))"), "Régua antiga intercepta toques"
+        page.locator('[data-heat-action="zoom"]').click(timeout=12000)
+        assert page.locator("#heat-zoom.open").count()==1, "Zoom não abre"
+        page.locator('[data-heat-action="close"]').click(timeout=12000)
+        assert page.locator("#heat-zoom.open").count()==0, "Zoom não fecha"
         page.screenshot(path=str(OUT/f"{name}_uhi_slide.png"),full_page=False)
-        page.locator("#next").click()
-        assert page.locator("#stage.uhi-image-slide").count()==0, "Navegação travada"
-        page.locator("#prev").click()
-        assert page.locator("#stage.uhi-image-slide").count()==1, "Voltar ao slide falhou"
+        page.locator('[data-heat-action="next"]').click(timeout=12000)
+        assert page.locator("#heat-slide-cover.active").count()==0, "Próximo slide travou"
+        page.locator("#prev").click(timeout=12000)
+        assert page.locator("#heat-slide-cover.active").count()==1, "Retorno ao slide falhou"
         page.evaluate("window.__scen.scen.view='me';window.__carbono.go(8)")
         page.wait_for_timeout(200)
         assert page.locator("#stage.food2-on").count()==1
