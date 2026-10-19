@@ -33,8 +33,8 @@ const revised=chunk.replace(/\$t\(i,`Mantida de 2025 a 2050:[\s\S]*?`,s,c\+36,"#
  '$t(i,`TCRE não é aplicável diretamente a misturas em CO\\u2082e; sem estimativa numérica de temperatura.`,s,c+54,"#465F79","left",11,500)');
 if(revised===chunk || revised.includes('Aquecimento evitado via TCRE')||revised.includes('Mantida de 2025 a 2050:'))throw new Error('Falha na correção de interpretação TCRE');
 app=app.slice(0,start)+revised+app.slice(end);
-html=html.replace('/*__APP_JS__*/', () => app+'\n'+read('src/enhancements.js')+'\n'+read('src/greenhouse.js')+'\n'+read('src/reservatorios-v2.js')+'\n'+read('src/ilha-calor-v3.js')+'\n'+read('src/alimentos-v2.js')+'\n'+read('src/ilha-calor-v4.js'));
-html=html.replace('</style>',read('src/overrides.css')+'\n'+read('src/greenhouse.css')+'\n'+read('src/reservatorios-v2.css')+'\n'+read('src/ilha-calor-v4.css')+'\n</style>');
+html=html.replace('/*__APP_JS__*/', () => app+'\n'+read('src/enhancements.js')+'\n'+read('src/greenhouse.js')+'\n'+read('src/reservatorios-v2.js')+'\n'+read('src/ilha-calor-v3.js')+'\n'+read('src/alimentos-v2.js')+'\n'+read('src/ilha-calor-v4.js')+'\n'+read('src/ilha-calor-slide.js'));
+html=html.replace('</style>',read('src/overrides.css')+'\n'+read('src/greenhouse.css')+'\n'+read('src/reservatorios-v2.css')+'\n'+read('src/ilha-calor-v4.css')+'\n'+read('src/ilha-calor-slide.css')+'\n</style>');
 fs.mkdirSync(path.join(root,'dist'),{recursive:true});
 fs.writeFileSync(path.join(root,'dist/index.html'),html);
 fs.writeFileSync(path.join(root,'index.html'),html);
