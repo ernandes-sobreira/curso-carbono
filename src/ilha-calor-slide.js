@@ -19,7 +19,7 @@ cover.setAttribute('aria-label','Experiência 8: árvores e ilhas de calor');
 cover.innerHTML='<div class="heat-main">'+
  '<span class="heat-kicker">Experiência 8 · Física ambiental</span>'+
  '<h2 class="heat-title">Mais árvores, menor ilha de calor</h2>'+
- '<img class="heat-graphic" id="heat-graphic" src="assets/ilha-calor-arvores.png" alt="Comparação ilustrada. Pouco verde e mais concreto deixam a cidade mais quente. Árvores aumentam a sombra, favorecem a evapotranspiração e reduzem a ilha de calor." decoding="async">'+
+ '<img class="heat-graphic" id="heat-graphic" src="assets/ilha-calor-arvores.jpg" alt="Comparação ilustrada. Pouco verde e mais concreto deixam a cidade mais quente. Árvores aumentam a sombra, favorecem a evapotranspiração e reduzem a ilha de calor." decoding="async">'+
  '</div>'+
  '<footer class="heat-footer"><span class="heat-footnote">Esquema didático, sem valores de temperatura. A eficácia da arborização depende também da água disponível.</span>'+
  '<nav class="heat-nav" aria-label="Navegação da apresentação">'+
@@ -30,7 +30,7 @@ cover.innerHTML='<div class="heat-main">'+
  '</nav></footer>'+
  '<div class="heat-zoom" id="heat-zoom" aria-hidden="true">'+
  '<button type="button" class="heat-zoom-close" data-heat-action="close">Fechar imagem ampliada</button>'+
- '<img src="assets/ilha-calor-arvores.png" alt="Ilustração ampliada de uma cidade com pouco verde versus a mesma cidade com muitas árvores.">'+
+ '<img src="assets/ilha-calor-arvores.jpg" alt="Ilustração ampliada de uma cidade com pouco verde versus a mesma cidade com muitas árvores.">'+
  '</div>';
 stage.appendChild(cover);
 const zoom=cover.querySelector('#heat-zoom');
