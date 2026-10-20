@@ -54,10 +54,12 @@ with sync_playwright() as p:
         page.locator('[data-hh="pm"]').click(timeout=12000)
         assert "Partículas finas" in page.locator("#hh-path-copy").inner_text()
         page.screenshot(path=str(OUT/f"{name}_health.png"),full_page=False)
+        page.locator("#next").click(timeout=12000)
+        assert not page.locator("#health").is_visible(), "Saída para cenários falhou"
         page.locator("#prev").click(timeout=12000)
-        assert page.locator("#health").is_visible(), "Voltar deveria alcançar saúde"
+        assert page.locator("#health").is_visible(), "Voltar dos cenários deveria alcançar saúde"
         page.locator("#prev").click(timeout=12000)
-        assert page.locator("#heat-slide-cover.active").count()==1, "Retorno ao slide falhou"
+        assert page.locator("#heat-slide-cover.active").count()==1, "Retorno à ilha de calor falhou"
         page.evaluate("window.__scen.scen.view='me';window.__carbono.go(9)")
         page.wait_for_timeout(200)
         assert page.locator("#stage.food2-on").count()==1
