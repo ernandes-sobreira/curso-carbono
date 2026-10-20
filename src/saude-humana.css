@@ -1,0 +1,44 @@
+/* Experiência 9: PM2,5, calor, carbono e saúde. Fundo branco e conteúdo sem réguas. */
+#health{position:absolute;inset:0;display:none;background:#fff;overflow:hidden}
+#stage.hh-on #ctrl,#stage.hh-on #readout,#stage.hh-on #chart{display:none!important}
+#health .hh-wrap{position:absolute;left:clamp(14px,3.2%,48px);right:clamp(14px,3.2%,48px);top:clamp(116px,19%,155px);bottom:54px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;overscroll-behavior:contain;padding:0 2px 18px}
+#health .hh-intro{margin:0;font-size:clamp(12px,1.12vw,16px);line-height:1.45;color:#405b70}
+#health .hh-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#health .hh-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;min-height:235px;padding:15px 17px;border:2px solid #d9e5f1;border-radius:18px;background:#fff;text-align:left;gap:5px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+#health .hh-card[aria-pressed=true]{border-color:#2a78d6;background:#f3f8fe;box-shadow:0 8px 18px rgba(42,120,214,.08)}
+#health .hh-card:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
+#health .hh-card:hover{transform:translateY(-2px)}
+#health .hh-icon{display:block;width:76px;height:76px;flex:none}
+#health .hh-icon svg{width:100%;height:100%;display:block}
+#health .hh-tag{font-size:10px;font-weight:800;letter-spacing:.08em;color:#516b82}
+#health .hh-name{font:800 clamp(24px,2.7vw,37px)/1 Sora,Inter,system-ui,sans-serif;color:#12233a}
+#health .hh-verb{font:800 clamp(13px,1.2vw,18px)/1.25 Sora,Inter,system-ui,sans-serif}
+#health .hh-pm .hh-verb{color:#13788d}
+#health .hh-heat .hh-verb{color:#bd5235}
+#health .hh-climate .hh-verb{color:#2674be}
+#health .hh-effects{font-size:clamp(11px,.98vw,13px);line-height:1.4;color:#506a80}
+#health .hh-mechanism{border-left:5px solid #2a78d6;background:#f5f8fc;border-radius:0 15px 15px 0;padding:13px 17px;display:flex;flex-direction:column;gap:4px}
+#health .hh-mechanism-title{font:800 clamp(13px,1.25vw,17px)/1.35 Sora,Inter,system-ui,sans-serif}
+#health .hh-mechanism-copy{color:#38546c;font-size:clamp(11px,1.04vw,14px);line-height:1.5}
+#health .hh-tap{font-size:10px;color:#56718a;margin-top:3px}
+#health .hh-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#health .hh-bridge{font:800 clamp(12px,1.1vw,15px)/1.4 Sora,Inter,sans-serif;color:#0a6b62}
+#health .hh-bridge b{color:#bd5235}
+#health .hh-vulnerable{color:#526c83;font-size:11px;line-height:1.45;max-width:40ch}
+#health .hh-source{margin:0;color:#63778a;font-size:10px;line-height:1.4}
+@media(max-width:850px){
+ #health .hh-wrap{top:110px;left:12px;right:12px;bottom:55px;gap:9px}
+ #health .hh-cards{grid-template-columns:1fr;gap:8px}
+ #health .hh-card{min-height:unset;padding:10px 11px;display:grid;grid-template-columns:60px 1fr;column-gap:10px;row-gap:2px}
+ #health .hh-icon{grid-row:1/span 4;width:60px;height:60px;align-self:center}
+ #health .hh-tag{font-size:9px}
+ #health .hh-name{font-size:21px}
+ #health .hh-verb{font-size:12px}
+ #health .hh-effects{font-size:11px}
+ #health .hh-mechanism{padding:11px 12px}
+ #health .hh-bottom{display:block}
+ #health .hh-bridge{display:block;font-size:11px;margin-bottom:5px}
+ #health .hh-vulnerable{display:block;font-size:10px}
+}
+@media(max-width:360px){#health .hh-wrap{top:104px}.hh-bridge{letter-spacing:-.02em}}
+@media(prefers-reduced-motion:reduce){#health .hh-card{transition:none}}
