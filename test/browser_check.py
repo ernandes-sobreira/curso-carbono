@@ -10,17 +10,18 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.set_content(content,wait_until='domcontentloaded',timeout=60000)
     ids=page.evaluate('window.__carbono.slides.map(x=>x.id)')
-    assert len(ids)==11, ids
-    for n in range(11):
+    assert len(ids)==12, ids
+    assert ids[7:10]==['uhi','health','scen'], ids
+    for n in range(12):
         page.evaluate('n => window.__carbono.go(n)',n)
         page.wait_for_timeout(130)
     assert not errors, errors
-    page.evaluate('window.__carbono.go(8)')
+    page.evaluate('window.__carbono.go(9)')
     emissions=page.evaluate('() => {window.__scen.scen.scope="mt";return window.__scen.leverResult()}')
     assert abs(emissions['total']-231.17459584)<1e-10
     assert len(emissions['rows'])==5
     page.locator('#challenge').evaluate('(e)=>e.click()')
     page.locator('[data-challenge="0"]').evaluate('(e)=>e.click()')
     assert 'Correto' in page.locator('.challenge-feedback').inner_text()
-    print('Chromium headless: 11 telas, 0 pageerrors, 5 setores MT e desafio interativo. WebGL:',page.evaluate('window.__carbono.hasGL'))
+    print('Chromium headless: 12 telas, 0 pageerrors, 5 setores MT e desafio interativo. WebGL:',page.evaluate('window.__carbono.hasGL'))
     browser.close()
