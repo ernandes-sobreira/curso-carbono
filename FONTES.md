@@ -45,3 +45,14 @@ A Experiência 8 atual é um **esquema qualitativo**, não um modelo preditivo d
 O controle de população usa uma transformação logarítmica **somente para distribuir os valores da régua** e para variar o desenho dos edifícios, não para estimar calor urbano. Os botões Cáceres/Cuiabá/São Paulo apenas preenchem valores aproximados de população e precipitação já existentes no código original. Eles **não** representam mapas urbanos, inventários de arborização ou observações climáticas atuais dessas cidades.
 
 A cobertura arbórea na ilustração (5% de referência versus valor escolhido) não é um levantamento empírico. Os círculos das copas, sombras, traços azuis de evapotranspiração e halo avermelhado são representações esquemáticas sem escala de energia, taxa de evaporação ou temperatura. **60% de cobertura de árvores não implica 60% de redução térmica.**
+
+
+## Experiência 9, saúde humana (19/10/2026)
+
+**PM2,5, mecanismo direto de exposição:** partículas com diâmetro aerodinâmico de até 2,5 µm podem atingir regiões profundas dos pulmões; a exposição é associada a doenças respiratórias e cardiovasculares, AVC e mortalidade prematura. Mistura de partículas (pode incluir carbono negro), **não confundir com o gás CO₂**. Fonte: OMS, *Ambient (outdoor) air pollution*, https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health (24/10/2024).
+
+**Calor extremo, estresse térmico:** sobrecarga da regulação térmica, com risco de exaustão, insolação, efeitos renais, cardiovasculares e exacerbação de doenças crônicas. Fonte: OMS, *Heat and health*, https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health (31/07/2026).
+
+**CO₂, mecanismo climático indireto:** elevação da concentração de CO₂ intensifica o forçamento radiativo, favorecendo o aquecimento global e exposição a calor extremo. Fontes emissoras, especialmente queimadas e combustão, podem liberar CO₂ **e** PM2,5 simultaneamente; isso não significa transformação direta de CO₂ em partículas. Referência: IPCC AR6, WGII, capítulo 7, *Health, Wellbeing and the Changing Structure of Communities*, https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-7/. Atribuição de incêndios depende de fatores adicionais, como ocupação da terra, manejo e ignição.
+
+**Natureza da visualização:** infográfico SVG vetorial autoral, sem valores numéricos de risco, dose-resposta ou taxas municipais não verificadas.
