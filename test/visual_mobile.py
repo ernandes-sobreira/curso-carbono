@@ -45,9 +45,20 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT/f"{name}_uhi_slide.png"),full_page=False)
         page.locator('[data-heat-action="next"]').click(timeout=12000)
         assert page.locator("#heat-slide-cover.active").count()==0, "Próximo slide travou"
+        assert page.locator("#health").is_visible(), "Nova experiência 9 não apareceu"
+        assert page.locator("#health [data-hh]").count()==3, "Três painéis de saúde ausentes"
+        page.locator('[data-hh="heat"]').click(timeout=12000)
+        assert "desidratação" in page.locator("#hh-path-copy").inner_text().lower()
+        page.locator('[data-hh="climate"]').click(timeout=12000)
+        assert "aquecimento global" in page.locator("#hh-path-copy").inner_text()
+        page.locator('[data-hh="pm"]').click(timeout=12000)
+        assert "Partículas finas" in page.locator("#hh-path-copy").inner_text()
+        page.screenshot(path=str(OUT/f"{name}_health.png"),full_page=False)
+        page.locator("#prev").click(timeout=12000)
+        assert page.locator("#health").is_visible(), "Voltar deveria alcançar saúde"
         page.locator("#prev").click(timeout=12000)
         assert page.locator("#heat-slide-cover.active").count()==1, "Retorno ao slide falhou"
-        page.evaluate("window.__scen.scen.view='me';window.__carbono.go(8)")
+        page.evaluate("window.__scen.scen.view='me';window.__carbono.go(9)")
         page.wait_for_timeout(200)
         assert page.locator("#stage.food2-on").count()==1
         assert page.locator("#food2 .f2-row").count()==5
@@ -57,7 +68,7 @@ with sync_playwright() as p:
         assert page.locator("#food2 .f2-row").count()==10
         page.screenshot(path=str(OUT/f"{name}_food_v2.png"),full_page=False)
         assert not errors,errors
-        print(f"{name}: slide de ilha de calor, zoom, navegação e alimentos OK")
+        print(f"{name}: ilha de calor, saúde interativa, navegação e alimentos OK")
         page.close()
     browser.close()
     server.shutdown()
