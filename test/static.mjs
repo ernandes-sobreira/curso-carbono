@@ -5,7 +5,7 @@ const source=fs.readFileSync('index.html','utf8');
 const js=source.split('<script>')[1]?.split('</script>')[0];
 assert.ok(js,'Script principal presente');
 new vm.Script(js,{filename:'carbono-index.js'});
-for (const id of ['atom','bonds','vib','budget','res','keeling','human','uhi','scen','quiz','final']) {
+for (const id of ['atom','bonds','vib','budget','res','keeling','human','uhi','health','scen','quiz','final']) {
  assert.ok(js.includes(`id:"${id}"`),`Tela ${id} preservada`);
 }
 assert.ok(js.includes('231.17459584'),'Total Mato Grosso extraído do SEEG 2024');
@@ -17,4 +17,6 @@ assert.ok(source.includes('aria-label'),'Acessibilidade declarada');
 assert.ok(js.includes('__carbonoGreenhouse'),'Esquema do efeito estufa carregado');
 assert.ok(source.includes('IR PARA BAIXO'),'Radiação atmosférica descendente explicitada');
 assert.ok(!source.includes('https://doi.org/10.1029/2020GL091585'),'Referência indevida de Kramer removida');
-console.log('OK: sintaxe JS, 11 telas, SEEG MT, correção TCRE e contingência.');
+assert.ok(js.includes('Bt.splice(8,0,healthSlide)'), 'Saúde inserida no núcleo de navegação após a ilha de calor');
+assert.ok(source.includes('id="health"'), 'Painel de saúde disponível no HTML');
+console.log('OK: sintaxe JS, 12 telas, saúde, SEEG MT, correção TCRE e contingência.');
