@@ -325,6 +325,50 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
  #heat-slide-cover .heat-nav{width:100%;justify-content:space-between}
 }
 
+/* Experiência 9: PM2,5, calor, carbono e saúde. Fundo branco e conteúdo sem réguas. */
+#health{position:absolute;inset:0;display:none;background:#fff;overflow:hidden}
+#stage.hh-on #ctrl,#stage.hh-on #readout,#stage.hh-on #chart{display:none!important}
+#health .hh-wrap{position:absolute;left:clamp(14px,3.2%,48px);right:clamp(14px,3.2%,48px);top:clamp(116px,19%,155px);bottom:54px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;overscroll-behavior:contain;padding:0 2px 18px}
+#health .hh-intro{margin:0;font-size:clamp(12px,1.12vw,16px);line-height:1.45;color:#405b70}
+#health .hh-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#health .hh-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;min-height:235px;padding:15px 17px;border:2px solid #d9e5f1;border-radius:18px;background:#fff;text-align:left;gap:5px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+#health .hh-card[aria-pressed=true]{border-color:#2a78d6;background:#f3f8fe;box-shadow:0 8px 18px rgba(42,120,214,.08)}
+#health .hh-card:focus-visible{outline:3px solid #0a6b62;outline-offset:3px}
+#health .hh-card:hover{transform:translateY(-2px)}
+#health .hh-icon{display:block;width:76px;height:76px;flex:none}
+#health .hh-icon svg{width:100%;height:100%;display:block}
+#health .hh-tag{font-size:10px;font-weight:800;letter-spacing:.08em;color:#516b82}
+#health .hh-name{font:800 clamp(24px,2.7vw,37px)/1 Sora,Inter,system-ui,sans-serif;color:#12233a}
+#health .hh-verb{font:800 clamp(13px,1.2vw,18px)/1.25 Sora,Inter,system-ui,sans-serif}
+#health .hh-pm .hh-verb{color:#13788d}
+#health .hh-heat .hh-verb{color:#bd5235}
+#health .hh-climate .hh-verb{color:#2674be}
+#health .hh-effects{font-size:clamp(11px,.98vw,13px);line-height:1.4;color:#506a80}
+#health .hh-mechanism{border-left:5px solid #2a78d6;background:#f5f8fc;border-radius:0 15px 15px 0;padding:13px 17px;display:flex;flex-direction:column;gap:4px}
+#health .hh-mechanism-title{font:800 clamp(13px,1.25vw,17px)/1.35 Sora,Inter,system-ui,sans-serif}
+#health .hh-mechanism-copy{color:#38546c;font-size:clamp(11px,1.04vw,14px);line-height:1.5}
+#health .hh-tap{font-size:10px;color:#56718a;margin-top:3px}
+#health .hh-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#health .hh-bridge{font:800 clamp(12px,1.1vw,15px)/1.4 Sora,Inter,sans-serif;color:#0a6b62}
+#health .hh-bridge b{color:#bd5235}
+#health .hh-vulnerable{color:#526c83;font-size:11px;line-height:1.45;max-width:40ch}
+#health .hh-source{margin:0;color:#63778a;font-size:10px;line-height:1.4}
+@media(max-width:850px){
+ #health .hh-wrap{top:110px;left:12px;right:12px;bottom:55px;gap:9px}
+ #health .hh-cards{grid-template-columns:1fr;gap:8px}
+ #health .hh-card{min-height:unset;padding:10px 11px;display:grid;grid-template-columns:60px 1fr;column-gap:10px;row-gap:2px}
+ #health .hh-icon{grid-row:1/span 4;width:60px;height:60px;align-self:center}
+ #health .hh-tag{font-size:9px}
+ #health .hh-name{font-size:21px}
+ #health .hh-verb{font-size:12px}
+ #health .hh-effects{font-size:11px}
+ #health .hh-mechanism{padding:11px 12px}
+ #health .hh-bottom{display:block}
+ #health .hh-bridge{display:block;font-size:11px;margin-bottom:5px}
+ #health .hh-vulnerable{display:block;font-size:10px}
+}
+@media(max-width:360px){#health .hh-wrap{top:104px}.hh-bridge{letter-spacing:-.02em}}
+@media(prefers-reduced-motion:reduce){#health .hh-card{transition:none}}
 </style>
 </head>
 <body>
@@ -353,6 +397,44 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   </div>
 
   <div id="uhi"><div id="city"></div><div id="uhiCard"></div></div>
+  <section id="health" aria-label="Experiência 9: carbono, PM2,5, calor e saúde humana">
+  <div class="hh-wrap">
+    <p class="hh-intro">Do ambiente ao organismo. <strong>Três exposições, mecanismos diferentes.</strong></p>
+    <div class="hh-cards" role="group" aria-label="Explore os caminhos do risco à saúde">
+      <button type="button" class="hh-card hh-pm" data-hh="pm" aria-pressed="true">
+        <span class="hh-icon" aria-hidden="true"><svg viewBox="0 0 120 120"><path d="M60 18V64" fill="none" stroke="#13788d" stroke-width="8" stroke-linecap="round"/><path d="M57 58L44 45M63 58L77 45" stroke="#13788d" stroke-width="6" stroke-linecap="round"/><path d="M48 40C39 37 26 50 20 68C15 82 17 100 33 102C48 104 56 89 56 73V58L48 40Z" fill="#cdeef3" stroke="#13788d" stroke-width="4"/><path d="M72 40C81 37 94 50 100 68C105 82 103 100 87 102C72 104 64 89 64 73V58L72 40Z" fill="#cdeef3" stroke="#13788d" stroke-width="4"/><g fill="#da5d47"><circle cx="26" cy="42" r="4"/><circle cx="17" cy="55" r="3"/><circle cx="34" cy="34" r="3"/><circle cx="96" cy="37" r="4"/><circle cx="104" cy="52" r="3"/></g></svg></span>
+        <span class="hh-tag">POLUIÇÃO DO AR</span>
+        <span class="hh-name">PM2,5</span>
+        <span class="hh-verb">Alcança os pulmões</span>
+        <span class="hh-effects">Inflamação · asma · infarto · AVC</span>
+      </button>
+      <button type="button" class="hh-card hh-heat" data-hh="heat" aria-pressed="false">
+        <span class="hh-icon" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="83" cy="30" r="17" fill="#ffe3a3" stroke="#d68d22" stroke-width="4"/><g stroke="#df9a33" stroke-width="4" stroke-linecap="round"><path d="M83 3V9M83 52V60M56 30H63M104 30H113M65 11L70 17M98 44L104 50"/></g><rect x="39" y="16" width="18" height="62" rx="9" fill="#fff5e7" stroke="#d9553b" stroke-width="5"/><circle cx="48" cy="85" r="20" fill="#f5a493" stroke="#d9553b" stroke-width="5"/><path d="M48 38V85" stroke="#d9553b" stroke-width="9" stroke-linecap="round"/></svg></span>
+        <span class="hh-tag">ESTRESSE TÉRMICO</span>
+        <span class="hh-name">Calor</span>
+        <span class="hh-verb">Sobrecarrega o corpo</span>
+        <span class="hh-effects">Desidratação · coração · rins</span>
+      </button>
+      <button type="button" class="hh-card hh-climate" data-hh="climate" aria-pressed="false">
+        <span class="hh-icon" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="61" cy="62" r="22" fill="#b4dafb" stroke="#2674be" stroke-width="5"/><circle cx="25" cy="62" r="17" fill="#ffe7d7" stroke="#d08049" stroke-width="4"/><circle cx="97" cy="62" r="17" fill="#ffe7d7" stroke="#d08049" stroke-width="4"/><path d="M41 62H79" stroke="#53758f" stroke-width="5"/><text x="61" y="68" text-anchor="middle" fill="#123f6d" font-size="14" font-weight="800">C</text><text x="25" y="68" text-anchor="middle" fill="#924420" font-size="13" font-weight="800">O</text><text x="97" y="68" text-anchor="middle" fill="#924420" font-size="13" font-weight="800">O</text></svg></span>
+        <span class="hh-tag">MUDANÇA DO CLIMA</span>
+        <span class="hh-name">CO₂</span>
+        <span class="hh-verb">Intensifica o aquecimento</span>
+        <span class="hh-effects">Risco climático indireto à saúde</span>
+      </button>
+    </div>
+    <div class="hh-mechanism" aria-live="polite">
+      <div class="hh-mechanism-title" id="hh-path-title">PM2,5: da respiração ao sistema cardiovascular</div>
+      <div class="hh-mechanism-copy" id="hh-path-copy">Partículas finas alcançam regiões profundas dos pulmões. A exposição está associada a doenças respiratórias e cardiovasculares.</div>
+      <span class="hh-tap">Toque nos cartões para descobrir cada mecanismo.</span>
+    </div>
+    <div class="hh-bottom">
+      <span class="hh-bridge">Emissões e queimadas <b>→</b> ar poluído e aquecimento <b>→</b> risco humano</span>
+      <span class="hh-vulnerable">Mais vulneráveis: crianças, idosos, trabalhadores expostos e pessoas com doenças crônicas.</span>
+    </div>
+    <p class="hh-source">Fontes: OMS, poluição do ar e calor; IPCC AR6, WGII cap. 7. <b>Esquema didático, sem atribuição numérica de risco.</b></p>
+  </div>
+</section>
   <div id="quiz"></div>
   <div id="rescard"></div>
   <div id="scale"></div>
@@ -4274,7 +4356,71 @@ void main() {
       <h4>Fluxos citados nos percursos (PgC ano\u207B\xB9, 2010 a 2019)</h4><p>Emiss\xF5es f\xF3sseis 9,4 \xB1 0,5; mudan\xE7a de uso da terra 1,6 \xB1 0,7; crescimento atmosf\xE9rico 5,1 \xB1 0,02; sumidouro oce\xE2nico 2,5 \xB1 0,6; sumidouro terrestre 3,4 \xB1 0,9 (AR6 Tabela 5.1). Fotoss\xEDntese bruta global ~113 PgC ano\u207B\xB9 (AR6 Fig. 5.12).</p>
       <p><span class="tag">Dados originais publicados</span></p>
       <h4>Refer\xEAncias</h4><p>Canadell, J. G. et al. (2021). Global Carbon and other Biogeochemical Cycles and Feedbacks. In IPCC AR6 WGI, cap. 5. <a href="https://doi.org/10.1017/9781009157896.007" target="_blank">doi:10.1017/9781009157896.007</a>; Figura 5.12: <a href="https://www.ipcc.ch/report/ar6/wg1/figures/chapter-5/figure-5-12" target="_blank">ipcc.ch</a><br>Friedlingstein, P. et al. (2020). Global Carbon Budget 2020. ESSD 12, 3269. <a href="https://doi.org/10.5194/essd-12-3269-2020" target="_blank">doi:10.5194/essd-12-3269-2020</a><br>Falkowski, P. et al. (2000). The global carbon cycle: a test of our knowledge of Earth as a system. Science 290, 291. <a href="https://doi.org/10.1126/science.290.5490.291" target="_blank">doi:10.1126/science.290.5490.291</a><br>Yvon-Durocher, G. et al. (2014). Nature 507, 488. <a href="https://doi.org/10.1038/nature13164" target="_blank">doi:10.1038/nature13164</a></p>`}},{id:"final",eyebrow:"Transi\xE7\xE3o",title:"",lede:"",ref:"III Semana Brasileira de F\xEDsica Ambiental \xB7 Cuiab\xE1, outubro de 2026",needsGL:!1,build(){},enter(){ze("final").style.display="grid",_t&&(dn.style.display="none")},exit(){ze("final").style.display="none",_t&&(dn.style.display="block")},more(){return"<h2>Para a segunda parte</h2><p>Os mesmos \xE1tomos de carbono que acabamos de ver nos orbitais, nas liga\xE7\xF5es e nas bandas de absor\xE7\xE3o est\xE3o na celulose, no h\xFAmus, no bicarbonato do oceano e no carv\xE3o. Mudar o uso da terra \xE9 mudar o destino desse carbono: supress\xE3o da vegeta\xE7\xE3o, perda de carbono do solo e emiss\xF5es de CO\u2082 e CH\u2084 no Pantanal e em Mato Grosso.</p>"}}],X8=kf({ui:Ue,c2d:un,seg:Ln,slider:so,kpi:en,core:_t,gl:dn,showInfo:ep,current:()=>Bt[tn]});Bt.splice(Bt.findIndex(i=>i.id==="final"),0,...X8);var $8=Xf({ui:Ue,c2d:un,seg:Ln,slider:so,kpi:en,core:_t,gl:dn});Bt.splice(Bt.findIndex(i=>i.id==="quiz"),0,...$8);Bt.find(i=>i.id==="final").eyebrow="Fechamento";function Mc(){Je.view==="earth"&&Dn?(un.style.display="none",un.classList.remove("active"),dn.style.display="block",Dn.enter(),Dn.setForcing(Je.f.total,Je.T,Je.wv)):(Dn&&Dn.exit(),_t&&(dn.style.display="none"),un.style.display="block",un.classList.add("active"))}function _2(){let i=ri.info();Ue.readout.innerHTML="",Ue.readout.appendChild(en("Is\xF3topo",i.label,`${i.p} p\u207A \xB7 ${i.n} n \xB7 ${i.e} e\u207B`)),Ue.readout.appendChild(en("Configura\xE7\xE3o","1s\xB2 2s\xB2 2p\xB2","K = 2 \xB7 L = 4")),Ue.readout.appendChild(en("Carga","neutro","pr\xF3tons = el\xE9trons"))}function Kf(){if(Ue.readout.innerHTML="",!Hn.state.current){Ue.readout.appendChild(en("Val\xEAncia","4","2s\xB2 2p\xB2"));return}let e=Hn.state.mol.def;Ue.readout.appendChild(en("Mol\xE9cula",e.formula,e.name)),Ue.readout.appendChild(en("Hibridiza\xE7\xE3o",e.hyb,"modelo de liga\xE7\xE3o")),Ue.readout.appendChild(en("Geometria",e.geom,e.angle))}function y2(){let i=hn.mode();Ue.readout.innerHTML="",Ue.readout.appendChild(en("Modo",`${i.id.replace("v","\u03BD")} \xB7 ${i.cm} cm\u207B\xB9`,`${(1e4/i.cm).toFixed(1)} \xB5m`)),Ue.readout.appendChild(en("Infravermelho",i.ir?"ativo":"inativo",i.ir?"dipolo oscila":"dipolo n\xE3o varia")),Ue.readout.appendChild(en("Raman",i.raman?"ativo":"inativo","polarizabilidade")),Ue.chartcap.textContent="Planck 288 K (calculada) \xB7 bandas NIST (posi\xE7\xF5es)"}function Pr(){let i=Je.f;Ue.readout.innerHTML="",Ue.readout.appendChild(en("\u0394F efetivo vs 1750",`${i.total>=0?"+":""}${i.total.toFixed(2)} W m\u207B\xB2`,`CO\u2082 ${i.erf.co2.toFixed(2)} \xB7 CH\u2084 ${i.erf.ch4.toFixed(2)} \xB7 N\u2082O ${i.erf.n2o.toFixed(2)}`)),Ue.readout.appendChild(en("\u0394T de equil\xEDbrio",`${i.dTeq>=0?"+":""}${i.dTeq.toFixed(2)} \xB0C`,`\u03BB = ${i.lambda.toFixed(2)} W m\u207B\xB2 \xB0C\u207B\xB9 (AR6)`)),Ue.readout.appendChild(en("Emiss\xE3o da superf\xEDcie",`${fc(Je.T).toFixed(0)} W m\u207B\xB2`,`\u03C3T\u2074, T = ${Je.T.toFixed(1)} K`)),Je.strip&&(Je.strip.innerHTML=`<div><label>\u0394F vs 1750</label><b>${i.total>=0?"+":""}${i.total.toFixed(2)} W m\u207B\xB2</b></div><div><label>\u0394T equil\xEDbrio</label><b>${i.dTeq>=0?"+":""}${i.dTeq.toFixed(2)} \xB0C</b></div><div><label>CO\u2082</label><b>${Je.conc.co2.toFixed(0)} ppm</b></div>`)}var Zi={sel:"atm",scale:"log"},bc=i=>i>=1e6?`~${(i/1e6).toFixed(0)} \xD7 10\u2076`:i.toLocaleString("pt-BR");function tp(i){Zi.sel=i;let e=Us.find(n=>n.id===i),t=ze("res");t.classList.add("focus"),t.querySelectorAll(".layer").forEach(n=>n.classList.toggle("on",n.dataset.res===i)),ze("rescard").innerHTML=`<span class="tag">${e.geo?"reservat\xF3rio geol\xF3gico":"ciclo ativo"}</span><h3>${e.name}</h3><div class="big">${bc(e.stock)} PgC</div><div style="color:var(--muted);font-size:.74rem">${e.range?e.range+" \xB7 ":""}estimativa ${e.year} \xB7 ${e.src.split(";")[0]}</div>
-  <dl><dt>entra</dt><dd>${e.inn}</dd><dt>sai</dt><dd>${e.out}</dd><dt>perman\xEAncia</dt><dd>${e.time}</dd><dt>clima</dt><dd>${e.climate}</dd></dl>`,ze("rescard").classList.add("show"),x2()}function x2(){let i=ze("scale"),e=Math.max(...Us.map(t=>t.stock));i.innerHTML=`<div style="font-size:.7rem;color:var(--muted);margin-bottom:4px">${Zi.scale==="log"?"escala logar\xEDtmica (ordens de grandeza)":"escala linear: a atmosfera quase desaparece"}</div>`+Us.map(t=>{let n=Zi.scale==="log"?Math.log10(t.stock)/Math.log10(e)*100:t.stock/e*100;return`<div class="row ${t.geo?"geo":""}" style="${t.id===Zi.sel?"font-weight:700":""}"><div>${t.name}</div><div class="bar"><i style="width:${Math.max(.6,n)}%"></i></div><span>${bc(t.stock)}</span></div>`}).join("")}document.querySelectorAll("#res .layer").forEach(i=>i.addEventListener("click",()=>tp(i.dataset.res)));var Jf={atm:[800,170],veg:[400,260],soil:[400,420],ocean:[1200,600],fossil:[400,560],rock:[400,760]},Qt=null;function Y8(i){let e=a2.find(t=>t.id===i);Qt={steps:e.steps,i:0,t:0,p:e},ze("rescard").innerHTML=`<span class="tag">percurso</span><h3>${e.label}</h3><p style="color:#2f4660">${e.text}</p>`,ze("rescard").classList.add("show"),ze("res").classList.add("focus"),ze("res").querySelectorAll(".layer").forEach(t=>t.classList.toggle("on",e.steps.includes(t.dataset.res)))}function Z8(i){let e=ze("marker");if(!Qt){e.setAttribute("opacity",0);return}let{steps:t}=Qt;if(Qt.t+=i/2.2,Qt.t>=1&&(Qt.t=0,Qt.i++,Qt.i>=t.length-1)){Qt=null;return}let n=Jf[t[Qt.i]],s=Jf[t[Qt.i+1]],r=Qt.t<.5?2*Qt.t*Qt.t:1-Math.pow(-2*Qt.t+2,2)/2;e.setAttribute("cx",n[0]+(s[0]-n[0])*r),e.setAttribute("cy",n[1]+(s[1]-n[1])*r),e.setAttribute("opacity",1)}var tn=-1,np=ze("dots");Bt.forEach(()=>np.appendChild(document.createElement("i")));function Lr(i){if(i=Math.max(0,Math.min(Bt.length-1,i)),i===tn)return;tn>=0&&(!Bt[tn].needsGL||Vn)&&Bt[tn].exit(),tn=i;let e=Bt[i];Ue.eyebrow.textContent=e.eyebrow,Ue.title.textContent=e.title,Ue.lede.textContent=e.lede,Ue.ref.textContent=e.ref,Ue.ctrl.innerHTML="",Ue.readout.innerHTML="",Ue.info.classList.remove("show"),ze("drawer").classList.remove("open"),np.querySelectorAll("i").forEach((t,n)=>t.classList.toggle("on",n===i)),ze("nowebgl").style.display=e.needsGL&&!Vn?"grid":"none",!(e.needsGL&&!Vn)&&(e.build(),e.enter(),Ue.hint.classList.toggle("show",!!e.needsGL),setTimeout(()=>Ue.hint.classList.remove("show"),3500),location.hash=e.id)}ze("prev").onclick=()=>Lr(tn-1);ze("next").onclick=()=>Lr(tn+1);ze("more").onclick=()=>{ze("drawerBody").innerHTML=Bt[tn].more(),ze("drawer").classList.add("open")};ze("drawerX").onclick=()=>ze("drawer").classList.remove("open");ze("full").onclick=()=>{var i;document.fullscreenElement?document.exitFullscreen():(i=Ir.requestFullscreen)==null||i.call(Ir)};window.addEventListener("keydown",i=>{(i.key==="ArrowRight"||i.key==="PageDown"||i.key===" ")&&(i.preventDefault(),Lr(tn+1)),(i.key==="ArrowLeft"||i.key==="PageUp")&&(i.preventDefault(),Lr(tn-1)),i.key==="Escape"&&(ze("drawer").classList.remove("open"),Ue.info.classList.remove("show")),i.key.toLowerCase()==="f"&&ze("full").click(),i.key.toLowerCase()==="i"&&ze("more").click(),i.key.toLowerCase()==="r"&&Bt[tn].exp&&Bt[tn].exp().reset()});var ip=0,sp=0,rp=0,v2=0;dn.addEventListener("pointerdown",i=>{ip=performance.now(),sp=i.clientX,rp=i.clientY});dn.addEventListener("pointerup",i=>{var a,o,l,c;let e=performance.now()-ip,t=Math.hypot(i.clientX-sp,i.clientY-rp);if(e>350||t>8||!_t)return;let n=performance.now();if(n-v2<320){(o=(a=Bt[tn]).exp)==null||o.call(a).reset(),v2=0;return}v2=n;let s=(c=(l=Bt[tn]).exp)==null?void 0:c.call(l);if(!s)return;let r=_t.pick(i.clientX,i.clientY,s.pickables);if(r){let h=r.object;for(;h&&!h.userData.info;)h=h.parent;h&&ep(h.userData.info.title,h.userData.info.text)}else Ue.info.classList.remove("show")});var jf=performance.now();function ap(i){requestAnimationFrame(ap);let e=Math.min(.05,(i-jf)/1e3);jf=i;let t=Bt[tn];if(!t)return;if(t.id==="budget"&&(Je.view==="cut"||!Vn)||t.draw){let s=un.clientWidth,r=un.clientHeight,a=Math.min(2,devicePixelRatio||1);un.width!==s*a&&(un.width=s*a,un.height=r*a);let o=un.getContext("2d");o.setTransform(a,0,0,a,0,0),t.id==="budget"?Nf(o,s,r,Je,i/1e3):(o.clearRect(0,0,s,r),t.draw(o,s,s<r?r*.56:r,e));return}if(t.id==="res"){Z8(e);return}if(!_t||!t.exp)return;_t.resize();let n=t.exp();if(n&&(n.update(e),_t.controls.update(),_t.renderer.render(_t.scene,_t.camera),t.id==="vib")){let s=Ue.chartc,r=s.clientWidth,a=s.clientHeight,o=Math.min(2,devicePixelRatio||1);r&&s.width!==r*o&&(s.width=r*o,s.height=a*o);let l=s.getContext("2d");l.setTransform(o,0,0,o,0,0),Df(l,r,a,hn.state.molId,hn.state.modeId,288)}}requestAnimationFrame(ap);window.addEventListener("resize",()=>_t&&_t.resize());var Qf=Bt.findIndex(i=>"#"+i.id===location.hash);Lr(Qf>=0?Qf:0);window.__carbono={slides:Bt,go:Lr,atom:ri,bonds:Hn,vib:hn,budget:Je,forcing:c2,hasGL:Vn,core:_t};})();
+  <dl><dt>entra</dt><dd>${e.inn}</dd><dt>sai</dt><dd>${e.out}</dd><dt>perman\xEAncia</dt><dd>${e.time}</dd><dt>clima</dt><dd>${e.climate}</dd></dl>`,ze("rescard").classList.add("show"),x2()}function x2(){let i=ze("scale"),e=Math.max(...Us.map(t=>t.stock));i.innerHTML=`<div style="font-size:.7rem;color:var(--muted);margin-bottom:4px">${Zi.scale==="log"?"escala logar\xEDtmica (ordens de grandeza)":"escala linear: a atmosfera quase desaparece"}</div>`+Us.map(t=>{let n=Zi.scale==="log"?Math.log10(t.stock)/Math.log10(e)*100:t.stock/e*100;return`<div class="row ${t.geo?"geo":""}" style="${t.id===Zi.sel?"font-weight:700":""}"><div>${t.name}</div><div class="bar"><i style="width:${Math.max(.6,n)}%"></i></div><span>${bc(t.stock)}</span></div>`}).join("")}document.querySelectorAll("#res .layer").forEach(i=>i.addEventListener("click",()=>tp(i.dataset.res)));var Jf={atm:[800,170],veg:[400,260],soil:[400,420],ocean:[1200,600],fossil:[400,560],rock:[400,760]},Qt=null;function Y8(i){let e=a2.find(t=>t.id===i);Qt={steps:e.steps,i:0,t:0,p:e},ze("rescard").innerHTML=`<span class="tag">percurso</span><h3>${e.label}</h3><p style="color:#2f4660">${e.text}</p>`,ze("rescard").classList.add("show"),ze("res").classList.add("focus"),ze("res").querySelectorAll(".layer").forEach(t=>t.classList.toggle("on",e.steps.includes(t.dataset.res)))}function Z8(i){let e=ze("marker");if(!Qt){e.setAttribute("opacity",0);return}let{steps:t}=Qt;if(Qt.t+=i/2.2,Qt.t>=1&&(Qt.t=0,Qt.i++,Qt.i>=t.length-1)){Qt=null;return}let n=Jf[t[Qt.i]],s=Jf[t[Qt.i+1]],r=Qt.t<.5?2*Qt.t*Qt.t:1-Math.pow(-2*Qt.t+2,2)/2;e.setAttribute("cx",n[0]+(s[0]-n[0])*r),e.setAttribute("cy",n[1]+(s[1]-n[1])*r),e.setAttribute("opacity",1)}/* Novo slide científico entre ilha de calor e cenários.
+   Executado dentro do bundle antes da construção dos botões de navegação.
+   Preserva todos os demais slides e não inventa coeficientes epidemiológicos. */
+const healthSlide={
+ id:"health",
+ eyebrow:"Experiência 9",
+ title:"O que chega ao corpo humano?",
+ lede:"PM2,5, calor e CO₂: três mecanismos, riscos diferentes.",
+ ref:"OMS, Air Pollution e Heat and Health; IPCC AR6 WGII, Capítulo 7.",
+ needsGL:false,
+ build(){
+   Ue.ctrl.replaceChildren();
+   Ue.readout.replaceChildren();
+   const host=document.getElementById("health");
+   host.querySelectorAll("[data-hh]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.hh==="pm")));
+   host.querySelector("#hh-path-title").textContent="PM2,5: da respiração ao sistema cardiovascular";
+   host.querySelector("#hh-path-copy").textContent="Partículas finas alcançam regiões profundas dos pulmões. A exposição está associada a doenças respiratórias e cardiovasculares.";
+ },
+ enter(){
+   const stage=document.getElementById("stage");
+   const host=document.getElementById("health");
+   stage.classList.add("hh-on");
+   host.style.display="block";
+   document.getElementById("gl").style.display="none";
+   const canvas=document.getElementById("c2d");
+   canvas.style.display="none";canvas.classList.remove("active");
+ },
+ exit(){
+   document.getElementById("stage").classList.remove("hh-on");
+   document.getElementById("health").style.display="none";
+   if(Vn)document.getElementById("gl").style.display="block";
+ },
+ more(){
+  return '<h2>Três caminhos diferentes até a saúde humana</h2>'+
+   '<h4>PM2,5: exposição por inalação</h4>'+
+   '<p>PM2,5 é a fração de partículas em suspensão cujo diâmetro aerodinâmico é de até 2,5 µm. Uma parte pode alcançar os alvéolos pulmonares. A exposição causa respostas inflamatórias e está associada a agravamento de asma, DPOC, doenças cardiovasculares, acidente vascular cerebral e mortalidade prematura. As partículas variam de composição: sulfatos, nitratos, poeira, carbono negro, matéria orgânica e outros componentes. <b>PM2,5 não é CO₂.</b></p>'+
+   '<h4>Calor extremo: estresse térmico</h4>'+
+   '<p>Temperatura elevada, umidade, radiação e pouco vento podem dificultar a perda de calor do organismo. Os efeitos incluem desidratação, exaustão térmica, insolação, piora das doenças cardíacas e renais e prejuízos ao trabalho e ao sono. Insolação é emergência médica.</p>'+
+   '<h4>CO₂ e mudança do clima: via indireta</h4>'+
+   '<p>O CO₂ atmosférico, nas concentrações externas usuais, não é o principal tóxico inalatório. Sua contribuição dominante aqui é <b>radiativa e climática</b>: o aumento de sua concentração favorece o aquecimento global e eleva a exposição a extremos de calor. Queimadas e combustão podem emitir <b>simultaneamente</b> CO₂ e PM2,5, mas o CO₂ não se transforma diretamente em partículas. O risco de incêndios depende também do manejo da terra, ignição e condições meteorológicas.</p>'+
+   '<h4>Quem fica mais exposto?</h4>'+
+   '<p>Crianças, idosos, gestantes, pessoas com doenças cardiorrespiratórias ou renais, trabalhadores ao ar livre e populações com menor acesso a habitação adequada, sombra e serviços de saúde.</p>'+
+   '<h4>Fontes verificáveis</h4>'+
+   '<p><a target="_blank" rel="noopener noreferrer" href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health">OMS, Ambient (outdoor) air pollution</a>.'+
+   ' <a target="_blank" rel="noopener noreferrer" href="https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health">OMS, Heat and health (2026)</a>.'+
+   ' <a target="_blank" rel="noopener noreferrer" href="https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-7/">IPCC AR6 WGII, capítulo 7</a>.</p>'+
+   '<p><span class="tag">Esquema didático autoral</span> Sem atribuir frações de risco ou valores epidemiológicos não calculados.</p>';
+ }
+};
+Bt.splice(8,0,healthSlide);
+const hhHost=document.getElementById("health");
+const hhContent={
+ pm:["PM2,5: da respiração ao sistema cardiovascular","Partículas finas alcançam regiões profundas dos pulmões. A exposição está associada a doenças respiratórias e cardiovasculares."],
+ heat:["Calor: quando o corpo não consegue dissipar energia","Calor e umidade podem dificultar o resfriamento do corpo, aumentando desidratação, exaustão térmica e sobrecarga do coração e dos rins."],
+ climate:["CO₂: intensificação do risco climático","O CO₂ contribui para o aquecimento global. Fumaça e PM2,5 podem ser emitidos ao mesmo tempo que CO₂ por queimadas e combustão, mas são substâncias diferentes."]
+};
+hhHost.addEventListener("click",event=>{
+ const card=event.target.closest("[data-hh]");
+ if(!card||!hhHost.contains(card))return;
+ const chosen=card.dataset.hh;
+ hhHost.querySelectorAll("[data-hh]").forEach(b=>b.setAttribute("aria-pressed",String(b===card)));
+ hhHost.querySelector("#hh-path-title").textContent=hhContent[chosen][0];
+ hhHost.querySelector("#hh-path-copy").textContent=hhContent[chosen][1];
+});
+var tn=-1,np=ze("dots");Bt.forEach(()=>np.appendChild(document.createElement("i")));function Lr(i){if(i=Math.max(0,Math.min(Bt.length-1,i)),i===tn)return;tn>=0&&(!Bt[tn].needsGL||Vn)&&Bt[tn].exit(),tn=i;let e=Bt[i];Ue.eyebrow.textContent=e.eyebrow,Ue.title.textContent=e.title,Ue.lede.textContent=e.lede,Ue.ref.textContent=e.ref,Ue.ctrl.innerHTML="",Ue.readout.innerHTML="",Ue.info.classList.remove("show"),ze("drawer").classList.remove("open"),np.querySelectorAll("i").forEach((t,n)=>t.classList.toggle("on",n===i)),ze("nowebgl").style.display=e.needsGL&&!Vn?"grid":"none",!(e.needsGL&&!Vn)&&(e.build(),e.enter(),Ue.hint.classList.toggle("show",!!e.needsGL),setTimeout(()=>Ue.hint.classList.remove("show"),3500),location.hash=e.id)}ze("prev").onclick=()=>Lr(tn-1);ze("next").onclick=()=>Lr(tn+1);ze("more").onclick=()=>{ze("drawerBody").innerHTML=Bt[tn].more(),ze("drawer").classList.add("open")};ze("drawerX").onclick=()=>ze("drawer").classList.remove("open");ze("full").onclick=()=>{var i;document.fullscreenElement?document.exitFullscreen():(i=Ir.requestFullscreen)==null||i.call(Ir)};window.addEventListener("keydown",i=>{(i.key==="ArrowRight"||i.key==="PageDown"||i.key===" ")&&(i.preventDefault(),Lr(tn+1)),(i.key==="ArrowLeft"||i.key==="PageUp")&&(i.preventDefault(),Lr(tn-1)),i.key==="Escape"&&(ze("drawer").classList.remove("open"),Ue.info.classList.remove("show")),i.key.toLowerCase()==="f"&&ze("full").click(),i.key.toLowerCase()==="i"&&ze("more").click(),i.key.toLowerCase()==="r"&&Bt[tn].exp&&Bt[tn].exp().reset()});var ip=0,sp=0,rp=0,v2=0;dn.addEventListener("pointerdown",i=>{ip=performance.now(),sp=i.clientX,rp=i.clientY});dn.addEventListener("pointerup",i=>{var a,o,l,c;let e=performance.now()-ip,t=Math.hypot(i.clientX-sp,i.clientY-rp);if(e>350||t>8||!_t)return;let n=performance.now();if(n-v2<320){(o=(a=Bt[tn]).exp)==null||o.call(a).reset(),v2=0;return}v2=n;let s=(c=(l=Bt[tn]).exp)==null?void 0:c.call(l);if(!s)return;let r=_t.pick(i.clientX,i.clientY,s.pickables);if(r){let h=r.object;for(;h&&!h.userData.info;)h=h.parent;h&&ep(h.userData.info.title,h.userData.info.text)}else Ue.info.classList.remove("show")});var jf=performance.now();function ap(i){requestAnimationFrame(ap);let e=Math.min(.05,(i-jf)/1e3);jf=i;let t=Bt[tn];if(!t)return;if(t.id==="budget"&&(Je.view==="cut"||!Vn)||t.draw){let s=un.clientWidth,r=un.clientHeight,a=Math.min(2,devicePixelRatio||1);un.width!==s*a&&(un.width=s*a,un.height=r*a);let o=un.getContext("2d");o.setTransform(a,0,0,a,0,0),t.id==="budget"?Nf(o,s,r,Je,i/1e3):(o.clearRect(0,0,s,r),t.draw(o,s,s<r?r*.56:r,e));return}if(t.id==="res"){Z8(e);return}if(!_t||!t.exp)return;_t.resize();let n=t.exp();if(n&&(n.update(e),_t.controls.update(),_t.renderer.render(_t.scene,_t.camera),t.id==="vib")){let s=Ue.chartc,r=s.clientWidth,a=s.clientHeight,o=Math.min(2,devicePixelRatio||1);r&&s.width!==r*o&&(s.width=r*o,s.height=a*o);let l=s.getContext("2d");l.setTransform(o,0,0,o,0,0),Df(l,r,a,hn.state.molId,hn.state.modeId,288)}}requestAnimationFrame(ap);window.addEventListener("resize",()=>_t&&_t.resize());var Qf=Bt.findIndex(i=>"#"+i.id===location.hash);Lr(Qf>=0?Qf:0);window.__carbono={slides:Bt,go:Lr,atom:ri,bonds:Hn,vib:hn,budget:Je,forcing:c2,hasGL:Vn,core:_t};})();
 /*! Bundled license information:
 
 three/build/three.module.js:
