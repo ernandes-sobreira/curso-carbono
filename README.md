@@ -94,3 +94,8 @@ A tela **A mesma cidade. Dois microclimas.** contém título e controles dentro 
 - **Próximo/anterior:** funciona fora do painel rolável, sem controles flutuantes sobre os botões.
 
 A tela é didática e não faz estimativas numéricas de temperatura; detalhes científicos em `FONTES.md`. O workflow de teste visual tira capturas nos tamanhos 320 px, 393 px e desktop, e a verificação de integridade compara o HTML publicado com o resultado do build.
+
+
+## Nova Experiência 9, Saúde humana
+
+O percurso agora inclui **12 experiências**: ilha de calor → **saúde humana (PM2,5, calor e CO₂)** → cenários. A nova tela apresenta três cartões SVG acessíveis, uma explicação interativa e fontes detalhadas em **Veja mais**; distingue claramente efeitos de inalação de PM2,5, efeitos fisiológicos do calor e via indireta do CO₂ pelo clima. O material contém apenas mecanismos referenciados, sem estimar casos ou temperaturas locais. Código: `src/saude-humana.js`, estilos em `src/saude-humana.css`. O build injeta o novo slide antes de montar os indicadores da navegação.
