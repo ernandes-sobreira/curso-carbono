@@ -53,3 +53,8 @@ Verificações que passaram:
 - Build reproduzível: `node build.mjs` passou e produziu `index.html` idêntico à versão publicada.
 
 **Pendente:** teste tátil em Chrome Android físico, Safari iOS e inspeção de FPS; os testes via Chromium não certificam performance nos dispositivos.
+
+
+## Experiência 9, saúde humana (19/10/2026)
+
+Adicionada **entre** a experiência 8 (ilha de calor) e os cenários. Teste automatizado em `test/visual_mobile.py` (Chromium em viewports 320 × 568, 393 × 852 e 1280 × 720) verifica cartões PM2,5, calor e CO₂, atualização da explicação ao toque, deslocamento entre ilha de calor, saúde e cenários. `test/browser_check.py` valida a navegação por todas as **12** experiências. `test/static.mjs` confere que a nova tela foi incorporada ao núcleo de navegação e preserva o HTML de saída. **Não é teste de aparelho Android/iOS físico.**
