@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102b39"><meta name="description" content="Construção coletiva de um mapa causal fuzzy do Pantanal, organizado por DPSIR.">
+<title>Pantanal Vivo • Laboratório DPSIR</title>
+<style>
+:root{--navy:#102b39;--navy2:#20485a;--ink:#213c4b;--muted:#687f8d;--line:#dce7e8;--soft:#f1f6f4;--bg:#f8f9f5;--white:#fff;--mint:#d1eee4;--teal:#1d846e;--coral:#c8664e;--shadow:0 14px 45px #14334210}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #75b8aa;outline-offset:2px}
+header{background:var(--navy);color:#fff;padding:14px clamp(16px,3vw,42px);display:flex;align-items:center;gap:17px;flex-wrap:wrap}.mark{display:grid;place-items:center;width:44px;height:44px;border:1px solid #7db6ad;border-radius:14px;font-size:25px;color:#b6efce}.brand{flex:1;min-width:210px}.brand b{font-size:22px;letter-spacing:-.6px}.brand small{display:block;color:#bbd6d7;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{border:1px solid #548079;background:#235061;color:#f4fff9;padding:8px 13px;border-radius:100px;font-size:12px}.topbtn{border-radius:9px;padding:10px 13px;background:#ffffff15;color:white;border:1px solid #ffffff35;font-weight:650}.topbtn.primary{color:var(--navy);background:#b9e8d2;border-color:#b9e8d2}.topbtn:hover{background:#ffffff32}
+main{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:18px;padding:18px;max-width:1850px;margin:0 auto}.workspace{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;min-width:0;display:flex;flex-direction:column;min-height:690px}.toolbar{padding:12px 16px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;border-bottom:1px solid var(--line)}.tabs{display:flex;gap:4px;background:#eff4f1;border-radius:10px;padding:4px}.tab{background:transparent;color:#4f6975;border-radius:8px;padding:9px 14px;font-weight:700}.tab.active{background:#fff;box-shadow:0 1px 7px #19313b13;color:var(--navy)}.toolbutton{border:1px solid var(--line);border-radius:9px;background:#fff;color:#3b5664;padding:9px 12px;font-weight:650}.toolbutton:hover,.toolbutton.active{border-color:#8bc0ae;background:#e9f7ef}.grow{flex:1}.stats{display:flex;gap:7px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #e8eeee}.stat{font-size:12px;border-radius:20px;background:#f0f5f4;padding:5px 10px;color:#4a6572}.stat strong{color:var(--navy);font-variant-numeric:tabular-nums}.view{display:none;position:relative;flex:1;min-height:510px}.view.active{display:block}#cy{position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,#f2faf4,#fff 60%);touch-action:none}.floatinfo{position:absolute;bottom:18px;left:18px;border:1px solid #dfe9e5;border-radius:13px;background:#fffffff0;box-shadow:0 7px 22px #12383d12;padding:10px 13px;max-width:min(400px,calc(100% - 36px));font-size:12px;color:#556f76}.legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:5px}.legend span{display:flex;align-items:center;gap:5px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%}#matrix,#dpsir{padding:20px;overflow:auto;max-height:74vh}.matrix-table{border-collapse:separate;border-spacing:2px;font-size:12px;white-space:nowrap}.matrix-table th{font-size:11px;background:#ecf4f0;color:#3e5967;position:sticky;top:0;z-index:1;padding:8px;max-width:130px;overflow:hidden;text-overflow:ellipsis}.matrix-table th.rowhead{position:sticky;left:0;z-index:2;max-width:160px}.matrix-table td{border:1px solid #ebeff0;border-radius:5px;min-width:44px;text-align:center;background:#f7f9f9;padding:7px 4px}.matrix-table td.positive{background:#b8e5d7;color:#105741;font-weight:800;cursor:pointer}.matrix-table td.negative{background:#f6d5cb;color:#993d27;font-weight:800;cursor:pointer}.matrix-table td.empty{cursor:pointer}.matrix-table td.empty:hover{background:#e2f1eb}.h2{font-size:21px;letter-spacing:-.6px;margin:0 0 6px;color:var(--navy)}.help{color:var(--muted);font-size:13px;margin:3px 0 13px}.columns{display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));gap:11px;margin:20px 0}.lane{background:#f6f8f7;border-radius:13px;min-height:280px;border-top:4px solid var(--lane);padding:10px}.lane h3{margin:4px 0;font-size:14px}.lane small{display:block;margin-bottom:13px;color:var(--muted);font-size:12px}.concept{display:block;text-align:left;width:100%;padding:10px 11px;background:#fff;margin:7px 0;border-radius:9px;border:1px solid #e1e8e8;color:var(--ink);font-weight:650;box-shadow:0 2px 4px #243c4010;overflow-wrap:anywhere}.concept:hover{border-color:var(--teal)}.pathlist{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px}.path{padding:11px;background:#f6f9f7;border-radius:9px;font-size:13px}
+aside{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{background:#fff;border:1px solid var(--line);box-shadow:0 5px 22px #12383808;border-radius:15px;padding:18px}.panel h2{font-size:17px;margin:0 0 4px;color:var(--navy);letter-spacing:-.2px}.eyebrow{font-weight:800;color:var(--teal);font-size:10px;text-transform:uppercase;letter-spacing:.15em;margin:0 0 5px}.subtle{font-size:12px;color:var(--muted);margin:0 0 12px}.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:12px;font-weight:750;color:#496370}.field input,.field select,.field textarea{border:1px solid #d7e3e3;border-radius:9px;background:#fff;color:var(--navy);padding:10px 11px;width:100%;min-height:42px}.field textarea{resize:vertical;min-height:65px}.buttons{display:flex;gap:8px;flex-wrap:wrap}.action{width:100%;background:var(--navy);color:#fff;padding:11px 13px;font-weight:760;border-radius:10px}.action:hover{background:#215269}.secondary{background:#e7f4ed;color:#20604d}.secondary:hover{background:#d5eadf}.danger{color:#ae4030;background:#fff0ec}.ghost{border:1px solid #d3e3e1;color:#395d61;background:#fff}.half{flex:1;min-width:115px}.ratio{display:flex;justify-content:space-between;align-items:center}.ratio output{font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums;font-size:19px}.field input[type=range]{accent-color:var(--teal);padding:0;min-height:27px}.inlinehint{font-size:12px;color:var(--muted)}.selected{background:#f1f8f4;border:1px solid #d4e6df;padding:10px;border-radius:9px;font-size:13px;margin-bottom:9px}.footer{padding:10px 20px 16px;text-align:center;color:var(--muted);font-size:11px}.statusline{font-size:12px;margin:6px 0 0;color:var(--teal)}.statusline.err{color:#b34935}.tag{display:inline-flex;align-items:center;background:#edf3f2;padding:3px 8px;border-radius:7px;font-size:11px;color:#4a6270;font-weight:750}.empty-state{padding:50px 20px;text-align:center;color:#7a8f91}.empty-state b{display:block;font-size:20px;color:var(--navy);margin-bottom:6px}.icon-ring{display:grid;place-items:center;margin:0 auto 15px;width:77px;height:77px;background:#e7f7eb;border-radius:50%;font-size:35px}dialog{border:1px solid #d5e4df;border-radius:19px;padding:0;width:min(440px,calc(100% - 30px));box-shadow:0 25px 90px #091f2677;color:var(--navy)}dialog::backdrop{background:#061d2780}.modalbody{padding:24px}.modalhead{display:flex;align-items:center;gap:8px;justify-content:space-between}.modalhead h2{margin:0}.close{background:#eff4f1;border-radius:9px;width:37px;height:37px;font-size:22px}#qrcode{display:flex;justify-content:center;margin:20px auto}#qrcode canvas,#qrcode img{max-width:100%;height:auto}.urltext{background:#eef5f1;padding:9px;border-radius:8px;font-size:11px;overflow-wrap:anywhere}.alert{background:#fff1e9;border:1px solid #f0d8c8;border-radius:10px;padding:10px;color:#93542e;font-size:13px;margin:12px 0}.tiny{font-size:11px;color:#7c919b}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#123745;color:#fff;border-radius:9px;padding:10px 16px;z-index:30;box-shadow:0 15px 40px #18292c44;max-width:90%;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}
+@media(max-width:1050px){main{grid-template-columns:minmax(0,1fr) 305px}.columns{grid-template-columns:repeat(3,minmax(160px,1fr))}.workspace{min-height:600px}}@media(max-width:760px){header{padding:12px 15px;gap:9px}.brand b{font-size:19px}.top-actions{width:100%}main{display:flex;flex-direction:column;padding:10px;gap:10px}aside{order:0;display:grid;grid-template-columns:1fr 1fr;align-items:start}.workspace{order:1;min-height:570px}.panel{padding:14px}.panel:first-child{grid-column:1/-1}.columns{grid-template-columns:repeat(2,minmax(130px,1fr))}.view{min-height:440px}.floatinfo{bottom:9px;left:9px;font-size:11px}.tabs .tab{padding:8px}.toolbar{padding:9px}.stats{padding:7px 10px}}@media(max-width:520px){aside{grid-template-columns:1fr}.panel:first-child{grid-column:auto}.workspace{min-height:490px}#cy{min-height:410px}.view{min-height:410px}.columns{grid-template-columns:1fr 1fr}.topbtn{font-size:12px}.brand small{font-size:10px}}
+@media print{header .top-actions,aside,.toolbar,.floatinfo,.footer{display:none}main{display:block}.workspace{border:0}.view{min-height:100vh}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+</head><body>
+<header><div class="mark" aria-hidden="true">✳</div><div class="brand"><small>III Semana Brasileira de Física Ambiental · Oficina colaborativa</small><b>Pantanal Vivo <span style="color:#a6e4cb">/</span> DPSIR</b></div><div class="top-actions">
+<span class="pill" id="connStatus">● conectando…</span><button class="topbtn primary" id="qrBtn">▦ Mostrar QR Code</button><button class="topbtn" id="fullscreenBtn">⛶ Tela cheia</button><button class="topbtn" id="downloadBtn">↓ Exportar</button><button class="topbtn" id="adminBtn" hidden>⋯ Facilitador</button>
+</div></header>
+<main><section class="workspace">
+<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-view="rede">✣ Rede</button><button class="tab" data-view="matriz">▦ Matriz fuzzy</button><button class="tab" data-view="dpsir">◫ DPSIR</button></div><span class="grow"></span><button class="toolbutton" id="fitBtn">Enquadrar</button><button class="toolbutton" id="layoutBtn">Organizar rede</button></div>
+<div class="stats"><span class="stat"><strong id="nNodes">0</strong> conceitos</span><span class="stat"><strong id="nEdges">0</strong> relações</span><span class="stat"><strong id="nAuthors">0</strong> contribuintes</span><span class="stat" id="lockLabel">Edição coletiva liberada</span></div>
+<div class="view active" id="rede"><div id="cy"></div><div class="floatinfo"><strong>Toque em dois conceitos para conectá-los.</strong><div>Arraste para reorganizar. Toque numa seta para editar sua força.</div><div class="legend"><span><i class="dot" style="background:#846cc0"></i>D</span><span><i class="dot" style="background:#da855e"></i>P</span><span><i class="dot" style="background:#4b95c1"></i>S</span><span><i class="dot" style="background:#bb6d93"></i>I</span><span><i class="dot" style="background:#43a381"></i>R</span><span style="color:#2b9172">→ +</span><span style="color:#bf6849">→ −</span></div></div></div>
+<div class="view" id="matriz"><h2 class="h2">Matriz de influência causal</h2><p class="help">Cada linha é a causa (origem), cada coluna é o efeito (destino). Coeficientes assinados de −1 a +1. Clique numa célula para criar ou ajustar a ligação.</p><div id="matrixContent"></div></div>
+<div class="view" id="dpsir"><h2 class="h2">Do conceito ao sistema socioecológico</h2><p class="help">D → P → S → I → R é uma estrutura analítica; as conexões podem ser transversais, retroalimentadas ou inversas.</p><div class="columns" id="lanes"></div><h2 class="h2" style="font-size:16px">Relações propostas pela turma</h2><div id="paths" class="pathlist"></div></div>
+</section>
+<aside>
+<div class="panel"><p class="eyebrow">01 · Compartilhar conhecimento</p><h2>Adicionar um conceito</h2><p class="subtle">Qual elemento ajuda a explicar o funcionamento ou a transformação do Pantanal?</p>
+<div class="field"><label for="author">Seu nome ou apelido</label><input id="author" placeholder="Participante" maxlength="40" autocomplete="nickname"></div>
+<form id="nodeForm"><div class="field"><label for="nodeLabel">Palavra ou expressão</label><input id="nodeLabel" maxlength="72" placeholder="Ex.: pulso de inundação" required minlength="2"></div>
+<div class="field"><label for="nodeCategory">Papel no modelo DPSIR</label><select id="nodeCategory"><option value="D">D · Força motriz (driver)</option><option value="P">P · Pressão</option><option value="S" selected>S · Estado</option><option value="I">I · Impacto</option><option value="R">R · Resposta</option></select></div>
+<button class="action" id="addNodeBtn" type="submit">+ Inserir na rede coletiva</button></form><p class="statusline" id="nodeHint" aria-live="polite"></p></div>
+<div class="panel"><p class="eyebrow">02 · Pensar causalmente</p><h2>Construir uma relação</h2><p class="subtle">Escolha causa e efeito, ou toque em dois nós da rede, nesta ordem.</p>
+<form id="edgeForm"><div class="field"><label for="source">Origem · o que influencia?</label><select id="source" required><option value="">Selecione um conceito</option></select></div>
+<div class="field"><label for="target">Destino · o que é influenciado?</label><select id="target" required><option value="">Selecione um conceito</option></select></div>
+<div class="field"><label for="weight">Força da relação</label><div class="ratio"><span class="inlinehint">fraca 0,01 — 1,00 forte</span><output id="weightValue">0,50</output></div><input id="weight" type="range" min="0.01" max="1" step="0.01" value="0.50"></div>
+<div class="field"><label for="sign">Efeito causal</label><select id="sign"><option value="1">+ Positivo · aumenta o destino</option><option value="-1">− Negativo · diminui o destino</option></select></div>
+<div class="field"><label for="edgeNote">Por quê? (opcional)</label><input id="edgeNote" maxlength="240" placeholder="Justificativa científica curta"></div>
+<div class="buttons"><button class="action half" id="saveEdgeBtn" type="submit">↗ Salvar ligação</button><button class="action half danger" id="deleteEdgeBtn" type="button" hidden>Remover ligação</button></div></form><p class="statusline" id="edgeHint" aria-live="polite"></p></div>
+<div class="panel"><p class="eyebrow">03 · Curadoria coletiva</p><h2>Editar o conceito escolhido</h2><div id="selectedText" class="selected">Toque em um nó da rede ou escolha-o na lista.</div>
+<div class="field"><label for="editNode">Conceito</label><select id="editNode"><option value="">Selecionar conceito</option></select></div><div class="field"><label for="editLabel">Texto exibido</label><input id="editLabel" maxlength="72" placeholder="Selecione um conceito"></div><div class="field"><label for="editCategory">Classificação</label><select id="editCategory"><option value="D">D · Força motriz</option><option value="P">P · Pressão</option><option value="S">S · Estado</option><option value="I">I · Impacto</option><option value="R">R · Resposta</option></select></div>
+<div class="buttons"><button class="action secondary half" id="editSaveBtn">Salvar edição</button><button class="action danger half" id="editDeleteBtn">Excluir conceito</button></div></div>
+<div class="panel"><p class="eyebrow">Nota metodológica</p><h2>Rede causal ≠ medida física</h2><p class="subtle">A matriz representa <b>hipóteses de influência construídas e ponderadas pela turma</b>, não correlações calculadas nem parâmetros calibrados. Forças assinadas permitem um primeiro mapa cognitivo fuzzy (FCM).</p>
+<div style="display:flex;gap:7px;flex-wrap:wrap"><span class="tag">D forças motrizes</span><span class="tag">P pressões</span><span class="tag">S estado</span><span class="tag">I impactos</span><span class="tag">R respostas</span></div></div>
+</aside></main>
+<div class="footer">Pantanal Vivo · Oficina de Física Ambiental · Construção coletiva de um mapa cognitivo causal e análise DPSIR · As contribuições ficam armazenadas nesta sala.</div>
+<dialog id="qrDialog"><div class="modalbody"><div class="modalhead"><h2>Entrar no Pantanal Vivo</h2><button class="close" data-close="qrDialog" aria-label="Fechar">×</button></div><p class="help">Aponte a câmera do celular. Todos entram na mesma sala, sem cadastro.</p><div id="qrcode"></div><p id="joinLink" class="urltext"></p><button class="action" id="copyJoin">Copiar link dos participantes</button><p class="tiny">Compartilhe somente este QR. O acesso de facilitador é separado.</p></div></dialog>
+<dialog id="exportDialog"><div class="modalbody"><div class="modalhead"><h2>Exportar o Pantanal coletivo</h2><button class="close" data-close="exportDialog" aria-label="Fechar">×</button></div><p class="help">Preserve as palavras, autorias, categorias DPSIR e pesos de influência.</p><div style="display:grid;gap:9px"><button class="action secondary" data-export="matrix">Matriz assinada (.csv)</button><button class="action secondary" data-export="edges">Lista de relações (.csv)</button><button class="action secondary" data-export="nodes">Conceitos e categorias (.csv)</button><button class="action secondary" data-export="json">Projeto completo (.json)</button><button class="action secondary" data-export="png">Imagem da rede (.png)</button></div></div></dialog>
+<dialog id="adminDialog"><div class="modalbody"><div class="modalhead"><h2>Facilitação da oficina</h2><button class="close" data-close="adminDialog" aria-label="Fechar">×</button></div><p class="help">Comandos exclusivos deste acesso. Os participantes podem adicionar, editar e excluir suas contribuições enquanto a sala estiver aberta.</p><div class="buttons"><button class="action secondary" id="lockBtn">Pausar edições</button><button class="action danger" id="clearBtn">Reiniciar a sala inteira</button></div><div class="alert">Reiniciar apaga permanentemente conceitos e ligações. Exporte antes de usar.</div></div></dialog>
+<div class="toast" role="status" id="toast"></div>
+<script>
+"use strict";
+(function(){
+ const SUPA="https://irofowthuhxczvgddblw.supabase.co";
+ const API=SUPA+"/functions/v1/pantdpsir";
+ const PUB="sb_publishable_UTz8ydh3SEY3yddJQYIMIw_3AMspCjP";
+ const params=new URLSearchParams(location.search);
+ const ROOM=params.get("room")||"";
+ const KEY=params.get("key")||"";
+ const ADMIN=params.get("admin")||"";
+ const isFacilitator=!!ADMIN;
+ const joinUrl=location.origin+location.pathname+"?room="+encodeURIComponent(ROOM)+"&key="+encodeURIComponent(KEY);
+ const $=id=>document.getElementById(id);
+ const cat={
+ D:{name:"Forças motrizes",detail:"Motores sociais e econômicos",color:"#846cc0"},
+ P:{name:"Pressões",detail:"Ações e processos de pressão",color:"#da855e"},
+ S:{name:"Estado",detail:"Condições do ambiente",color:"#4b95c1"},
+ I:{name:"Impactos",detail:"Efeitos no sistema e na sociedade",color:"#bb6d93"},
+ R:{name:"Respostas",detail:"Ações de gestão e sociedade",color:"#43a381"}
+ };
+ let nodes=[], edges=[], cy=null, channel=null, locked=false, loading=false, loaded=false, activeView="rede", renderSignature="", toastTimer=null, pendingRefresh=null, currentSelection="", online=false;
+ const stored=localStorage.getItem("pantdpsir-author")||"";
+ $("author").value=stored;
+ $("author").addEventListener("change",()=>localStorage.setItem("pantdpsir-author",$("author").value.trim().slice(0,40)));
+ if(isFacilitator)$("adminBtn").hidden=false;
+ function showToast(msg,error=false){const x=$("toast");x.textContent=msg;x.style.background=error?"#9b3e2f":"#123745";x.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>x.classList.remove("show"),3500)}
+ function message(id,txt,error=false){const el=$(id);el.textContent=txt;el.classList.toggle("err",error)}
+ function localeWeight(v){return Number(v).toFixed(2).replace(".",",")}
+ function errorText(e){return e?.message||String(e)||"Falha desconhecida"}
+ async function api(action,values={}){
+  const ctl=new AbortController(),timeout=setTimeout(()=>ctl.abort(),14000);
+  try{
+   const res=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json","apikey":PUB},body:JSON.stringify({action,room:ROOM,key:KEY,admin:ADMIN,author:$("author").value.trim()||"Participante",...values}),signal:ctl.signal,cache:"no-store"});
+   const json=await res.json();
+   if(!res.ok||!json.ok)throw new Error(json.error||"Falha no servidor.");
+   return json;
+  }catch(e){if(e.name==="AbortError")throw new Error("Servidor demorou para responder. Confira sua conexão.");throw e}finally{clearTimeout(timeout)}
+ }
+ function getNode(id){return nodes.find(n=>n.id===id)}
+ function getEdge(source,target){return edges.find(e=>e.source_id===source&&e.target_id===target)}
+ function triggerRefresh(){if(channel){try{channel.send({type:"broadcast",event:"update",payload:{time:Date.now()}})}catch(e){}}}
+ function queueLoad(delay=350){clearTimeout(pendingRefresh);pendingRefresh=setTimeout(()=>load(),delay)}
+ async function load(){
+  if(loading)return;
+  loading=true;
+  try{
+   const data=await api("load");
+   online=true; $("connStatus").textContent="● conectado ao vivo";
+   locked=!!data.locked;
+   const nextSignature=JSON.stringify([data.nodes,data.edges,locked]);
+   if(!loaded||nextSignature!==renderSignature){
+    nodes=data.nodes||[];edges=data.edges||[];
+    renderSignature=nextSignature;
+    updateAll();
+   }
+   loaded=true;
+   $("lockLabel").textContent=locked?"Edições pausadas":"Edição coletiva liberada";
+   const isBlocked=locked&&!isFacilitator;
+   ["addNodeBtn","saveEdgeBtn","deleteEdgeBtn","editSaveBtn","editDeleteBtn"].forEach(id=>$(id).disabled=isBlocked);
+   $("lockBtn").textContent=locked?"Liberar edições":"Pausar edições";
+  }catch(e){online=false;$("connStatus").textContent="● sem conexão"; if(!loaded)showToast(errorText(e),true);}
+  finally{loading=false}
+ }
+ function updateAll(){
+  $("nNodes").textContent=nodes.length;
+  $("nEdges").textContent=edges.length;
+  $("nAuthors").textContent=new Set(nodes.map(n=>n.created_by).concat(edges.map(e=>e.updated_by))).size;
+  const ids=["source","target","editNode"];
+  ids.forEach(id=>{const sel=$(id),selected=sel.value;sel.replaceChildren();const o=document.createElement("option");o.value="";o.textContent=id==="editNode"?"Selecionar conceito":"Selecione um conceito";sel.appendChild(o);
+   nodes.forEach(n=>{const op=document.createElement("option");op.value=n.id;op.textContent=n.category+" · "+n.label;sel.appendChild(op)});
+   if(nodes.some(n=>n.id===selected))sel.value=selected;
+  });
+  renderGraph();renderMatrix();renderDpsir();
+  if(currentSelection&&getNode(currentSelection))selectNode(currentSelection,false);
+ }
+ function initGraph(){
+  if(!window.cytoscape){$("cy").innerHTML='<div class="empty-state"><b>Rede indisponível</b>Verifique a internet e recarregue. A matriz e a classificação continuam disponíveis.</div>';return}
+  cy=cytoscape({container:$("cy"),elements:[],layout:{name:"preset"},minZoom:0.18,maxZoom:3,
+   wheelSensitivity:.25,
+   style:[
+    {selector:"node",style:{"background-color":ele=>cat[ele.data("category")]?.color||"#4b95c1","label":"data(label)","color":"#183644","font-family":"system-ui, sans-serif","font-size":13,"font-weight":700,"text-wrap":"wrap","text-max-width":"120px","text-valign":"bottom","text-margin-y":12,"text-outline-width":0,"width":ele=>Math.min(55,28+ele.connectedEdges().length*3),"height":ele=>Math.min(55,28+ele.connectedEdges().length*3),"border-width":3,"border-color":"#ffffff","shadow-blur":9,"shadow-opacity":.08,"shadow-color":"#1e4455","shadow-offset-y":3}},
+    {selector:"node:selected",style:{"border-width":5,"border-color":"#194758","background-color":"#e6c86d"}},
+    {selector:"edge",style:{"curve-style":"bezier","target-arrow-shape":"triangle","arrow-scale":1.08,"line-color":ele=>ele.data("sign")>0?"#4aaf91":"#da826c","target-arrow-color":ele=>ele.data("sign")>0?"#4aaf91":"#da826c","width":ele=>Math.max(1.7,Number(ele.data("weight"))*8),"opacity":.86,"label":ele=>((ele.data("sign")<0?"−":"+")+localeWeight(ele.data("weight"))),"font-size":10,"color":"#345465","text-background-opacity":.91,"text-background-color":"#fff","text-background-padding":"3px","text-background-shape":"roundrectangle","text-rotation":"autorotate","line-style":"solid"}},
+    {selector:"edge:selected",style:{"line-color":"#163b48","target-arrow-color":"#163b48","overlay-color":"#b8e7d9","overlay-opacity":.23,"overlay-padding":7}}
+   ]});
+  cy.on("tap","node",e=>{const id=e.target.id(),src=$("source").value;
+   if(src&&src!==id){$("target").value=id;existingEdge();showToast("Ligação selecionada. Ajuste o peso e salve.");}
+   else $("source").value=id;
+   selectNode(id,true);
+  });
+  cy.on("tap","edge",e=>{const d=e.target.data();$("source").value=d.source;$("target").value=d.target;existingEdge();showToast("Ligação selecionada para edição.");});
+  cy.on("dragfree","node",async e=>{
+   const id=e.target.id();const p=e.target.position();
+   try{await api("update_node",{id,x:p.x,y:p.y});triggerRefresh()}catch(err){showToast(errorText(err),true)}
+  });
+ }
+ function renderGraph(){
+  if(!cy)return;
+  const zoom=cy.zoom(),pan=cy.pan(),hasNodes=cy.nodes().length;
+  const list=nodes.map(n=>({group:"nodes",data:{id:n.id,label:n.label,category:n.category},position:{x:Number(n.pos_x)||0,y:Number(n.pos_y)||0}}));
+  edges.forEach(e=>{if(getNode(e.source_id)&&getNode(e.target_id))list.push({group:"edges",data:{id:e.id,source:e.source_id,target:e.target_id,weight:Number(e.weight),sign:Number(e.sign)}})});
+  cy.batch(()=>{cy.elements().remove();cy.add(list)});
+  if(!hasNodes&&nodes.length)cy.fit(65);else if(nodes.length){cy.zoom(zoom);cy.pan(pan)}
+  if(currentSelection&&cy.getElementById(currentSelection).length)cy.getElementById(currentSelection).select();
+ }
+ function selectNode(id,focus=false){
+  const n=getNode(id);if(!n)return;
+  currentSelection=id;$("editNode").value=id;$("editLabel").value=n.label;$("editCategory").value=n.category;
+  $("selectedText").textContent=n.label+" · "+cat[n.category].name+" · inserido por "+n.created_by;
+  if(cy&&focus){cy.nodes().unselect();const ele=cy.getElementById(id);if(ele.length)ele.select();}
+ }
+ function existingEdge(){
+  const edge=getEdge($("source").value,$("target").value);
+  $("deleteEdgeBtn").hidden=!edge;
+  if(edge){$("weight").value=String(edge.weight);$("weightValue").textContent=localeWeight(edge.weight);$("sign").value=String(edge.sign);$("edgeNote").value=edge.note||""}
+  else{$("edgeNote").value="";$("deleteEdgeBtn").hidden=true}
+ }
+ function renderMatrix(){
+  const root=$("matrixContent");
+  if(!nodes.length){root.innerHTML='<div class="empty-state"><span class="icon-ring">▦</span><b>A matriz nasce da primeira palavra</b>Convide a turma a contribuir.</div>';return}
+  const table=document.createElement("table");table.className="matrix-table";
+  const thead=document.createElement("thead");const head=document.createElement("tr"),corner=document.createElement("th");
+  corner.textContent="ORIGEM ↓ / DESTINO →";head.appendChild(corner);
+  nodes.forEach(n=>{const th=document.createElement("th");th.textContent=n.label;th.title=cat[n.category].name;head.appendChild(th)});thead.appendChild(head);table.appendChild(thead);
+  const tbody=document.createElement("tbody");
+  nodes.forEach(n=>{const tr=document.createElement("tr"),th=document.createElement("th");th.className="rowhead";th.textContent=n.label;tr.appendChild(th);
+   nodes.forEach(t=>{const td=document.createElement("td");if(n.id===t.id){td.textContent="—";}else{
+    const e=getEdge(n.id,t.id);td.className=e?(Number(e.sign)>0?"positive":"negative"):"empty";td.textContent=e?(Number(e.sign)>0?"+":"−")+localeWeight(e.weight):"·";
+    td.title=n.label+" → "+t.label;td.addEventListener("click",()=>{$("source").value=n.id;$("target").value=t.id;existingEdge();document.getElementById("edgeForm").scrollIntoView({behavior:"smooth",block:"center"});showToast("Edite a influência "+n.label+" → "+t.label);});
+   }tr.appendChild(td)});tbody.appendChild(tr)});
+  table.appendChild(tbody);root.replaceChildren(table);
+ }
+ function renderDpsir(){
+  const lanes=$("lanes");lanes.replaceChildren();
+  Object.entries(cat).forEach(([k,c])=>{const lane=document.createElement("div");lane.className="lane";lane.style.setProperty("--lane",c.color);const h=document.createElement("h3");h.textContent=k+" · "+c.name;const s=document.createElement("small");s.textContent=c.detail;lane.append(h,s);
+   nodes.filter(n=>n.category===k).forEach(n=>{const b=document.createElement("button");b.className="concept";b.textContent=n.label;b.addEventListener("click",()=>{selectNode(n.id,true);switchView("rede")});lane.appendChild(b)});lanes.appendChild(lane)});
+  const paths=$("paths");paths.replaceChildren();
+  if(!edges.length){const d=document.createElement("p");d.className="help";d.textContent="As relações surgirão aqui à medida que a turma ligar os conceitos.";paths.appendChild(d)}
+  edges.forEach(e=>{const a=getNode(e.source_id),b=getNode(e.target_id);if(!a||!b)return;const row=document.createElement("div");row.className="path";const strong=document.createElement("strong");strong.textContent=a.label+" → "+b.label+"  ("+(e.sign<0?"−":"+")+localeWeight(e.weight)+")";row.appendChild(strong);if(e.note){const why=document.createElement("div");why.textContent=e.note;row.appendChild(why)}paths.appendChild(row)});
+ }
+ function switchView(name){activeView=name;document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===name));document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id===name));if(name==="rede"&&cy)setTimeout(()=>{cy.resize();cy.fit(45)},60)}
+ document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>switchView(btn.dataset.view)));
+ $("nodeForm").addEventListener("submit",async e=>{e.preventDefault();const btn=$("addNodeBtn");btn.disabled=true;message("nodeHint","Enviando…");try{await api("add_node",{label:$("nodeLabel").value,category:$("nodeCategory").value});$("nodeLabel").value="";message("nodeHint","Conceito incorporado à rede!");triggerRefresh();await load()}catch(err){message("nodeHint",errorText(err),true)}finally{btn.disabled=locked&&!isFacilitator}});
+ $("edgeForm").addEventListener("submit",async e=>{e.preventDefault();const btn=$("saveEdgeBtn");if(!$("source").value||!$("target").value){message("edgeHint","Escolha origem e destino.",true);return}btn.disabled=true;message("edgeHint","Salvando…");try{await api("upsert_edge",{source:$("source").value,target:$("target").value,weight:Number($("weight").value),sign:Number($("sign").value),note:$("edgeNote").value});message("edgeHint","Ligação salva coletivamente!");triggerRefresh();await load();existingEdge()}catch(err){message("edgeHint",errorText(err),true)}finally{btn.disabled=locked&&!isFacilitator}});
+ $("deleteEdgeBtn").addEventListener("click",async()=>{if(!confirm("Remover esta relação do modelo coletivo?"))return;try{await api("delete_edge",{source:$("source").value,target:$("target").value});triggerRefresh();await load();existingEdge();showToast("Ligação removida.")}catch(e){showToast(errorText(e),true)}});
+ $("weight").addEventListener("input",()=>{$("weightValue").textContent=localeWeight($("weight").value)});
+ ["source","target"].forEach(id=>$(id).addEventListener("change",existingEdge));
+ $("editNode").addEventListener("change",()=>selectNode($("editNode").value,true));
+ $("editSaveBtn").addEventListener("click",async()=>{const id=$("editNode").value;if(!id)return showToast("Selecione um conceito.",true);try{await api("update_node",{id,label:$("editLabel").value,category:$("editCategory").value});triggerRefresh();await load();showToast("Conceito atualizado.")}catch(e){showToast(errorText(e),true)}});
+ $("editDeleteBtn").addEventListener("click",async()=>{const id=$("editNode").value;if(!id)return showToast("Selecione um conceito.",true);if(!confirm("Excluir o conceito e TODAS as ligações dele?"))return;try{await api("delete_node",{id});currentSelection="";$("editNode").value="";$("editLabel").value="";triggerRefresh();await load();showToast("Conceito excluído.")}catch(e){showToast(errorText(e),true)}});
+ $("layoutBtn").addEventListener("click",()=>{if(!cy||!nodes.length)return;cy.layout({name:"cose",animate:true,animationDuration:700,fit:true,padding:60,nodeRepulsion:900000,idealEdgeLength:160}).run();showToast("Posições reorganizadas nesta tela.")});
+ $("fitBtn").addEventListener("click",()=>{if(cy)cy.fit(55)});
+ $("fullscreenBtn").addEventListener("click",()=>{const elem=document.querySelector(".workspace");if(document.fullscreenElement)document.exitFullscreen();else if(elem.requestFullscreen)elem.requestFullscreen().catch(()=>showToast("Tela cheia indisponível.",true))});
+ function openDialog(id){$(id).showModal()}
+ document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>$(b.dataset.close).close()));
+ $("qrBtn").addEventListener("click",()=>{openDialog("qrDialog");$("joinLink").textContent=joinUrl;const target=$("qrcode");target.replaceChildren();if(window.QRCode){new QRCode(target,{text:joinUrl,width:270,height:270,colorDark:"#102b39",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M})}else{target.textContent="QR não disponível. Copie o link abaixo."}});
+ $("copyJoin").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(joinUrl);showToast("Link dos alunos copiado.")}catch(e){showToast("Selecione e copie o link exibido.",true)}});
+ $("downloadBtn").addEventListener("click",()=>openDialog("exportDialog"));
+ $("adminBtn").addEventListener("click",()=>openDialog("adminDialog"));
+ $("lockBtn").addEventListener("click",async()=>{try{await api("lock",{locked:!locked});triggerRefresh();await load();showToast(locked?"Turma pausada.":"Turma liberada.")}catch(e){showToast(errorText(e),true)}});
+ $("clearBtn").addEventListener("click",async()=>{if(!confirm("ATENÇÃO: apagar TODOS os conceitos e TODAS as ligações? Exporte antes."))return;if(!confirm("Confirmar reinício permanente desta oficina?"))return;try{await api("clear");triggerRefresh();await load();$("adminDialog").close();showToast("Sala reiniciada.")}catch(e){showToast(errorText(e),true)}});
+ function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}
+ function csv(rows){return "\ufeff"+rows.map(r=>r.map(csvCell).join(";")).join("\r\n")}
+ function download(filename,contents,type){const blob=new Blob([contents],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+ function exportKind(kind){
+  if(kind==="nodes")download("pantanal-conceitos.csv",csv([["ID","Conceito","Categoria","Autor","Última edição por"],...nodes.map(n=>[n.id,n.label,n.category,n.created_by,n.updated_by])]),"text/csv;charset=utf-8");
+  if(kind==="edges")download("pantanal-ligacoes.csv",csv([["Origem","Origem DPSIR","Destino","Destino DPSIR","Sinal","Intensidade","Peso assinado","Justificativa","Editado por"],...edges.map(e=>[getNode(e.source_id)?.label,getNode(e.source_id)?.category,getNode(e.target_id)?.label,getNode(e.target_id)?.category,e.sign,e.weight,Number(e.sign)*Number(e.weight),e.note,e.updated_by])]),"text/csv;charset=utf-8");
+  if(kind==="matrix")download("pantanal-matriz-assinada.csv",csv([["Origem \\ Destino",...nodes.map(n=>n.label)],...nodes.map(a=>[a.label,...nodes.map(b=>{const e=getEdge(a.id,b.id);return e?(Number(e.sign)*Number(e.weight)).toFixed(2):"0"})])]),"text/csv;charset=utf-8");
+  if(kind==="json")download("pantanal-dpsir-projeto.json",JSON.stringify({title:"Pantanal Vivo / DPSIR",exported_at:new Date().toISOString(),method:"Mapa cognitivo causal fuzzy não calibrado",nodes,edges},null,2),"application/json");
+  if(kind==="png"){if(!cy||!nodes.length)return showToast("Adicione conceitos à rede primeiro.",true);const a=document.createElement("a");a.href=cy.png({output:"base64uri",bg:"#ffffff",scale:2,full:true});a.download="pantanal-rede.png";a.click()}
+  showToast("Exportação preparada.");
+ }
+ document.querySelectorAll("[data-export]").forEach(b=>b.addEventListener("click",()=>exportKind(b.dataset.export)));
+ function live(){
+  if(!window.supabase){$("connStatus").title="Atualizações por verificação periódica";return}
+  try{
+   const sb=window.supabase.createClient(SUPA,PUB,{auth:{persistSession:false}});
+   channel=sb.channel("pantdpsir-"+ROOM).on("broadcast",{event:"update"},()=>queueLoad(250)).subscribe();
+  }catch(e){console.warn("Realtime indisponível",e)}
+ }
+ if(!ROOM||!KEY){$("connStatus").textContent="● link incompleto";showToast("Abra pelo link de convite ou QR Code fornecido pelo facilitador.",true);$("cy").innerHTML='<div class="empty-state"><span class="icon-ring">✳</span><b>Bem-vindo ao Pantanal Vivo</b>Use o link ou QR Code compartilhado pelo facilitador para participar da construção coletiva.</div>';}
+ else{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000);}
+})();
+</script></body></html>
