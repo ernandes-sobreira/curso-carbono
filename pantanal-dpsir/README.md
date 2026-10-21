@@ -9,7 +9,7 @@ Parte independente do repositório [curso-carbono](https://github.com/ernandes-s
 1. Facilitador abre seu link exclusivo com `admin` na projeção. Clica em **Mostrar QR Code**.
 2. Cada participante lê o QR pelo celular e entra na mesma sala. Não precisa criar conta.
 3. Cada pessoa introduz conceitos do Pantanal, associados a D, P, S, I ou R. Todos podem editar.
-4. Toque em **dois nós**, na ordem **causa → efeito**, ou escolha origem e destino nos menus. Defina sinal (+/−), intensidade (0,01–1) e justificativa.
+4. Toque em **dois nós**, na ordem **causa → efeito**, ou escolha origem e destino nos menus. Defina sinal (+/−), intensidade **de 0 a 100** (régua ou valor digitado) e justificativa. **Clicar numa seta** carrega os valores para editar ou excluir a relação. **Selecionar um conceito** permite corrigir o nome, a categoria ou removê-lo.
 5. Mostre a aba **Matriz fuzzy** para discutir a matriz de adjacência assinada e a aba **DPSIR** para discutir interpretações e feedbacks.
 6. Exporte os arquivos CSV (nós, ligações e matriz), JSON ou a imagem PNG. O facilitador pode **pausar edições** e **reiniciar** após confirmar.
 
@@ -21,7 +21,7 @@ S: estado do ambiente (e.g., nível d'água, estoque de carbono);
 I: impactos (e.g., alterações em emissões ou serviços ecossistêmicos);
 R: respostas (e.g., prevenção de incêndios e restauração).
 
-O grafo é **direcionado**: uma aresta A → B indica que A influencia B. O sinal **positivo (+)** aumenta B quando A aumenta, e **negativo (−)** reduz B quando A aumenta. A força representa uma *hipótese ordinal/sem quantitativo calibrado*, registrada em escala 0,01–1. A matriz exportada contém o produto do sinal pela intensidade (−1 a +1), como em um **mapa cognitivo fuzzy** inicial. Não confundir com correlação estatística, regressão, efeito causal estimado ou balanço quantitativo de gases.
+O grafo é **direcionado**: uma aresta A → B indica que A influencia B. O sinal **positivo (+)** aumenta B quando A aumenta, e **negativo (−)** reduz B quando A aumenta. A força representa uma *hipótese subjetiva não calibrada*, exibida na escala **0–100**; **0** indica nenhuma influência e **100**, a intensidade máxima atribuída. O sinal é escolhido separadamente: **+** representa influência direta e **−**, influência inversa. A matriz CSV contém o produto **sinal × intensidade** na escala **−100 a +100**. Internamente, os pesos são divididos por 100 para permitir formulações de **mapas cognitivos fuzzy** em −1 a +1. Uma ligação de peso zero continua registrável, distinta da ausência de ligação; é representada como linha cinza tracejada. Não confundir com correlação estatística, regressão, efeito causal estimado ou balanço quantitativo de gases.
 
 **Discussão orientadora:** quais relações são evidenciadas por literatura? Quais são controversas? Onde surgem retroalimentações? Quem sofre impactos e quem decide as respostas?
 
