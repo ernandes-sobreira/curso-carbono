@@ -2,11 +2,11 @@
 
 **Aplicativo público:** https://ernandes-sobreira.github.io/curso-carbono/pantanal-dpsir/
 
-Parte independente do repositório [curso-carbono](https://github.com/ernandes-sobreira/curso-carbono). A ferramenta depende de um **link de sala** gerado e entregue pelo facilitador, com parâmetros `room` e `key`. O link público sem parâmetros é apenas uma página de acolhimento. **Não publique chaves de salas ou o parâmetro `admin` no repositório.**
+Parte independente do repositório [curso-carbono](https://github.com/ernandes-sobreira/curso-carbono). O **endereço público sem parâmetros abre diretamente a sala colaborativa do minicurso**. O botão **QR Code** compartilha esse mesmo endereço simples. Todos com o link podem adicionar, editar e excluir os conceitos e relações enquanto a sala estiver aberta. Para usar os controles exclusivos, clique em **Facilitador** e forneça sua chave privada, ou entre por um link administrativo com `admin`. **Nunca publique a chave administrativa nem o parâmetro `admin` no repositório.** O convite público desta oficina não é uma barreira de autorização: não insira informações sensíveis.
 
 ## Em sala de aula
 
-1. Facilitador abre seu link exclusivo com `admin` na projeção. Clica em **Mostrar QR Code**.
+1. Facilitador abre o endereço principal. Se desejar controlar bloqueio/reinício, entra no menu **Facilitador** com sua chave privada (ou utiliza seu link administrativo). Clique em **QR Code** para projetar o convite público.
 2. Cada participante lê o QR pelo celular e entra na mesma sala. Não precisa criar conta.
 3. Cada pessoa introduz conceitos do Pantanal, associados a D, P, S, I ou R. Todos podem editar.
 4. Use **+ Conceito** (palavra e categoria) e **+ Ligação** (origem, destino, intensidade **de 0 a 100** por régua ou valor digitado, sinal +/− e justificativa opcional). Na rede, toque num conceito e use **Ligar a**, depois toque no destino. **Tocar numa seta** abre o painel contextual para editar ou excluir a ligação; tocar num conceito permite editar, ligar ou excluir. Na matriz, cada célula abre a ligação correspondente.
