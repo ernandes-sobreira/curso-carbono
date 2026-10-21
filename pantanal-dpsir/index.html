@@ -453,10 +453,10 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
   <button class="btn" data-export="png">Imagem da rede (.png)</button>
 </div></div></dialog>
 
-<dialog id="adminDialog"><div class="dbody"><div class="dhead"><h2>Facilitador</h2><button class="btn quiet icon" data-close="adminDialog" aria-label="Fechar"><svg><use href="#i-x"/></svg></button></div><p>Comandos exclusivos deste acesso.</p><div class="dstack">
-  <button class="btn" id="lockBtn">Pausar edições</button>
-  <button class="btn danger" id="clearBtn">Reiniciar a sala</button>
-</div><p class="note">Reiniciar apaga todos os conceitos e ligações. Exporte antes.</p></div></dialog>
+<dialog id="adminDialog"><div class="dbody"><div class="dhead"><h2>Facilitador</h2><button class="btn quiet icon" data-close="adminDialog" aria-label="Fechar"><svg><use href="#i-x"/></svg></button></div>
+<div id="adminLogin"><p>Informe a chave do professor para controlar a oficina.</p><div class="field"><label for="adminCode">Chave do facilitador</label><input type="password" id="adminCode" autocomplete="off" placeholder="Cole sua chave"></div><button class="btn primary" style="width:100%;margin-top:12px" id="activateAdmin">Entrar como facilitador</button><p class="note">Participantes não precisam dessa chave.</p></div>
+<div id="adminControls" hidden><p>Comandos exclusivos do facilitador.</p><div class="dstack"><button class="btn" id="lockBtn">Pausar edições</button><button class="btn danger" id="clearBtn">Reiniciar a sala</button></div><p class="note">Reiniciar apaga todos os conceitos e ligações. Exporte antes.</p><button class="btn quiet" id="adminLogout" style="margin-top:12px">Sair do modo facilitador</button></div>
+</div></dialog>
 
 <dialog id="confirmDialog"><div class="dbody"><div class="dhead"><h2 id="confirmTitle">Confirmar</h2></div><p id="confirmText"></p><div class="dfoot"><button class="btn" id="confirmNo">Cancelar</button><button class="btn danger" id="confirmYes">Excluir</button></div></div></dialog>
 
@@ -469,9 +469,16 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
  const API=SUPA+"/functions/v1/pantdpsir";
  const PUB="sb_publishable_UTz8ydh3SEY3yddJQYIMIw_3AMspCjP";
  const params=new URLSearchParams(location.search);
- const ROOM=params.get("room")||"", KEY=params.get("key")||"", ADMIN=params.get("admin")||"";
- const isFacilitator=!!ADMIN;
- const joinUrl=location.origin+location.pathname+"?room="+encodeURIComponent(ROOM)+"&key="+encodeURIComponent(KEY);
+ // Sala pública aberta para contribuições. A chave do facilitador não é publicada.
+ const DEFAULT_ROOM="fa06cb51-0894-4d37-9f58-397555a9cacb";
+ const DEFAULT_KEY="rrNGA2qnX8VkC70ZOJZNqFdsBFIo1erU";
+ const supplied=!!(params.get("room")&&params.get("key"));
+ const ROOM=supplied?params.get("room"):DEFAULT_ROOM;
+ const KEY=supplied?params.get("key"):DEFAULT_KEY;
+ const adminStore="pantdpsir-facilitador-"+ROOM;
+ let ADMIN=params.get("admin")||sessionStorage.getItem(adminStore)||"";
+ let isFacilitator=!!ADMIN;
+ const joinUrl=location.origin+location.pathname+(supplied&&ROOM!==DEFAULT_ROOM?"?room="+encodeURIComponent(ROOM)+"&key="+encodeURIComponent(KEY):"");
  const $=id=>document.getElementById(id);
  const cat={
   D:{name:"Forças motrizes",detail:"Processos sociais e econômicos",color:"#6E6AA6"},
@@ -519,6 +526,10 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
    const data=await api("load");
    setConn("on","ao vivo");
    locked=!!data.locked;
+   isFacilitator=!!data.admin;
+   if(isFacilitator&&ADMIN)sessionStorage.setItem(adminStore,ADMIN);
+   else if(ADMIN){ADMIN="";sessionStorage.removeItem(adminStore)}
+   updateAdminState();
    const sig=JSON.stringify([data.nodes,data.edges,locked]);
    if(!loaded||sig!==renderSignature){nodes=data.nodes||[];edges=data.edges||[];renderSignature=sig;updateAll()}
    loaded=true;
@@ -529,6 +540,11 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
   finally{loading=false}
  }
  function applyLock(){const b=!canEdit();["nodeSaveBtn","nodeDeleteBtn","saveEdgeBtn","deleteEdgeBtn","newNodeBtn","newEdgeBtn","dpsirNewNode","popEdit","popLink","popDelete"].forEach(id=>$(id).disabled=b)}
+ function updateAdminState(){
+  $("adminLogin").hidden=isFacilitator;
+  $("adminControls").hidden=!isFacilitator;
+  $("adminBtn").title=isFacilitator?"Facilitador ativo":"Ativar modo facilitador";
+ }
 
  /* render */
  function updateAll(){
@@ -741,7 +757,23 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
  $("qrBtn").addEventListener("click",()=>{$("qrDialog").showModal();$("joinLink").textContent=joinUrl;const t=$("qrcode");t.replaceChildren();if(window.QRCode)new QRCode(t,{text:joinUrl,width:240,height:240,colorDark:"#102B39",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});else t.textContent="QR indisponível. Copie o link."});
  $("copyJoin").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(joinUrl);toast("Link copiado.")}catch(e){toast("Selecione e copie o link exibido.",true)}});
  $("downloadBtn").addEventListener("click",()=>$("exportDialog").showModal());
- $("adminBtn").addEventListener("click",()=>$("adminDialog").showModal());
+ $("adminBtn").addEventListener("click",()=>{updateAdminState();$("adminDialog").showModal()});
+ $("activateAdmin").addEventListener("click",async()=>{
+  const secret=$("adminCode").value.trim();
+  if(!secret)return toast("Cole a chave do facilitador.",true);
+  const old=ADMIN;ADMIN=secret;
+  try{
+   const data=await api("load");
+   if(!data.admin)throw new Error("Chave do facilitador incorreta.");
+   isFacilitator=true;sessionStorage.setItem(adminStore,secret);$("adminCode").value="";
+   updateAdminState();applyLock();$("adminDialog").close();toast("Modo facilitador ativado.");
+  }catch(err){ADMIN=old;toast(errorText(err),true)}
+ });
+ $("adminCode").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("activateAdmin").click()}});
+ $("adminLogout").addEventListener("click",()=>{
+  ADMIN="";isFacilitator=false;sessionStorage.removeItem(adminStore);
+  updateAdminState();applyLock();$("adminDialog").close();toast("Modo participante ativo.");
+ });
  $("lockBtn").addEventListener("click",async()=>{try{await api("lock",{locked:!locked});triggerRefresh();await load();toast(locked?"Edições pausadas.":"Edições liberadas.")}catch(e){toast(errorText(e),true)}});
  $("clearBtn").addEventListener("click",async()=>{if(!await confirmDialog("Reiniciar a sala","Apagar todos os conceitos e ligações? Exporte antes.","Apagar tudo"))return;if(!await confirmDialog("Confirmar","Esta ação é permanente. Continuar?","Reiniciar"))return;
   try{await api("clear");triggerRefresh();await load();$("adminDialog").close();toast("Sala reiniciada.")}catch(e){toast(errorText(e),true)}});
@@ -765,9 +797,13 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
   if(!window.supabase){$("connStatus").title="Atualização por verificação periódica";return}
   try{const sb=window.supabase.createClient(SUPA,PUB,{auth:{persistSession:false}});channel=sb.channel("pantdpsir-"+ROOM).on("broadcast",{event:"update"},()=>queueLoad(250)).subscribe()}catch(e){console.warn("Realtime indisponível",e)}
  }
- if(isFacilitator)$("adminBtn").hidden=false;
- if(!ROOM||!KEY){setConn("off","link incompleto");$("welcome").hidden=false;["newNodeBtn","newEdgeBtn","dpsirNewNode"].forEach(id=>$(id).disabled=true)}
- else{window.addEventListener("DOMContentLoaded",()=>{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000)})}
+ $("adminBtn").hidden=false;
+ updateAdminState();
+ window.addEventListener("DOMContentLoaded",()=>{
+  $("welcome").hidden=true;
+  initGraph();live();load();
+  setInterval(()=>{if(!document.hidden)load()},7000);
+ });
 })();
 </script>
 </body>
