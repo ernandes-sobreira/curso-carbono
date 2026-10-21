@@ -1,55 +1,467 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#102b39"><meta name="description" content="Construção coletiva de um mapa causal fuzzy do Pantanal, organizado por DPSIR.">
-<title>Pantanal Vivo • Laboratório DPSIR</title>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F8F9F6">
+<meta name="description" content="Pantanal Vivo: laboratório coletivo de modelagem socioambiental do Pantanal, organizado por DPSIR, com matriz cognitiva fuzzy construída em sala.">
+<title>Pantanal Vivo · Laboratório DPSIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#102b39;--navy2:#20485a;--ink:#213c4b;--muted:#687f8d;--line:#dce7e8;--soft:#f1f6f4;--bg:#f8f9f5;--white:#fff;--mint:#d1eee4;--teal:#1d846e;--coral:#c8664e;--shadow:0 14px 45px #14334210}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #75b8aa;outline-offset:2px}
-header{background:var(--navy);color:#fff;padding:14px clamp(16px,3vw,42px);display:flex;align-items:center;gap:17px;flex-wrap:wrap}.mark{display:grid;place-items:center;width:44px;height:44px;border:1px solid #7db6ad;border-radius:14px;font-size:25px;color:#b6efce}.brand{flex:1;min-width:210px}.brand b{font-size:22px;letter-spacing:-.6px}.brand small{display:block;color:#bbd6d7;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{border:1px solid #548079;background:#235061;color:#f4fff9;padding:8px 13px;border-radius:100px;font-size:12px}.topbtn{border-radius:9px;padding:10px 13px;background:#ffffff15;color:white;border:1px solid #ffffff35;font-weight:650}.topbtn.primary{color:var(--navy);background:#b9e8d2;border-color:#b9e8d2}.topbtn:hover{background:#ffffff32}
-main{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:18px;padding:18px;max-width:1850px;margin:0 auto}.workspace{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;min-width:0;display:flex;flex-direction:column;min-height:690px}.toolbar{padding:12px 16px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;border-bottom:1px solid var(--line)}.tabs{display:flex;gap:4px;background:#eff4f1;border-radius:10px;padding:4px}.tab{background:transparent;color:#4f6975;border-radius:8px;padding:9px 14px;font-weight:700}.tab.active{background:#fff;box-shadow:0 1px 7px #19313b13;color:var(--navy)}.toolbutton{border:1px solid var(--line);border-radius:9px;background:#fff;color:#3b5664;padding:9px 12px;font-weight:650}.toolbutton:hover,.toolbutton.active{border-color:#8bc0ae;background:#e9f7ef}.grow{flex:1}.stats{display:flex;gap:7px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #e8eeee}.stat{font-size:12px;border-radius:20px;background:#f0f5f4;padding:5px 10px;color:#4a6572}.stat strong{color:var(--navy);font-variant-numeric:tabular-nums}.view{display:none;position:relative;flex:1;min-height:510px}.view.active{display:block}#cy{position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,#f2faf4,#fff 60%);touch-action:none}.floatinfo{position:absolute;bottom:18px;left:18px;border:1px solid #dfe9e5;border-radius:13px;background:#fffffff0;box-shadow:0 7px 22px #12383d12;padding:10px 13px;max-width:min(400px,calc(100% - 36px));font-size:12px;color:#556f76}.legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:5px}.legend span{display:flex;align-items:center;gap:5px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%}#matrix,#dpsir{padding:20px;overflow:auto;max-height:74vh}.matrix-table{border-collapse:separate;border-spacing:2px;font-size:12px;white-space:nowrap}.matrix-table th{font-size:11px;background:#ecf4f0;color:#3e5967;position:sticky;top:0;z-index:1;padding:8px;max-width:130px;overflow:hidden;text-overflow:ellipsis}.matrix-table th.rowhead{position:sticky;left:0;z-index:2;max-width:160px}.matrix-table td{border:1px solid #ebeff0;border-radius:5px;min-width:44px;text-align:center;background:#f7f9f9;padding:7px 4px}.matrix-table td.positive{background:#b8e5d7;color:#105741;font-weight:800;cursor:pointer}.matrix-table td.negative{background:#f6d5cb;color:#993d27;font-weight:800;cursor:pointer}.matrix-table td.empty{cursor:pointer}.matrix-table td.empty:hover{background:#e2f1eb}.h2{font-size:21px;letter-spacing:-.6px;margin:0 0 6px;color:var(--navy)}.help{color:var(--muted);font-size:13px;margin:3px 0 13px}.columns{display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));gap:11px;margin:20px 0}.lane{background:#f6f8f7;border-radius:13px;min-height:280px;border-top:4px solid var(--lane);padding:10px}.lane h3{margin:4px 0;font-size:14px}.lane small{display:block;margin-bottom:13px;color:var(--muted);font-size:12px}.concept{display:block;text-align:left;width:100%;padding:10px 11px;background:#fff;margin:7px 0;border-radius:9px;border:1px solid #e1e8e8;color:var(--ink);font-weight:650;box-shadow:0 2px 4px #243c4010;overflow-wrap:anywhere}.concept:hover{border-color:var(--teal)}.pathlist{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px}.path{padding:11px;background:#f6f9f7;border-radius:9px;font-size:13px}
-aside{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{background:#fff;border:1px solid var(--line);box-shadow:0 5px 22px #12383808;border-radius:15px;padding:18px}.panel h2{font-size:17px;margin:0 0 4px;color:var(--navy);letter-spacing:-.2px}.eyebrow{font-weight:800;color:var(--teal);font-size:10px;text-transform:uppercase;letter-spacing:.15em;margin:0 0 5px}.subtle{font-size:12px;color:var(--muted);margin:0 0 12px}.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:12px;font-weight:750;color:#496370}.field input,.field select,.field textarea{border:1px solid #d7e3e3;border-radius:9px;background:#fff;color:var(--navy);padding:10px 11px;width:100%;min-height:42px}.field textarea{resize:vertical;min-height:65px}.buttons{display:flex;gap:8px;flex-wrap:wrap}.action{width:100%;background:var(--navy);color:#fff;padding:11px 13px;font-weight:760;border-radius:10px}.action:hover{background:#215269}.secondary{background:#e7f4ed;color:#20604d}.secondary:hover{background:#d5eadf}.danger{color:#ae4030;background:#fff0ec}.ghost{border:1px solid #d3e3e1;color:#395d61;background:#fff}.half{flex:1;min-width:115px}.ratio{display:flex;justify-content:space-between;align-items:center}.ratio output{font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums;font-size:19px}.field input[type=range]{accent-color:var(--teal);padding:0;min-height:27px}.inlinehint{font-size:12px;color:var(--muted)}.selected{background:#f1f8f4;border:1px solid #d4e6df;padding:10px;border-radius:9px;font-size:13px;margin-bottom:9px}.footer{padding:10px 20px 16px;text-align:center;color:var(--muted);font-size:11px}.statusline{font-size:12px;margin:6px 0 0;color:var(--teal)}.statusline.err{color:#b34935}.tag{display:inline-flex;align-items:center;background:#edf3f2;padding:3px 8px;border-radius:7px;font-size:11px;color:#4a6270;font-weight:750}.empty-state{padding:50px 20px;text-align:center;color:#7a8f91}.empty-state b{display:block;font-size:20px;color:var(--navy);margin-bottom:6px}.icon-ring{display:grid;place-items:center;margin:0 auto 15px;width:77px;height:77px;background:#e7f7eb;border-radius:50%;font-size:35px}dialog{border:1px solid #d5e4df;border-radius:19px;padding:0;width:min(440px,calc(100% - 30px));box-shadow:0 25px 90px #091f2677;color:var(--navy)}dialog::backdrop{background:#061d2780}.modalbody{padding:24px}.modalhead{display:flex;align-items:center;gap:8px;justify-content:space-between}.modalhead h2{margin:0}.close{background:#eff4f1;border-radius:9px;width:37px;height:37px;font-size:22px}#qrcode{display:flex;justify-content:center;margin:20px auto}#qrcode canvas,#qrcode img{max-width:100%;height:auto}.urltext{background:#eef5f1;padding:9px;border-radius:8px;font-size:11px;overflow-wrap:anywhere}.alert{background:#fff1e9;border:1px solid #f0d8c8;border-radius:10px;padding:10px;color:#93542e;font-size:13px;margin:12px 0}.tiny{font-size:11px;color:#7c919b}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#123745;color:#fff;border-radius:9px;padding:10px 16px;z-index:30;box-shadow:0 15px 40px #18292c44;max-width:90%;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}
-@media(max-width:1050px){main{grid-template-columns:minmax(0,1fr) 305px}.columns{grid-template-columns:repeat(3,minmax(160px,1fr))}.workspace{min-height:600px}}@media(max-width:760px){header{padding:12px 15px;gap:9px}.brand b{font-size:19px}.top-actions{width:100%}main{display:flex;flex-direction:column;padding:10px;gap:10px}aside{display:contents}.workspace{order:1;min-height:570px}.panel{padding:14px}.panel:first-child{order:0}.panel:nth-child(2){order:2}.panel:nth-child(3){order:3}.panel:nth-child(4){order:4}.columns{grid-template-columns:repeat(2,minmax(130px,1fr))}.view{min-height:440px}.floatinfo{bottom:9px;left:9px;font-size:11px}.tabs .tab{padding:8px}.toolbar{padding:9px}.stats{padding:7px 10px}}@media(max-width:520px){aside{grid-template-columns:1fr}.panel:first-child{grid-column:auto}.workspace{min-height:490px}#cy{min-height:410px}.view{min-height:410px}.columns{grid-template-columns:1fr 1fr}.topbtn{font-size:12px}.brand small{font-size:10px}}
-@media print{header .top-actions,aside,.toolbar,.floatinfo,.footer{display:none}main{display:block}.workspace{border:0}.view{min-height:100vh}}
+:root{
+  --bg:#F8F9F6;--surface:#FFFFFF;--navy:#102B39;--navy-soft:#1E4256;--ink:#1F3340;--ink-2:#4A6170;--muted:#7C8F99;
+  --line:#E3E9E7;--line-2:#D2DDD9;--sage:#8FB8A6;--sage-soft:#E8F2EC;--teal:#2B8C76;--teal-soft:#DDEFE8;
+  --terra:#C4674D;--terra-soft:#F6E4DD;--amber:#C9955A;
+  --d:#6E6AA6;--p:#C9955A;--s:#4E8FB5;--i:#A8678A;--r:#5E9E86;
+  --radius:12px;--radius-s:8px;
+  --shadow-1:0 1px 2px rgba(16,43,57,.04),0 4px 14px rgba(16,43,57,.05);
+  --shadow-2:0 2px 6px rgba(16,43,57,.06),0 18px 40px rgba(16,43,57,.10);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --header-h:56px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;min-height:100dvh;overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+button:disabled{cursor:not-allowed;opacity:.45}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Header */
+.top{height:var(--header-h);flex:0 0 auto;display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--surface);border-bottom:1px solid var(--line);position:relative;z-index:20}
+.brand{display:flex;align-items:baseline;gap:8px;min-width:0;white-space:nowrap}
+.brand b{font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--navy)}
+.brand span{font-size:12px;color:var(--muted);font-weight:500}
+.nav{display:flex;gap:2px;margin:0 auto;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px}
+.nav button{padding:6px 14px;border-radius:999px;font-weight:500;font-size:13px;color:var(--ink-2);transition:background .18s var(--ease),color .18s var(--ease)}
+.nav button:hover{color:var(--navy)}
+.nav button[aria-selected=true]{background:var(--navy);color:#fff}
+.actions{display:flex;align-items:center;gap:6px}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);padding:0 8px;white-space:nowrap}
+.status i{width:7px;height:7px;border-radius:50%;background:#B9C5C9;transition:background .3s}
+.status.on i{background:var(--teal)}.status.off i{background:var(--terra)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 12px;border-radius:var(--radius-s);border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font-weight:500;font-size:13px;white-space:nowrap;transition:background .15s,border-color .15s,transform .15s var(--ease)}
+.btn:hover{background:var(--bg);border-color:#C2D0CA}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy-soft)}
+.btn.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.teal:hover{background:#246F5E}
+.btn.danger{color:#A24A33;border-color:#EBD2C9;background:#FFF8F5}
+.btn.danger:hover{background:var(--terra-soft)}
+.btn.quiet{border-color:transparent;background:transparent;color:var(--ink-2)}
+.btn.quiet:hover{background:var(--bg)}
+.btn.icon{width:34px;padding:0}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Stage */
+.stage{flex:1;position:relative;min-height:0}
+.view{position:absolute;inset:0;display:none}
+.view.active{display:block}
+#cy{position:absolute;inset:0;background:var(--bg);touch-action:none}
+.overlay{position:absolute;z-index:5;pointer-events:none}
+.overlay>*{pointer-events:auto}
+.chips{top:14px;left:16px;display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid var(--line);font-size:12px;color:var(--ink-2);backdrop-filter:blur(6px)}
+.chip b{font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.chip.warn{background:#FFF4EC;border-color:#F0D6C8;color:#9A4F32}
+.legend{bottom:14px;left:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid var(--line);font-size:11.5px;color:var(--ink-2);backdrop-filter:blur(6px)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.legend .ln{width:16px;height:2px;border-radius:2px;display:inline-block}
+.tools{bottom:14px;right:16px;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.tools .row{display:flex;gap:6px}
+.fab{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:999px;background:var(--navy);color:#fff;font-weight:600;font-size:13px;box-shadow:var(--shadow-2);transition:transform .15s var(--ease),background .15s}
+.fab:hover{background:var(--navy-soft);transform:translateY(-1px)}
+.fab.alt{background:var(--surface);color:var(--navy);border:1px solid var(--line-2);box-shadow:var(--shadow-1)}
+.fab.alt:hover{background:var(--bg)}
+.ctl{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:var(--radius-s);background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--ink-2);font-size:15px;transition:background .15s}
+.ctl:hover{background:#fff;color:var(--navy)}
+.ctl svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hint{top:14px;left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:999px;background:var(--navy);color:#fff;font-size:12px;box-shadow:var(--shadow-2);opacity:0;transition:opacity .2s;pointer-events:none}
+.hint.show{opacity:1}
+
+/* Node popover */
+.pop{position:absolute;z-index:8;min-width:200px;max-width:260px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-2);padding:10px 12px;transform-origin:top left;animation:pop .18s var(--ease)}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(-4px)}to{opacity:1;transform:none}}
+.pop .t{font-weight:600;color:var(--navy);font-size:13px;overflow-wrap:anywhere}
+.pop .m{font-size:11.5px;color:var(--muted);margin:2px 0 8px}
+.pop .m i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.pop .b{display:flex;gap:5px;flex-wrap:wrap}
+.pop .b .btn{height:30px;padding:0 10px;font-size:12px}
+
+/* Panel (drawer) */
+.panel{position:absolute;top:14px;right:16px;z-index:10;width:328px;max-height:calc(100% - 28px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-2);transform:translateX(16px);opacity:0;pointer-events:none;transition:transform .22s var(--ease),opacity .18s}
+.panel.open{transform:none;opacity:1;pointer-events:auto}
+.panel header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
+.panel h2{margin:0;font-size:15px;font-weight:600;color:var(--navy)}
+.panel .kicker{font-size:11px;color:var(--muted);margin-top:2px}
+.panel .body{padding:4px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:500;color:var(--ink-2);display:flex;justify-content:space-between;align-items:center}
+.field input[type=text],.field input[type=number],.field select,.field textarea{height:38px;border:1px solid var(--line-2);border-radius:var(--radius-s);background:var(--surface);padding:0 10px;width:100%;transition:border-color .15s,box-shadow .15s}
+.field textarea{height:auto;min-height:58px;padding:8px 10px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,140,118,.14)}
+.field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237C8F99' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;padding-top:22px}
+.row-link{display:grid;grid-template-columns:1fr 20px 1fr;gap:6px}
+.inten{display:grid;grid-template-columns:1fr 72px;gap:10px;align-items:center}
+.inten input[type=range]{width:100%;accent-color:var(--teal);height:28px;margin:0}
+.inten input[type=number]{text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-2);border-radius:var(--radius-s);overflow:hidden}
+.seg button{height:36px;font-weight:500;font-size:13px;color:var(--ink-2);transition:background .15s,color .15s}
+.seg button[aria-pressed=true].pos{background:var(--teal-soft);color:#1E6C5A}
+.seg button[aria-pressed=true].neg{background:var(--terra-soft);color:#9A4F32}
+.help-i{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--line-2);color:var(--muted);font-size:10px;font-weight:600;cursor:help}
+.panel .foot{display:flex;gap:8px;padding-top:4px}
+.panel .foot .btn{flex:1;height:38px}
+.msg{font-size:12px;color:var(--teal);min-height:16px}
+.msg.err{color:#A24A33}
+.who{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--line);background:var(--bg);border-radius:0 0 14px 14px;font-size:12px;color:var(--muted)}
+.who input{flex:1;height:30px;border:1px solid var(--line-2);border-radius:6px;padding:0 8px;background:#fff;font-size:12.5px}
+
+/* Pages (matrix, dpsir, about) */
+.page{position:absolute;inset:0;overflow:auto;padding:28px clamp(16px,4vw,48px) 60px}
+.page-in{max-width:1180px;margin:0 auto}
+@media(min-width:1000px){.stage.panel-open .page{padding-right:372px}}
+.page h1{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--navy)}
+.page .lead{margin:0 0 20px;color:var(--muted);font-size:13px}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.page-head .lead{margin:0}
+.empty{padding:56px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line-2);border-radius:var(--radius);background:var(--surface)}
+.empty b{display:block;color:var(--navy);font-weight:600;margin-bottom:4px;font-size:15px}
+
+.mwrap{overflow:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);max-height:calc(100dvh - 230px)}
+table.matrix{border-collapse:separate;border-spacing:0;font-size:12px;min-width:100%}
+table.matrix th{position:sticky;top:0;z-index:2;background:var(--surface);color:var(--ink-2);font-weight:500;padding:8px 6px;border-bottom:1px solid var(--line);max-width:120px;font-size:11.5px;vertical-align:bottom}
+table.matrix th.col span{display:block;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.matrix th.rh{position:sticky;left:0;z-index:3;text-align:left;border-right:1px solid var(--line);border-bottom:1px solid #F0F3F2;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px}
+table.matrix th.corner{z-index:4;left:0;text-align:left;padding:0 10px;color:var(--muted);font-weight:500}
+table.matrix td{padding:0;border-bottom:1px solid #F0F3F2;border-right:1px solid #F0F3F2;text-align:center}
+table.matrix td button{width:100%;min-width:52px;height:38px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);transition:box-shadow .15s;border-radius:0}
+table.matrix td button:hover{box-shadow:inset 0 0 0 2px var(--teal)}
+table.matrix td .none{color:#C9D3D0;font-weight:400}
+table.matrix td .zero{color:var(--muted);text-decoration:underline dotted}
+table.matrix td.self{background:#F3F5F4}
+.mlegend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--ink-2)}
+.mlegend .bar{display:inline-block;width:90px;height:10px;border-radius:5px;background:linear-gradient(90deg,#C4674D,#F6E4DD 50%,#DDEFE8 50%,#2B8C76);vertical-align:middle;margin:0 6px}
+
+.lanes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.lane{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;min-height:220px}
+.lane h3{margin:0;font-size:12.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:7px}
+.lane h3 i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.lane .n{margin-left:auto;font-weight:500;color:var(--muted);font-size:11.5px}
+.lane .d{font-size:11.5px;color:var(--muted);margin:3px 0 10px}
+.card{display:block;width:100%;text-align:left;padding:9px 10px;margin:6px 0;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--bg);font-weight:500;font-size:13px;color:var(--ink);overflow-wrap:anywhere;transition:border-color .15s,background .15s,transform .15s var(--ease)}
+.card:hover{border-color:var(--sage);background:#fff;transform:translateY(-1px)}
+.lane .add{width:100%;height:32px;border-radius:var(--radius-s);border:1px dashed var(--line-2);color:var(--muted);font-size:12px;margin-top:4px}
+.lane .add:hover{border-color:var(--sage);color:var(--teal)}
+.rels{margin-top:26px}
+.rels h2{font-size:14px;font-weight:600;color:var(--navy);margin:0 0 10px}
+.rel-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.rel{display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--surface);font-size:12.5px;transition:border-color .15s}
+.rel:hover{border-color:var(--sage)}
+.rel .r1{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-weight:500;color:var(--ink)}
+.rel .w{margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums;padding:1px 7px;border-radius:999px;font-size:11.5px}
+.rel .w.pos{background:var(--teal-soft);color:#1E6C5A}.rel .w.neg{background:var(--terra-soft);color:#9A4F32}.rel .w.zero{background:#EEF1F0;color:var(--muted)}
+.rel .r2{color:var(--muted);font-size:11.5px}
+
+.about{max-width:760px}
+.about details{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:8px;transition:box-shadow .2s}
+.about details[open]{box-shadow:var(--shadow-1)}
+.about summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:600;font-size:14px;color:var(--navy);display:flex;align-items:center;gap:10px}
+.about summary::-webkit-details-marker{display:none}
+.about summary .k{width:26px;height:26px;border-radius:7px;background:var(--sage-soft);color:var(--teal);display:inline-grid;place-items:center;font-size:12px;font-weight:600}
+.about summary::after{content:"+";margin-left:auto;color:var(--muted);font-weight:400;font-size:18px;transition:transform .2s var(--ease)}
+.about details[open] summary::after{transform:rotate(45deg)}
+.about .c{padding:0 16px 16px 52px;color:var(--ink-2);font-size:13.5px;line-height:1.65}
+.about .c p{margin:0 0 10px}
+.about .c ul{margin:0 0 10px;padding-left:18px}
+.about .c li{margin:3px 0}
+.about .c code{background:var(--bg);border:1px solid var(--line);padding:1px 5px;border-radius:4px;font-size:12px}
+.credits{margin-top:22px;padding:16px;border-radius:var(--radius);background:var(--navy);color:#DCE6E3;font-size:12.5px;line-height:1.6}
+.credits b{color:#fff;font-weight:600}
+.credits a{color:#BFE3D5}
+
+/* Welcome */
+.welcome{position:absolute;inset:0;display:grid;place-items:center;padding:24px}
+.welcome div{max-width:420px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-1)}
+.welcome h1{margin:0 0 6px;font-size:20px;color:var(--navy);font-weight:600}
+.welcome p{margin:0;color:var(--muted);font-size:13.5px}
+
+/* Dialogs */
+dialog{border:1px solid var(--line);border-radius:16px;padding:0;width:min(420px,calc(100% - 32px));box-shadow:var(--shadow-2);color:var(--ink);background:var(--surface)}
+dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
+.dbody{padding:22px 22px 20px}
+.dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.dhead h2{margin:0;font-size:16px;font-weight:600;color:var(--navy)}
+.dbody p{margin:0 0 14px;color:var(--ink-2);font-size:13px}
+.dstack{display:grid;gap:8px}
+.dstack .btn{height:40px;justify-content:flex-start}
+#qrcode{display:flex;justify-content:center;margin:8px auto 14px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;width:fit-content}
+#qrcode img,#qrcode canvas{display:block;max-width:100%;height:auto}
+.url{background:var(--bg);border:1px solid var(--line);padding:8px 10px;border-radius:8px;font-size:11px;color:var(--ink-2);overflow-wrap:anywhere;margin-bottom:10px}
+.note{font-size:11.5px;color:var(--muted);margin-top:10px}
+.dfoot{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,8px);background:var(--navy);color:#fff;border-radius:10px;padding:10px 16px;z-index:60;box-shadow:var(--shadow-2);max-width:min(92%,460px);font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:#9B4530}
+
+/* Presentation (fullscreen) */
+.present .panel{display:none}
+.present .nav button{font-size:14px;padding:7px 16px}
+.present .chip{font-size:13px;height:30px}
+.present .legend{font-size:13px}
+
+@media(max-width:900px){
+  .lanes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav button{padding:6px 10px}
+}
+@media(max-width:720px){
+  :root{--header-h:52px}
+  .top{padding:0 10px;gap:8px}
+  .brand span{display:none}
+  .status{padding:0 4px}.status .lbl{display:none}
+  .actions .btn .lbl{display:none}
+  .actions .btn{padding:0 9px}
+  .nav{order:3;width:100%;margin:0;justify-content:space-between;position:absolute;left:0;right:0;top:var(--header-h);border-radius:0;border-left:0;border-right:0;background:var(--surface);padding:4px 8px}
+  .nav button{flex:1;text-align:center;padding:7px 4px;font-size:13px}
+  .stage{margin-top:42px}
+  .chips{top:10px;left:10px}
+  .legend{display:none}
+  .tools{bottom:12px;right:12px}
+  .fab{height:40px}
+  .panel{top:auto;right:0;left:0;bottom:0;width:100%;max-height:72%;border-radius:16px 16px 0 0;transform:translateY(24px)}
+  .panel.open{transform:none}
+  .panel .body{padding-bottom:10px}
+  .page{padding:18px 14px 90px}
+  .lanes{grid-template-columns:1fr}
+  .lane{min-height:auto}
+  .mwrap{max-height:calc(100dvh - 240px)}
+  .pop{max-width:calc(100% - 20px)}
+  .about .c{padding-left:16px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script defer src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
-</head><body>
-<header><div class="mark" aria-hidden="true">✳</div><div class="brand"><small>III Semana Brasileira de Física Ambiental · Oficina colaborativa</small><b>Pantanal Vivo <span style="color:#a6e4cb">/</span> DPSIR</b></div><div class="top-actions">
-<span class="pill" id="connStatus">● conectando…</span><button class="topbtn primary" id="qrBtn">▦ Mostrar QR Code</button><button class="topbtn" id="fullscreenBtn">⛶ Tela cheia</button><button class="topbtn" id="downloadBtn">↓ Exportar</button><button class="topbtn" id="adminBtn" hidden>⋯ Facilitador</button>
-</div></header>
-<main><section class="workspace">
-<div class="toolbar"><div class="tabs" role="tablist"><button class="tab active" data-view="rede">✣ Rede</button><button class="tab" data-view="matriz">▦ Matriz fuzzy</button><button class="tab" data-view="dpsir">◫ DPSIR</button></div><span class="grow"></span><button class="toolbutton" id="fitBtn">Enquadrar</button><button class="toolbutton" id="layoutBtn">Organizar rede</button></div>
-<div class="stats"><span class="stat"><strong id="nNodes">0</strong> conceitos</span><span class="stat"><strong id="nEdges">0</strong> relações</span><span class="stat"><strong id="nAuthors">0</strong> contribuintes</span><span class="stat" id="lockLabel">Edição coletiva liberada</span></div>
-<div class="view active" id="rede"><div id="cy"></div><div class="floatinfo"><strong>Toque em dois conceitos para conectá-los.</strong><div>Arraste os conceitos. Toque numa seta para alterar força, sinal ou excluir.</div><div class="legend"><span><i class="dot" style="background:#846cc0"></i>D</span><span><i class="dot" style="background:#da855e"></i>P</span><span><i class="dot" style="background:#4b95c1"></i>S</span><span><i class="dot" style="background:#bb6d93"></i>I</span><span><i class="dot" style="background:#43a381"></i>R</span><span style="color:#2b9172">→ +</span><span style="color:#bf6849">→ −</span></div></div></div>
-<div class="view" id="matriz"><h2 class="h2">Matriz de influência causal</h2><p class="help">Cada linha é a causa (origem), cada coluna é o efeito (destino). Forças assinadas de −100 a +100. Clique numa célula para criar, editar ou excluir uma ligação. A matriz fuzzy também pode ser expressa de −1 a +1 dividindo estes valores por 100.</p><div id="matrixContent"></div></div>
-<div class="view" id="dpsir"><h2 class="h2">Do conceito ao sistema socioecológico</h2><p class="help">D → P → S → I → R é uma estrutura analítica; as conexões podem ser transversais, retroalimentadas ou inversas.</p><div class="columns" id="lanes"></div><h2 class="h2" style="font-size:16px">Relações propostas pela turma</h2><div id="paths" class="pathlist"></div></div>
-</section>
-<aside>
-<div class="panel"><p class="eyebrow">01 · Compartilhar conhecimento</p><h2>Adicionar um conceito</h2><p class="subtle">Qual elemento ajuda a explicar o funcionamento ou a transformação do Pantanal?</p>
-<div class="field"><label for="author">Seu nome ou apelido</label><input id="author" placeholder="Participante" maxlength="40" autocomplete="nickname"></div>
-<form id="nodeForm"><div class="field"><label for="nodeLabel">Palavra ou expressão</label><input id="nodeLabel" maxlength="72" placeholder="Ex.: pulso de inundação" required minlength="2"></div>
-<div class="field"><label for="nodeCategory">Papel no modelo DPSIR</label><select id="nodeCategory"><option value="D">D · Força motriz (driver)</option><option value="P">P · Pressão</option><option value="S" selected>S · Estado</option><option value="I">I · Impacto</option><option value="R">R · Resposta</option></select></div>
-<button class="action" id="addNodeBtn" type="submit">+ Inserir na rede coletiva</button></form><p class="statusline" id="nodeHint" aria-live="polite"></p></div>
-<div class="panel"><p class="eyebrow">02 · Pensar causalmente</p><h2>Construir uma relação</h2><p class="subtle">Escolha causa e efeito, ou toque em dois nós da rede, nesta ordem.</p>
-<form id="edgeForm"><div class="field"><label for="source">Origem · o que influencia?</label><select id="source" required><option value="">Selecione um conceito</option></select></div>
-<div class="field"><label for="target">Destino · o que é influenciado?</label><select id="target" required><option value="">Selecione um conceito</option></select></div>
-<div class="field"><label for="weight">Força da ligação · de 0 a 100</label><div class="ratio"><span class="inlinehint">0 nenhuma · 50 moderada · 100 máxima</span><output id="weightValue">50</output></div><input id="weight" type="range" min="0" max="100" step="1" value="50" aria-label="Força da ligação entre zero e cem">
-<div class="ratio" style="gap:9px"><span class="inlinehint">Digite um valor exato:</span><input id="weightNumber" type="number" min="0" max="100" step="1" value="50" style="width:100px;min-height:36px;text-align:center;font-weight:800" aria-label="Força numérica de zero a cem"></div></div>
-<div class="field"><label for="sign">Sinal da ligação</label><select id="sign"><option value="1">+ Positivo · aumenta o destino</option><option value="-1">− Negativo · diminui o destino</option></select><span class="inlinehint">Quando a origem aumenta, o destino aumenta (+) ou diminui (−). A direção é origem → destino.</span></div>
-<div class="field"><label for="edgeNote">Por quê? (opcional)</label><input id="edgeNote" maxlength="240" placeholder="Justificativa científica curta"></div>
-<div class="buttons"><button class="action half" id="saveEdgeBtn" type="submit">↗ Salvar ligação</button><button class="action half danger" id="deleteEdgeBtn" type="button" hidden>Remover ligação</button></div></form><p class="statusline" id="edgeHint" aria-live="polite"></p></div>
-<div class="panel"><p class="eyebrow">03 · Curadoria coletiva</p><h2>Editar o conceito escolhido</h2><div id="selectedText" class="selected">Toque em um nó da rede ou escolha-o na lista.</div>
-<div class="field"><label for="editNode">Conceito</label><select id="editNode"><option value="">Selecionar conceito</option></select></div><div class="field"><label for="editLabel">Texto exibido</label><input id="editLabel" maxlength="72" placeholder="Selecione um conceito"></div><div class="field"><label for="editCategory">Classificação</label><select id="editCategory"><option value="D">D · Força motriz</option><option value="P">P · Pressão</option><option value="S">S · Estado</option><option value="I">I · Impacto</option><option value="R">R · Resposta</option></select></div>
-<div class="buttons"><button class="action secondary half" id="editSaveBtn">Salvar edição</button><button class="action danger half" id="editDeleteBtn">Excluir conceito</button></div></div>
-<div class="panel"><p class="eyebrow">Nota metodológica</p><h2>Rede causal ≠ medida física</h2><p class="subtle">A matriz representa <b>hipóteses de influência construídas e ponderadas pela turma</b>, não correlações calculadas nem parâmetros calibrados. Use 0 a 100 para a intensidade e +/− para o sinal: no cálculo fuzzy, o peso é dividido por 100. Forças assinadas permitem um primeiro mapa cognitivo fuzzy (FCM).</p>
-<div style="display:flex;gap:7px;flex-wrap:wrap"><span class="tag">D forças motrizes</span><span class="tag">P pressões</span><span class="tag">S estado</span><span class="tag">I impactos</span><span class="tag">R respostas</span></div></div>
-</aside></main>
-<div class="footer">Pantanal Vivo · Oficina de Física Ambiental · Construção coletiva de um mapa cognitivo causal e análise DPSIR · As contribuições ficam armazenadas nesta sala.</div>
-<dialog id="qrDialog"><div class="modalbody"><div class="modalhead"><h2>Entrar no Pantanal Vivo</h2><button class="close" data-close="qrDialog" aria-label="Fechar">×</button></div><p class="help">Aponte a câmera do celular. Todos entram na mesma sala, sem cadastro.</p><div id="qrcode"></div><p id="joinLink" class="urltext"></p><button class="action" id="copyJoin">Copiar link dos participantes</button><p class="tiny">Compartilhe somente este QR. O acesso de facilitador é separado.</p></div></dialog>
-<dialog id="exportDialog"><div class="modalbody"><div class="modalhead"><h2>Exportar o Pantanal coletivo</h2><button class="close" data-close="exportDialog" aria-label="Fechar">×</button></div><p class="help">Preserve as palavras, autorias, categorias DPSIR e pesos de influência.</p><div style="display:grid;gap:9px"><button class="action secondary" data-export="matrix">Matriz assinada (.csv)</button><button class="action secondary" data-export="edges">Lista de relações (.csv)</button><button class="action secondary" data-export="nodes">Conceitos e categorias (.csv)</button><button class="action secondary" data-export="json">Projeto completo (.json)</button><button class="action secondary" data-export="png">Imagem da rede (.png)</button></div></div></dialog>
-<dialog id="adminDialog"><div class="modalbody"><div class="modalhead"><h2>Facilitação da oficina</h2><button class="close" data-close="adminDialog" aria-label="Fechar">×</button></div><p class="help">Comandos exclusivos deste acesso. Os participantes podem adicionar, editar e excluir suas contribuições enquanto a sala estiver aberta.</p><div class="buttons"><button class="action secondary" id="lockBtn">Pausar edições</button><button class="action danger" id="clearBtn">Reiniciar a sala inteira</button></div><div class="alert">Reiniciar apaga permanentemente conceitos e ligações. Exporte antes de usar.</div></div></dialog>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v1M17 20h4M14 20h1"/></symbol>
+  <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M4 15v5h5M20 15v5h-5"/><circle cx="12" cy="12" r="2.5"/></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="18" r="2.5"/><path d="M8.4 6.6l7.2 1M7.2 15.8l-.5-7.3M11.3 17.2l5.2-7.4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9M14 9.5l2.5 2.5-2.5 2.5"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="brand"><b>Pantanal Vivo</b><span>Laboratório DPSIR</span></div>
+  <nav class="nav" role="tablist" aria-label="Seções">
+    <button role="tab" aria-selected="true" data-view="rede" id="tab-rede">Rede</button>
+    <button role="tab" aria-selected="false" data-view="matriz" id="tab-matriz">Matriz</button>
+    <button role="tab" aria-selected="false" data-view="dpsir" id="tab-dpsir">DPSIR</button>
+    <button role="tab" aria-selected="false" data-view="sobre" id="tab-sobre">Sobre</button>
+  </nav>
+  <div class="actions">
+    <span class="status" id="connStatus" title="Estado da conexão"><i></i><span class="lbl">conectando</span></span>
+    <button class="btn" id="qrBtn" title="QR Code de entrada"><svg><use href="#i-qr"/></svg><span class="lbl">QR Code</span></button>
+    <button class="btn" id="fullscreenBtn" title="Modo apresentação"><svg><use href="#i-full"/></svg><span class="lbl">Apresentar</span></button>
+    <button class="btn" id="downloadBtn" title="Exportar dados"><svg><use href="#i-down"/></svg><span class="lbl">Exportar</span></button>
+    <button class="btn" id="adminBtn" hidden title="Controles do facilitador"><svg><use href="#i-more"/></svg><span class="lbl">Facilitador</span></button>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+  <!-- REDE -->
+  <section class="view active" id="rede" role="tabpanel" aria-labelledby="tab-rede">
+    <div id="cy" aria-label="Rede causal do Pantanal"></div>
+    <div class="overlay chips">
+      <span class="chip"><b id="nNodes">0</b> conceitos</span>
+      <span class="chip"><b id="nEdges">0</b> ligações</span>
+      <span class="chip"><b id="nAuthors">0</b> pessoas</span>
+      <span class="chip warn" id="lockChip" hidden>Edições pausadas</span>
+    </div>
+    <div class="overlay hint" id="hint" aria-live="polite"></div>
+    <div class="overlay legend" id="legend">
+      <span><i style="background:var(--d)"></i>D</span><span><i style="background:var(--p)"></i>P</span><span><i style="background:var(--s)"></i>S</span><span><i style="background:var(--i)"></i>I</span><span><i style="background:var(--r)"></i>R</span>
+      <span><i class="ln" style="background:var(--teal)"></i>+</span><span><i class="ln" style="background:var(--terra)"></i>−</span><span><i class="ln" style="background:#B9C5C9;background-image:repeating-linear-gradient(90deg,#B9C5C9 0 3px,transparent 3px 6px)"></i>0</span>
+    </div>
+    <div class="overlay tools">
+      <div class="row">
+        <button class="ctl" id="zoomIn" title="Aproximar" aria-label="Aproximar"><svg><use href="#i-plus"/></svg></button>
+        <button class="ctl" id="zoomOut" title="Afastar" aria-label="Afastar"><svg><use href="#i-minus"/></svg></button>
+        <button class="ctl" id="fitBtn" title="Centralizar" aria-label="Centralizar"><svg><use href="#i-fit"/></svg></button>
+        <button class="ctl" id="layoutBtn" title="Organizar" aria-label="Organizar"><svg><use href="#i-layout"/></svg></button>
+      </div>
+      <div class="row">
+        <button class="fab alt" id="newEdgeBtn"><svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8"><use href="#i-link"/></svg>Ligação</button>
+        <button class="fab" id="newNodeBtn"><svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><use href="#i-plus"/></svg>Conceito</button>
+      </div>
+    </div>
+    <div class="pop" id="nodePop" hidden role="dialog" aria-label="Conceito selecionado">
+      <div class="t" id="popTitle"></div>
+      <div class="m" id="popMeta"></div>
+      <div class="b">
+        <button class="btn" id="popEdit">Editar</button>
+        <button class="btn" id="popLink">Ligar a</button>
+        <button class="btn danger" id="popDelete">Excluir</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATRIZ -->
+  <section class="view" id="matriz" role="tabpanel" aria-labelledby="tab-matriz">
+    <div class="page"><div class="page-in">
+      <div class="page-head">
+        <div><h1>Matriz de influência</h1><p class="lead">Linhas são origens, colunas são destinos. Valores assinados de −100 a +100. Clique numa célula para criar, editar ou excluir a ligação.</p></div>
+        <button class="btn" data-export="matrix"><svg><use href="#i-down"/></svg>CSV</button>
+      </div>
+      <div id="matrixContent"></div>
+      <div class="mlegend"><span>−100</span><span class="bar"></span><span>+100</span><span style="margin-left:10px"><u style="text-decoration:underline dotted">0</u> ligação registrada com intensidade zero</span><span style="color:#C9D3D0">·</span><span>sem ligação</span></div>
+    </div></div>
+  </section>
+
+  <!-- DPSIR -->
+  <section class="view" id="dpsir" role="tabpanel" aria-labelledby="tab-dpsir">
+    <div class="page"><div class="page-in">
+      <div class="page-head">
+        <div><h1>Estrutura DPSIR</h1><p class="lead">Forças motrizes, pressões, estado, impactos e respostas. As ligações podem cruzar colunas em qualquer direção e formar ciclos.</p></div>
+        <button class="btn primary" id="dpsirNewNode"><svg><use href="#i-plus"/></svg>Conceito</button>
+      </div>
+      <div class="lanes" id="lanes"></div>
+      <div class="rels"><h2>Ligações</h2><div class="rel-list" id="paths"></div></div>
+    </div></div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="view" id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
+    <div class="page"><div class="page-in about">
+      <h1>Sobre o Pantanal Vivo</h1>
+      <p class="lead">Guia breve da atividade e do método.</p>
+
+      <details open><summary><span class="k">1</span>O que é o Pantanal Vivo?</summary><div class="c">
+        <p>Um laboratório coletivo de modelagem socioambiental. A turma constrói, em tempo real, um mapa causal do Pantanal: cada pessoa propõe conceitos (clima, pulso de inundação, pecuária, fogo, carbono, políticas públicas) e ligações entre eles. O resultado é uma rede compartilhada que organiza hipóteses sobre como o sistema funciona e se transforma.</p>
+        <p>A plataforma não calcula nada sobre o Pantanal real. Ela registra o raciocínio do grupo de forma estruturada, para discussão, comparação e exportação.</p>
+      </div></details>
+
+      <details><summary><span class="k">2</span>Como participar?</summary><div class="c">
+        <ul>
+          <li>Entre pelo QR Code ou link da sala. Não há cadastro; um apelido é opcional.</li>
+          <li><b>Conceito</b>: escreva uma palavra ou expressão e escolha a categoria DPSIR.</li>
+          <li><b>Ligação</b>: escolha origem, destino, intensidade (0 a 100), sinal (+ ou −) e, se quiser, uma justificativa. Na rede, selecione um conceito e use <b>Ligar a</b>, depois toque no destino.</li>
+          <li>Toque em qualquer conceito ou seta para editar ou excluir. Arraste os conceitos para reorganizar; a posição é compartilhada.</li>
+          <li>Todas as pessoas veem as mudanças em poucos segundos. O facilitador pode pausar as edições durante a discussão.</li>
+        </ul>
+      </div></details>
+
+      <details><summary><span class="k">3</span>O que é DPSIR?</summary><div class="c">
+        <p>DPSIR é um arcabouço analítico usado pela Agência Europeia do Ambiente para organizar relações entre sociedade e ambiente em cinco categorias:</p>
+        <ul>
+          <li><b>D · Forças motrizes</b>: processos sociais e econômicos amplos, como demanda por carne, expansão agrícola ou mudança climática.</li>
+          <li><b>P · Pressões</b>: ações diretas sobre o ambiente, como desmatamento, uso do fogo ou alteração de rios.</li>
+          <li><b>S · Estado</b>: condições do sistema, como nível da água, cobertura vegetal ou estoque de carbono.</li>
+          <li><b>I · Impactos</b>: consequências para ecossistemas e pessoas, como perda de biodiversidade, fumaça ou perda de renda.</li>
+          <li><b>R · Respostas</b>: medidas de gestão e política, como brigadas, restauração, fiscalização ou pagamento por serviços ambientais.</li>
+        </ul>
+        <p>A sequência D, P, S, I, R é didática. No sistema real as relações são transversais: respostas alteram pressões, impactos retroalimentam forças motrizes, e ciclos de reforço ou amortecimento aparecem. A plataforma permite ligações em qualquer direção justamente para capturar isso.</p>
+      </div></details>
+
+      <details><summary><span class="k">4</span>Como interpretar as ligações?</summary><div class="c">
+        <p>Cada seta A → B significa que A influencia B. O <b>sinal</b> indica o sentido da influência: positivo (+) quando o aumento de A tende a aumentar B; negativo (−) quando o aumento de A tende a reduzir B.</p>
+        <p>Sinal positivo não quer dizer efeito bom. "Fogo → emissões de CO<sub>2</sub>" é uma ligação positiva e ambientalmente ruim. "Brigadas → área queimada" é negativa e desejável. Sinal é direção matemática, não juízo de valor.</p>
+        <p>A <b>intensidade</b> vai de 0 a 100 e expressa quão forte o grupo acredita que a influência seja. Uma ligação com intensidade 0 é diferente de nenhuma ligação: ela registra que a relação foi considerada e julgada nula, o que também é informação. Na rede, ela aparece como linha cinza tracejada; na matriz, como 0 sublinhado.</p>
+      </div></details>
+
+      <details><summary><span class="k">5</span>O que é uma matriz cognitiva fuzzy?</summary><div class="c">
+        <p>Um mapa cognitivo fuzzy (FCM) é um grafo direcionado em que os nós são conceitos e as arestas carregam pesos entre −1 e +1, representando a força e o sentido da influência causal. A matriz de adjacência assinada reúne todos esses pesos: cada linha é uma origem e cada coluna um destino.</p>
+        <p>Aqui a turma trabalha na escala 0 a 100 com sinal separado, mais intuitiva. Internamente e nas exportações, o peso fuzzy é <code>sinal × intensidade / 100</code>, o que dá a escala −1 a +1 usada nas formulações clássicas de FCM. A matriz exportada em CSV traz o produto sinal × intensidade, de −100 a +100.</p>
+        <p>Com essa matriz é possível, fora da plataforma, simular como uma perturbação em um conceito se propaga pela rede, identificar conceitos centrais e comparar mapas de grupos diferentes.</p>
+      </div></details>
+
+      <details><summary><span class="k">6</span>Limitações metodológicas</summary><div class="c">
+        <ul>
+          <li>Os pesos são hipóteses subjetivas da turma, não medidas físicas, correlações estatísticas ou efeitos causais estimados.</li>
+          <li>A matriz não está calibrada. Dois grupos podem produzir mapas diferentes e ambos são válidos como registro de percepção.</li>
+          <li>O modelo é estático: não representa atrasos, limiares, sazonalidade ou não linearidades do Pantanal.</li>
+          <li>As categorias DPSIR são uma simplificação. Um mesmo conceito pode caber em mais de uma categoria dependendo da escala de análise.</li>
+          <li>Qualquer pessoa com o link da sala pode editar. O facilitador deve exportar os dados ao final e revisar antes de usar o mapa em outro contexto.</li>
+        </ul>
+      </div></details>
+
+      <div class="credits">
+        <b>Minicurso de Física Ambiental</b> · III Semana Brasileira de Física Ambiental<br>
+        Desenvolvido por <b>Ernandes Sobreira</b>, Universidade do Estado de Mato Grosso (UNEMAT), Cáceres.<br>
+        Código aberto em <a href="https://github.com/ernandes-sobreira/curso-carbono" target="_blank" rel="noopener">github.com/ernandes-sobreira/curso-carbono</a>.
+      </div>
+    </div></div>
+  </section>
+
+  <!-- PAINEL CONTEXTUAL -->
+  <aside class="panel" id="panel" role="dialog" aria-labelledby="panelTitle" aria-hidden="true">
+    <header><div><h2 id="panelTitle">Novo conceito</h2><div class="kicker" id="panelKicker"></div></div><button class="btn quiet icon" id="panelClose" aria-label="Fechar painel"><svg><use href="#i-x"/></svg></button></header>
+
+    <form class="body" id="nodeForm" hidden>
+      <div class="field"><label for="nodeLabel">Palavra ou expressão</label><input type="text" id="nodeLabel" maxlength="72" minlength="2" required placeholder="Ex.: pulso de inundação" autocomplete="off"></div>
+      <div class="field"><label for="nodeCategory">Categoria DPSIR</label><select id="nodeCategory">
+        <option value="D">D · Força motriz</option><option value="P">P · Pressão</option><option value="S" selected>S · Estado</option><option value="I">I · Impacto</option><option value="R">R · Resposta</option></select></div>
+      <div class="msg" id="nodeMsg" aria-live="polite"></div>
+      <div class="foot"><button class="btn danger" type="button" id="nodeDeleteBtn" hidden>Excluir</button><button class="btn primary" type="submit" id="nodeSaveBtn">Salvar</button></div>
+    </form>
+
+    <form class="body" id="edgeForm" hidden>
+      <div class="row-link">
+        <div class="field"><label for="source">Origem</label><select id="source" required><option value="">Escolher</option></select></div>
+        <div class="arrow">→</div>
+        <div class="field"><label for="target">Destino</label><select id="target" required><option value="">Escolher</option></select></div>
+      </div>
+      <div class="field"><label for="weight">Intensidade <span class="help-i" title="0 nenhuma influência, 100 influência máxima. Zero registra uma relação considerada nula, diferente de não haver ligação.">?</span></label>
+        <div class="inten"><input type="range" id="weight" min="0" max="100" step="1" value="50" aria-label="Intensidade de 0 a 100"><input type="number" id="weightNumber" min="0" max="100" step="1" value="50" aria-label="Intensidade numérica"></div></div>
+      <div class="field"><label>Sinal <span class="help-i" title="Positivo: quando a origem aumenta, o destino tende a aumentar. Negativo: o destino tende a diminuir. Não indica se o efeito é bom ou ruim.">?</span></label>
+        <div class="seg" role="group" aria-label="Sinal da ligação"><button type="button" class="pos" id="signPos" aria-pressed="true">+ aumenta</button><button type="button" class="neg" id="signNeg" aria-pressed="false">− diminui</button></div>
+        <input type="hidden" id="sign" value="1"></div>
+      <div class="field"><label for="edgeNote">Justificativa <span style="color:var(--muted);font-weight:400">opcional</span></label><textarea id="edgeNote" maxlength="240" placeholder="Por que esta relação existe?"></textarea></div>
+      <div class="msg" id="edgeMsg" aria-live="polite"></div>
+      <div class="foot"><button class="btn danger" type="button" id="deleteEdgeBtn" hidden>Excluir</button><button class="btn primary" type="submit" id="saveEdgeBtn">Salvar</button></div>
+    </form>
+
+    <div class="who"><label for="author">Seu nome</label><input type="text" id="author" maxlength="40" placeholder="opcional" autocomplete="nickname"></div>
+  </aside>
+
+  <div class="welcome" id="welcome" hidden><div><h1>Pantanal Vivo</h1><p>Entre pelo link ou QR Code fornecido pelo facilitador para participar da construção coletiva.</p></div></div>
+</main>
+
+<dialog id="qrDialog"><div class="dbody"><div class="dhead"><h2>Entrar na sala</h2><button class="btn quiet icon" data-close="qrDialog" aria-label="Fechar"><svg><use href="#i-x"/></svg></button></div><p>Aponte a câmera do celular. Todos entram na mesma sala, sem cadastro.</p><div id="qrcode"></div><div class="url" id="joinLink"></div><button class="btn primary" id="copyJoin" style="width:100%">Copiar link</button><p class="note">Compartilhe apenas este link. O acesso de facilitador é separado.</p></div></dialog>
+
+<dialog id="exportDialog"><div class="dbody"><div class="dhead"><h2>Exportar</h2><button class="btn quiet icon" data-close="exportDialog" aria-label="Fechar"><svg><use href="#i-x"/></svg></button></div><p>Conceitos, categorias, autorias, sinais e intensidades.</p><div class="dstack">
+  <button class="btn" data-export="matrix">Matriz assinada (.csv)</button>
+  <button class="btn" data-export="edges">Lista de ligações (.csv)</button>
+  <button class="btn" data-export="nodes">Conceitos e categorias (.csv)</button>
+  <button class="btn" data-export="json">Projeto completo (.json)</button>
+  <button class="btn" data-export="png">Imagem da rede (.png)</button>
+</div></div></dialog>
+
+<dialog id="adminDialog"><div class="dbody"><div class="dhead"><h2>Facilitador</h2><button class="btn quiet icon" data-close="adminDialog" aria-label="Fechar"><svg><use href="#i-x"/></svg></button></div><p>Comandos exclusivos deste acesso.</p><div class="dstack">
+  <button class="btn" id="lockBtn">Pausar edições</button>
+  <button class="btn danger" id="clearBtn">Reiniciar a sala</button>
+</div><p class="note">Reiniciar apaga todos os conceitos e ligações. Exporte antes.</p></div></dialog>
+
+<dialog id="confirmDialog"><div class="dbody"><div class="dhead"><h2 id="confirmTitle">Confirmar</h2></div><p id="confirmText"></p><div class="dfoot"><button class="btn" id="confirmNo">Cancelar</button><button class="btn danger" id="confirmYes">Excluir</button></div></div></dialog>
+
 <div class="toast" role="status" id="toast"></div>
+
 <script>
 "use strict";
 (function(){
@@ -57,30 +469,38 @@ aside{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{background:
  const API=SUPA+"/functions/v1/pantdpsir";
  const PUB="sb_publishable_UTz8ydh3SEY3yddJQYIMIw_3AMspCjP";
  const params=new URLSearchParams(location.search);
- const ROOM=params.get("room")||"";
- const KEY=params.get("key")||"";
- const ADMIN=params.get("admin")||"";
+ const ROOM=params.get("room")||"", KEY=params.get("key")||"", ADMIN=params.get("admin")||"";
  const isFacilitator=!!ADMIN;
  const joinUrl=location.origin+location.pathname+"?room="+encodeURIComponent(ROOM)+"&key="+encodeURIComponent(KEY);
  const $=id=>document.getElementById(id);
  const cat={
- D:{name:"Forças motrizes",detail:"Motores sociais e econômicos",color:"#846cc0"},
- P:{name:"Pressões",detail:"Ações e processos de pressão",color:"#da855e"},
- S:{name:"Estado",detail:"Condições do ambiente",color:"#4b95c1"},
- I:{name:"Impactos",detail:"Efeitos no sistema e na sociedade",color:"#bb6d93"},
- R:{name:"Respostas",detail:"Ações de gestão e sociedade",color:"#43a381"}
+  D:{name:"Forças motrizes",detail:"Processos sociais e econômicos",color:"#6E6AA6"},
+  P:{name:"Pressões",detail:"Ações diretas sobre o ambiente",color:"#C9955A"},
+  S:{name:"Estado",detail:"Condições do sistema",color:"#4E8FB5"},
+  I:{name:"Impactos",detail:"Consequências para ecossistemas e pessoas",color:"#A8678A"},
+  R:{name:"Respostas",detail:"Gestão e política",color:"#5E9E86"}
  };
- let nodes=[], edges=[], cy=null, channel=null, locked=false, loading=false, loaded=false, activeView="rede", renderSignature="", toastTimer=null, pendingRefresh=null, currentSelection="", online=false;
- const stored=localStorage.getItem("pantdpsir-author")||"";
- $("author").value=stored;
+ const COLOR={pos:"#2B8C76",neg:"#C4674D",zero:"#A9B6BB",sel:"#102B39"};
+ let nodes=[],edges=[],cy=null,channel=null,locked=false,loading=false,loaded=false,renderSignature="",toastTimer=null,hintTimer=null,pendingRefresh=null;
+ let selectedNode="",editingNode="",linkFrom="",panelMode="";
+ const isMobile=()=>window.matchMedia("(max-width:720px)").matches;
+
+ /* utilities */
+ $("author").value=localStorage.getItem("pantdpsir-author")||"";
  $("author").addEventListener("change",()=>localStorage.setItem("pantdpsir-author",$("author").value.trim().slice(0,40)));
- if(isFacilitator)$("adminBtn").hidden=false;
- function showToast(msg,error=false){const x=$("toast");x.textContent=msg;x.style.background=error?"#9b3e2f":"#123745";x.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>x.classList.remove("show"),3500)}
- function message(id,txt,error=false){const el=$(id);el.textContent=txt;el.classList.toggle("err",error)}
- function localeWeight(v){return String(Math.round(Number(v)*100))}
- function signedLabel(sign,weight){const magnitude=Math.round(Number(weight)*100);return magnitude===0?"0":((Number(sign)<0?"−":"+")+magnitude)}
- function syncWeight(value){const n=Number(value);const v=Number.isFinite(n)?Math.max(0,Math.min(100,Math.round(n))):0;["weight","weightNumber"].forEach(id=>$(id).value=String(v));$("weightValue").textContent=String(v)}
+ function toast(msg,err=false){const x=$("toast");x.textContent=msg;x.classList.toggle("err",err);x.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>x.classList.remove("show"),3200)}
+ function hint(msg){const h=$("hint");clearTimeout(hintTimer);if(!msg){h.classList.remove("show");return}h.textContent=msg;h.classList.add("show");hintTimer=setTimeout(()=>h.classList.remove("show"),6000)}
+ function msg(id,txt,err=false){const el=$(id);el.textContent=txt;el.classList.toggle("err",err)}
  function errorText(e){return e?.message||String(e)||"Falha desconhecida"}
+ function clamp100(v){const n=Number(v);return Number.isFinite(n)?Math.max(0,Math.min(100,Math.round(n))):0}
+ function signedLabel(sign,weight){const m=Math.round(Number(weight)*100);return m===0?"0":((Number(sign)<0?"−":"+")+m)}
+ function signedValue(e){return Math.round(Number(e.sign)*Number(e.weight)*100)}
+ function getNode(id){return nodes.find(n=>n.id===id)}
+ function getEdge(s,t){return edges.find(e=>e.source_id===s&&e.target_id===t)}
+ const canEdit=()=>!(locked&&!isFacilitator);
+ function confirmDialog(title,text,yes="Excluir"){return new Promise(res=>{const d=$("confirmDialog");$("confirmTitle").textContent=title;$("confirmText").textContent=text;$("confirmYes").textContent=yes;const done=v=>{d.close();$("confirmYes").onclick=null;$("confirmNo").onclick=null;d.oncancel=null;res(v)};$("confirmYes").onclick=()=>done(true);$("confirmNo").onclick=()=>done(false);d.oncancel=e=>{e.preventDefault();done(false)};d.showModal();$("confirmNo").focus()})}
+
+ /* backend */
  async function api(action,values={}){
   const ctl=new AbortController(),timeout=setTimeout(()=>ctl.abort(),14000);
   try{
@@ -88,154 +508,267 @@ aside{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{background:
    const json=await res.json();
    if(!res.ok||!json.ok)throw new Error(json.error||"Falha no servidor.");
    return json;
-  }catch(e){if(e.name==="AbortError")throw new Error("Servidor demorou para responder. Confira sua conexão.");throw e}finally{clearTimeout(timeout)}
+  }catch(e){if(e.name==="AbortError")throw new Error("O servidor demorou para responder. Confira a conexão.");throw e}finally{clearTimeout(timeout)}
  }
- function getNode(id){return nodes.find(n=>n.id===id)}
- function getEdge(source,target){return edges.find(e=>e.source_id===source&&e.target_id===target)}
  function triggerRefresh(){if(channel){try{channel.send({type:"broadcast",event:"update",payload:{time:Date.now()}})}catch(e){}}}
- function queueLoad(delay=350){clearTimeout(pendingRefresh);pendingRefresh=setTimeout(()=>load(),delay)}
+ function queueLoad(delay=300){clearTimeout(pendingRefresh);pendingRefresh=setTimeout(()=>load(),delay)}
+ function setConn(state,label){const s=$("connStatus");s.classList.remove("on","off");if(state)s.classList.add(state);s.querySelector(".lbl").textContent=label;s.title=label}
  async function load(){
-  if(loading)return;
-  loading=true;
+  if(loading)return;loading=true;
   try{
    const data=await api("load");
-   online=true; $("connStatus").textContent="● conectado ao vivo";
+   setConn("on","ao vivo");
    locked=!!data.locked;
-   const nextSignature=JSON.stringify([data.nodes,data.edges,locked]);
-   if(!loaded||nextSignature!==renderSignature){
-    nodes=data.nodes||[];edges=data.edges||[];
-    renderSignature=nextSignature;
-    updateAll();
-   }
+   const sig=JSON.stringify([data.nodes,data.edges,locked]);
+   if(!loaded||sig!==renderSignature){nodes=data.nodes||[];edges=data.edges||[];renderSignature=sig;updateAll()}
    loaded=true;
-   $("lockLabel").textContent=locked?"Edições pausadas":"Edição coletiva liberada";
-   const isBlocked=locked&&!isFacilitator;
-   ["addNodeBtn","saveEdgeBtn","deleteEdgeBtn","editSaveBtn","editDeleteBtn"].forEach(id=>$(id).disabled=isBlocked);
+   $("lockChip").hidden=!locked;
    $("lockBtn").textContent=locked?"Liberar edições":"Pausar edições";
-  }catch(e){online=false;$("connStatus").textContent="● sem conexão"; if(!loaded)showToast(errorText(e),true);}
+   applyLock();
+  }catch(e){setConn("off","sem conexão");if(!loaded)toast(errorText(e),true)}
   finally{loading=false}
  }
+ function applyLock(){const b=!canEdit();["nodeSaveBtn","nodeDeleteBtn","saveEdgeBtn","deleteEdgeBtn","newNodeBtn","newEdgeBtn","dpsirNewNode","popEdit","popLink","popDelete"].forEach(id=>$(id).disabled=b)}
+
+ /* render */
  function updateAll(){
-  $("nNodes").textContent=nodes.length;
-  $("nEdges").textContent=edges.length;
-  $("nAuthors").textContent=new Set(nodes.map(n=>n.created_by).concat(edges.map(e=>e.updated_by))).size;
-  const ids=["source","target","editNode"];
-  ids.forEach(id=>{const sel=$(id),selected=sel.value;sel.replaceChildren();const o=document.createElement("option");o.value="";o.textContent=id==="editNode"?"Selecionar conceito":"Selecione um conceito";sel.appendChild(o);
+  $("nNodes").textContent=nodes.length;$("nEdges").textContent=edges.length;
+  $("nAuthors").textContent=new Set(nodes.map(n=>n.created_by).concat(edges.map(e=>e.updated_by)).filter(Boolean)).size;
+  ["source","target"].forEach(id=>{const sel=$(id),cur=sel.value;sel.replaceChildren();const o=document.createElement("option");o.value="";o.textContent="Escolher";sel.appendChild(o);
    nodes.forEach(n=>{const op=document.createElement("option");op.value=n.id;op.textContent=n.category+" · "+n.label;sel.appendChild(op)});
-   if(nodes.some(n=>n.id===selected))sel.value=selected;
-  });
+   if(nodes.some(n=>n.id===cur))sel.value=cur});
   renderGraph();renderMatrix();renderDpsir();
-  if(currentSelection&&getNode(currentSelection))selectNode(currentSelection,false);
+  if(selectedNode&&!getNode(selectedNode))hideNodePop();
+  if(selectedNode)positionNodePop();
+  if(editingNode&&panelMode==="node-edit"&&!getNode(editingNode))closePanel();
  }
  function initGraph(){
-  if(!window.cytoscape){$("cy").innerHTML='<div class="empty-state"><b>Rede indisponível</b>Verifique a internet e recarregue. A matriz e a classificação continuam disponíveis.</div>';return}
-  cy=cytoscape({container:$("cy"),elements:[],layout:{name:"preset"},minZoom:0.18,maxZoom:3,
-   wheelSensitivity:.25,
+  if(!window.cytoscape){$("cy").innerHTML='<div class="empty" style="margin:40px auto;max-width:360px"><b>Rede indisponível</b>Verifique a internet e recarregue. A matriz e o DPSIR continuam disponíveis.</div>';return}
+  cy=cytoscape({container:$("cy"),elements:[],layout:{name:"preset"},minZoom:.15,maxZoom:3,wheelSensitivity:.22,boxSelectionEnabled:false,
    style:[
-    {selector:"node",style:{"background-color":ele=>cat[ele.data("category")]?.color||"#4b95c1","label":"data(label)","color":"#183644","font-family":"system-ui, sans-serif","font-size":13,"font-weight":700,"text-wrap":"wrap","text-max-width":"120px","text-valign":"bottom","text-margin-y":12,"text-outline-width":0,"width":ele=>Math.min(55,28+ele.connectedEdges().length*3),"height":ele=>Math.min(55,28+ele.connectedEdges().length*3),"border-width":3,"border-color":"#ffffff","shadow-blur":9,"shadow-opacity":.08,"shadow-color":"#1e4455","shadow-offset-y":3}},
-    {selector:"node:selected",style:{"border-width":5,"border-color":"#194758","background-color":"#e6c86d"}},
-    {selector:"edge",style:{"curve-style":"bezier","target-arrow-shape":"triangle","arrow-scale":1.08,"line-color":ele=>Number(ele.data("weight"))===0?"#a5b3b7":ele.data("sign")>0?"#4aaf91":"#da826c","target-arrow-color":ele=>Number(ele.data("weight"))===0?"#a5b3b7":ele.data("sign")>0?"#4aaf91":"#da826c","width":ele=>Math.max(1.7,Number(ele.data("weight"))*8),"opacity":.86,"label":ele=>signedLabel(ele.data("sign"),ele.data("weight")),"font-size":10,"color":"#345465","text-background-opacity":.91,"text-background-color":"#fff","text-background-padding":"3px","text-background-shape":"roundrectangle","text-rotation":"autorotate","line-style":ele=>Number(ele.data("weight"))===0?"dashed":"solid"}},
-    {selector:"edge:selected",style:{"line-color":"#163b48","target-arrow-color":"#163b48","overlay-color":"#b8e7d9","overlay-opacity":.23,"overlay-padding":7}}
+    {selector:"node",style:{"background-color":ele=>cat[ele.data("category")]?.color||"#4E8FB5","label":"data(label)","color":"#1F3340","font-family":"Inter, system-ui, sans-serif","font-size":12,"font-weight":500,"text-wrap":"wrap","text-max-width":"130px","text-valign":"bottom","text-margin-y":8,"text-background-color":"#F8F9F6","text-background-opacity":.85,"text-background-padding":"2px","text-background-shape":"roundrectangle","width":ele=>Math.min(46,22+ele.connectedEdges().length*3),"height":ele=>Math.min(46,22+ele.connectedEdges().length*3),"border-width":2,"border-color":"#FFFFFF","transition-property":"background-color, border-color, width, height","transition-duration":"150ms"}},
+    {selector:"node:selected",style:{"border-width":3,"border-color":COLOR.sel}},
+    {selector:"node.linksrc",style:{"border-width":3,"border-color":COLOR.pos}},
+    {selector:"edge",style:{"curve-style":"bezier","target-arrow-shape":"triangle","arrow-scale":.95,"line-color":ele=>edgeColor(ele),"target-arrow-color":ele=>edgeColor(ele),"width":ele=>Math.max(1.4,Number(ele.data("weight"))*6),"opacity":.9,"label":ele=>signedLabel(ele.data("sign"),ele.data("weight")),"font-family":"Inter, system-ui, sans-serif","font-size":10,"font-weight":600,"color":"#4A6170","text-background-opacity":.92,"text-background-color":"#FFFFFF","text-background-padding":"2px","text-background-shape":"roundrectangle","text-rotation":"autorotate","line-style":ele=>Number(ele.data("weight"))===0?"dashed":"solid","line-dash-pattern":[5,4]}},
+    {selector:"edge:selected",style:{"line-color":COLOR.sel,"target-arrow-color":COLOR.sel,"width":ele=>Math.max(2.5,Number(ele.data("weight"))*6+1),"overlay-color":"#8FB8A6","overlay-opacity":.18,"overlay-padding":6}}
    ]});
-  cy.on("tap","node",e=>{const id=e.target.id(),src=$("source").value;
-   if(src&&src!==id){$("target").value=id;existingEdge();showToast("Ligação selecionada. Ajuste o peso e salve.");}
-   else $("source").value=id;
-   selectNode(id,true);
-  });
-  cy.on("tap","edge",e=>{const d=e.target.data();$("source").value=d.source;$("target").value=d.target;existingEdge();showToast("Ligação selecionada: pode editar ou excluir.");if(window.matchMedia("(max-width:760px)").matches)$("edgeForm").scrollIntoView({behavior:"smooth",block:"start"});});
-  cy.on("dragfree","node",async e=>{
-   const id=e.target.id();const p=e.target.position();
-   try{await api("update_node",{id,x:p.x,y:p.y});triggerRefresh()}catch(err){showToast(errorText(err),true)}
-  });
+  cy.on("tap","node",e=>{const id=e.target.id();
+   if(linkFrom&&linkFrom!==id){const from=linkFrom;endLink();openEdgePanel(from,id);return}
+   selectNode(id)});
+  cy.on("tap","edge",e=>{const d=e.target.data();hideNodePop();endLink();cy.elements().unselect();e.target.select();openEdgePanel(d.source,d.target,true)});
+  cy.on("tap",e=>{if(e.target===cy){hideNodePop();if(linkFrom)endLink();if(panelMode==="edge"||panelMode==="node-edit")closePanel()}});
+  cy.on("drag","node",e=>{if(e.target.id()===selectedNode)positionNodePop()});
+  cy.on("pan zoom",()=>{if(selectedNode)positionNodePop()});
+  cy.on("dragfree","node",async e=>{const id=e.target.id(),p=e.target.position();if(!canEdit())return;try{await api("update_node",{id,x:p.x,y:p.y});triggerRefresh()}catch(err){toast(errorText(err),true)}});
  }
+ function fitView(animate=true){if(!cy||!nodes.length)return;const els=cy.elements();if(animate)cy.animate({fit:{eles:els,padding:70},duration:260,complete:clampZoom});else{cy.fit(els,70);clampZoom()}}
+ function clampZoom(){if(!cy)return;const max=1.4;if(cy.zoom()>max){const bb=cy.elements().boundingBox();cy.zoom({level:max,position:{x:(bb.x1+bb.x2)/2,y:(bb.y1+bb.y2)/2}});cy.center(cy.elements())}}
+ function edgeColor(ele){const w=Number(ele.data("weight"));return w===0?COLOR.zero:(Number(ele.data("sign"))>0?COLOR.pos:COLOR.neg)}
  function renderGraph(){
   if(!cy)return;
-  const zoom=cy.zoom(),pan=cy.pan(),hasNodes=cy.nodes().length;
+  const zoom=cy.zoom(),pan=cy.pan(),had=cy.nodes().length;
   const list=nodes.map(n=>({group:"nodes",data:{id:n.id,label:n.label,category:n.category},position:{x:Number(n.pos_x)||0,y:Number(n.pos_y)||0}}));
   edges.forEach(e=>{if(getNode(e.source_id)&&getNode(e.target_id))list.push({group:"edges",data:{id:e.id,source:e.source_id,target:e.target_id,weight:Number(e.weight),sign:Number(e.sign)}})});
+  const before=new Set(cy.nodes().map(n=>n.id()));
   cy.batch(()=>{cy.elements().remove();cy.add(list)});
-  if(!hasNodes&&nodes.length)cy.fit(65);else if(nodes.length){cy.zoom(zoom);cy.pan(pan)}
-  if(currentSelection&&cy.getElementById(currentSelection).length)cy.getElementById(currentSelection).select();
+  if(!had&&nodes.length)fitView(false);
+  else if(nodes.length){cy.zoom(zoom);cy.pan(pan);
+   const ext=cy.extent();const fresh=cy.nodes().filter(n=>!before.has(n.id()));
+   if(fresh.length&&fresh.some(n=>{const p=n.position();return p.x<ext.x1||p.x>ext.x2||p.y<ext.y1||p.y>ext.y2}))fitView()}
+  if(selectedNode&&cy.getElementById(selectedNode).length)cy.getElementById(selectedNode).select();
+  if(linkFrom&&cy.getElementById(linkFrom).length)cy.getElementById(linkFrom).addClass("linksrc");
  }
- function selectNode(id,focus=false){
+ function selectNode(id){
   const n=getNode(id);if(!n)return;
-  currentSelection=id;$("editNode").value=id;$("editLabel").value=n.label;$("editCategory").value=n.category;
-  $("selectedText").textContent=n.label+" · "+cat[n.category].name+" · inserido por "+n.created_by;
-  if(cy&&focus){cy.nodes().unselect();const ele=cy.getElementById(id);if(ele.length)ele.select();}
+  selectedNode=id;
+  if(cy){cy.elements().unselect();cy.getElementById(id).select()}
+  $("popTitle").textContent=n.label;
+  $("popMeta").innerHTML='<i style="background:'+cat[n.category].color+'"></i>'+cat[n.category].name+(n.created_by?" · "+escapeHtml(n.created_by):"");
+  $("nodePop").hidden=false;positionNodePop();
  }
- function existingEdge(){
-  const edge=getEdge($("source").value,$("target").value);
-  $("deleteEdgeBtn").hidden=!edge;
-  $("saveEdgeBtn").textContent=edge?"✓ Atualizar ligação":"↗ Criar ligação";
-  if(edge){syncWeight(Math.round(Number(edge.weight)*100));$("sign").value=String(edge.sign);$("edgeNote").value=edge.note||""}
-  else{syncWeight(50);$("sign").value="1";$("edgeNote").value="";$("deleteEdgeBtn").hidden=true}
+ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+ function positionNodePop(){
+  if(!cy||!selectedNode)return;const ele=cy.getElementById(selectedNode);if(!ele.length){hideNodePop();return}
+  const pop=$("nodePop"),box=ele.renderedBoundingBox({includeLabels:false}),stage=$("rede").getBoundingClientRect();
+  let x=box.x2+10,y=box.y1-6;
+  const w=pop.offsetWidth||220,h=pop.offsetHeight||90;
+  if(x+w>stage.width-12)x=box.x1-w-10;if(x<12)x=12;
+  if(y+h>stage.height-12)y=stage.height-h-12;if(y<12)y=12;
+  pop.style.left=x+"px";pop.style.top=y+"px";
  }
+ function hideNodePop(){selectedNode="";$("nodePop").hidden=true;if(cy)cy.nodes().unselect()}
+ function startLink(id){linkFrom=id;hideNodePop();if(cy){cy.nodes().removeClass("linksrc");cy.getElementById(id).addClass("linksrc")}hint("Toque no conceito de destino. Esc cancela.")}
+ function endLink(){linkFrom="";if(cy)cy.nodes().removeClass("linksrc");hint("")}
+
+ /* contextual panel */
+ function openPanel(mode,title,kicker){
+  panelMode=mode;$("panelTitle").textContent=title;$("panelKicker").textContent=kicker||"";
+  $("nodeForm").hidden=!mode.startsWith("node");$("edgeForm").hidden=mode!=="edge";
+  const p=$("panel");p.classList.add("open");p.setAttribute("aria-hidden","false");$("stage").classList.add("panel-open");
+  msg("nodeMsg","");msg("edgeMsg","");
+ }
+ function revealOnMobile(eles){if(!cy||!isMobile()||!eles||!eles.length)return;const h=$("rede").clientHeight;cy.animate({center:{eles},duration:200,complete:()=>cy.animate({panBy:{x:0,y:-h*0.33},duration:160})})}
+ function closePanel(){panelMode="";editingNode="";const p=$("panel");p.classList.remove("open");p.setAttribute("aria-hidden","true");$("stage").classList.remove("panel-open");if(cy)cy.edges().unselect()}
+ function openNewNode(category){
+  editingNode="";openPanel("node-new","Novo conceito","Palavra ou expressão e categoria");
+  $("nodeLabel").value="";$("nodeCategory").value=category||"S";$("nodeDeleteBtn").hidden=true;$("nodeSaveBtn").textContent="Adicionar";
+  setTimeout(()=>$("nodeLabel").focus(),120);
+ }
+ function openEditNode(id){
+  const n=getNode(id);if(!n)return;editingNode=id;hideNodePop();
+  openPanel("node-edit","Editar conceito",n.created_by?"Inserido por "+n.created_by:"");
+  $("nodeLabel").value=n.label;$("nodeCategory").value=n.category;$("nodeDeleteBtn").hidden=false;$("nodeSaveBtn").textContent="Salvar";
+  if(cy&&document.getElementById("rede").classList.contains("active"))revealOnMobile(cy.getElementById(id));
+  setTimeout(()=>$("nodeLabel").focus(),120);
+ }
+ function openEdgePanel(source,target,fromGraph=false){
+  hideNodePop();
+  $("source").value=source||"";$("target").value=target||"";
+  const e=source&&target?getEdge(source,target):null;
+  openPanel("edge",e?"Editar ligação":"Nova ligação",e?(e.updated_by?"Editada por "+e.updated_by:""):"Origem, destino, intensidade e sinal");
+  syncEdgeFields();
+  if(fromGraph&&cy)revealOnMobile(cy.edges(":selected"));
+  if(!fromGraph||isMobile())setTimeout(()=>{(source&&target?$("weightNumber"):(source?$("target"):$("source"))).focus()},120);
+ }
+ function syncEdgeFields(){
+  const s=$("source").value,t=$("target").value,e=s&&t?getEdge(s,t):null;
+  $("deleteEdgeBtn").hidden=!e;$("saveEdgeBtn").textContent=e?"Salvar":"Criar";
+  if(e){setWeight(Math.round(Number(e.weight)*100));setSign(Number(e.sign));$("edgeNote").value=e.note||"";$("panelTitle").textContent="Editar ligação"}
+  else{setWeight(50);setSign(1);$("edgeNote").value="";$("panelTitle").textContent="Nova ligação"}
+  if(s&&t&&s===t)msg("edgeMsg","Origem e destino devem ser conceitos diferentes.",true);else msg("edgeMsg","");
+ }
+ function setWeight(v){const n=clamp100(v);$("weight").value=n;$("weightNumber").value=n}
+ function setSign(v){$("sign").value=v<0?"-1":"1";$("signPos").setAttribute("aria-pressed",v>=0?"true":"false");$("signNeg").setAttribute("aria-pressed",v<0?"true":"false")}
+
+ /* matrix */
  function renderMatrix(){
   const root=$("matrixContent");
-  if(!nodes.length){root.innerHTML='<div class="empty-state"><span class="icon-ring">▦</span><b>A matriz nasce da primeira palavra</b>Convide a turma a contribuir.</div>';return}
-  const table=document.createElement("table");table.className="matrix-table";
-  const thead=document.createElement("thead");const head=document.createElement("tr"),corner=document.createElement("th");
-  corner.textContent="ORIGEM ↓ / DESTINO →";head.appendChild(corner);
-  nodes.forEach(n=>{const th=document.createElement("th");th.textContent=n.label;th.title=cat[n.category].name;head.appendChild(th)});thead.appendChild(head);table.appendChild(thead);
+  if(!nodes.length){root.innerHTML='<div class="empty"><b>A matriz nasce do primeiro conceito</b>Adicione conceitos na aba Rede ou DPSIR.</div>';return}
+  const wrap=document.createElement("div");wrap.className="mwrap";
+  const table=document.createElement("table");table.className="matrix";
+  const thead=document.createElement("thead"),hr=document.createElement("tr"),corner=document.createElement("th");corner.className="corner";corner.textContent="origem ↓  destino →";hr.appendChild(corner);
+  nodes.forEach(n=>{const th=document.createElement("th");th.className="col";th.scope="col";th.title=n.label+" · "+cat[n.category].name;const sp=document.createElement("span");sp.textContent=n.label;th.appendChild(sp);hr.appendChild(th)});
+  thead.appendChild(hr);table.appendChild(thead);
   const tbody=document.createElement("tbody");
-  nodes.forEach(n=>{const tr=document.createElement("tr"),th=document.createElement("th");th.className="rowhead";th.textContent=n.label;tr.appendChild(th);
-   nodes.forEach(t=>{const td=document.createElement("td");if(n.id===t.id){td.textContent="—";}else{
-    const e=getEdge(n.id,t.id);td.className=e?(Number(e.sign)>0?"positive":"negative"):"empty";td.textContent=e?signedLabel(e.sign,e.weight):"·";
-    td.title=n.label+" → "+t.label;td.addEventListener("click",()=>{$("source").value=n.id;$("target").value=t.id;existingEdge();document.getElementById("edgeForm").scrollIntoView({behavior:"smooth",block:"center"});showToast("Edite a influência "+n.label+" → "+t.label);});
-   }tr.appendChild(td)});tbody.appendChild(tr)});
-  table.appendChild(tbody);root.replaceChildren(table);
+  nodes.forEach(a=>{const tr=document.createElement("tr"),th=document.createElement("th");th.className="rh";th.scope="row";th.textContent=a.label;th.title=a.label+" · "+cat[a.category].name;tr.appendChild(th);
+   nodes.forEach(b=>{const td=document.createElement("td");
+    if(a.id===b.id){td.className="self";td.textContent="";tr.appendChild(td);return}
+    const e=getEdge(a.id,b.id),btn=document.createElement("button");btn.type="button";
+    btn.title=a.label+" → "+b.label+(e?" · "+signedLabel(e.sign,e.weight):" · sem ligação");
+    btn.setAttribute("aria-label",btn.title);
+    if(e){const v=signedValue(e),alpha=Math.abs(v)/100;
+     if(v===0){const sp=document.createElement("span");sp.className="zero";sp.textContent="0";btn.appendChild(sp)}
+     else{btn.textContent=signedLabel(e.sign,e.weight);btn.style.background=v>0?"rgba(43,140,118,"+(0.08+alpha*0.42).toFixed(2)+")":"rgba(196,103,77,"+(0.08+alpha*0.42).toFixed(2)+")";btn.style.color=alpha>.6?"#fff":(v>0?"#1E6C5A":"#8F4530")}}
+    else{const sp=document.createElement("span");sp.className="none";sp.textContent="·";btn.appendChild(sp)}
+    btn.addEventListener("click",()=>{if(!canEdit())return toast("Edições pausadas pelo facilitador.",true);openEdgePanel(a.id,b.id)});
+    td.appendChild(btn);tr.appendChild(td)});
+   tbody.appendChild(tr)});
+  table.appendChild(tbody);wrap.appendChild(table);root.replaceChildren(wrap);
  }
+
+ /* DPSIR */
  function renderDpsir(){
   const lanes=$("lanes");lanes.replaceChildren();
-  Object.entries(cat).forEach(([k,c])=>{const lane=document.createElement("div");lane.className="lane";lane.style.setProperty("--lane",c.color);const h=document.createElement("h3");h.textContent=k+" · "+c.name;const s=document.createElement("small");s.textContent=c.detail;lane.append(h,s);
-   nodes.filter(n=>n.category===k).forEach(n=>{const b=document.createElement("button");b.className="concept";b.textContent=n.label;b.addEventListener("click",()=>{selectNode(n.id,true);switchView("rede")});lane.appendChild(b)});lanes.appendChild(lane)});
+  Object.entries(cat).forEach(([k,c])=>{const lane=document.createElement("div");lane.className="lane";
+   const h=document.createElement("h3");h.innerHTML='<i style="background:'+c.color+'"></i>'+k+" · "+c.name;const n=nodes.filter(x=>x.category===k);const cnt=document.createElement("span");cnt.className="n";cnt.textContent=n.length;h.appendChild(cnt);
+   const d=document.createElement("div");d.className="d";d.textContent=c.detail;lane.append(h,d);
+   n.forEach(x=>{const b=document.createElement("button");b.type="button";b.className="card";b.textContent=x.label;b.title="Editar";b.addEventListener("click",()=>{if(!canEdit())return toast("Edições pausadas pelo facilitador.",true);openEditNode(x.id)});lane.appendChild(b)});
+   const add=document.createElement("button");add.type="button";add.className="add";add.textContent="+ conceito";add.addEventListener("click",()=>{if(!canEdit())return toast("Edições pausadas pelo facilitador.",true);openNewNode(k)});lane.appendChild(add);
+   lanes.appendChild(lane)});
   const paths=$("paths");paths.replaceChildren();
-  if(!edges.length){const d=document.createElement("p");d.className="help";d.textContent="As relações surgirão aqui à medida que a turma ligar os conceitos.";paths.appendChild(d)}
-  edges.forEach(e=>{const a=getNode(e.source_id),b=getNode(e.target_id);if(!a||!b)return;const row=document.createElement("div");row.className="path";const strong=document.createElement("strong");strong.textContent=a.label+" → "+b.label+"  ("+signedLabel(e.sign,e.weight)+"/100)";row.appendChild(strong);if(e.note){const why=document.createElement("div");why.textContent=e.note;row.appendChild(why)}row.title="Clique para editar ou excluir esta ligação";row.style.cursor="pointer";row.addEventListener("click",()=>{$("source").value=e.source_id;$("target").value=e.target_id;existingEdge();$("edgeForm").scrollIntoView({behavior:"smooth",block:"start"});});paths.appendChild(row)});
+  if(!edges.length){const p=document.createElement("p");p.className="lead";p.style.gridColumn="1/-1";p.textContent="As ligações aparecerão aqui à medida que a turma conectar os conceitos.";paths.appendChild(p)}
+  edges.forEach(e=>{const a=getNode(e.source_id),b=getNode(e.target_id);if(!a||!b)return;
+   const btn=document.createElement("button");btn.type="button";btn.className="rel";const v=signedValue(e);
+   const r1=document.createElement("div");r1.className="r1";
+   r1.innerHTML='<i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+cat[a.category].color+'"></i>'+escapeHtml(a.label)+' <span style="color:var(--muted)">→</span> <i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+cat[b.category].color+'"></i>'+escapeHtml(b.label)+'<span class="w '+(v===0?"zero":v>0?"pos":"neg")+'">'+signedLabel(e.sign,e.weight)+'</span>';
+   btn.appendChild(r1);
+   if(e.note){const r2=document.createElement("div");r2.className="r2";r2.textContent=e.note;btn.appendChild(r2)}
+   btn.addEventListener("click",()=>{if(!canEdit())return toast("Edições pausadas pelo facilitador.",true);openEdgePanel(e.source_id,e.target_id)});
+   paths.appendChild(btn)});
  }
- function switchView(name){activeView=name;document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===name));document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id===name));if(name==="rede"&&cy)setTimeout(()=>{cy.resize();cy.fit(45)},60)}
- document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>switchView(btn.dataset.view)));
- $("nodeForm").addEventListener("submit",async e=>{e.preventDefault();const btn=$("addNodeBtn");btn.disabled=true;message("nodeHint","Enviando…");try{await api("add_node",{label:$("nodeLabel").value,category:$("nodeCategory").value});$("nodeLabel").value="";message("nodeHint","Conceito incorporado à rede!");triggerRefresh();await load()}catch(err){message("nodeHint",errorText(err),true)}finally{btn.disabled=locked&&!isFacilitator}});
- $("edgeForm").addEventListener("submit",async e=>{e.preventDefault();const btn=$("saveEdgeBtn");if(!$("source").value||!$("target").value){message("edgeHint","Escolha origem e destino.",true);return}btn.disabled=true;message("edgeHint","Salvando…");try{await api("upsert_edge",{source:$("source").value,target:$("target").value,weight:Number($("weight").value)/100,sign:Number($("sign").value),note:$("edgeNote").value});message("edgeHint","Ligação salva coletivamente!");triggerRefresh();await load();existingEdge()}catch(err){message("edgeHint",errorText(err),true)}finally{btn.disabled=locked&&!isFacilitator}});
- $("deleteEdgeBtn").addEventListener("click",async()=>{if(!confirm("Remover esta relação do modelo coletivo?"))return;try{await api("delete_edge",{source:$("source").value,target:$("target").value});triggerRefresh();await load();existingEdge();showToast("Ligação removida.")}catch(e){showToast(errorText(e),true)}});
- $("weight").addEventListener("input",()=>syncWeight($("weight").value));
- $("weightNumber").addEventListener("input",()=>{if($("weightNumber").value!=="")syncWeight($("weightNumber").value)});
- $("weightNumber").addEventListener("change",()=>syncWeight($("weightNumber").value));
- ["source","target"].forEach(id=>$(id).addEventListener("change",existingEdge));
- $("editNode").addEventListener("change",()=>selectNode($("editNode").value,true));
- $("editSaveBtn").addEventListener("click",async()=>{const id=$("editNode").value;if(!id)return showToast("Selecione um conceito.",true);try{await api("update_node",{id,label:$("editLabel").value,category:$("editCategory").value});triggerRefresh();await load();showToast("Conceito atualizado.")}catch(e){showToast(errorText(e),true)}});
- $("editDeleteBtn").addEventListener("click",async()=>{const id=$("editNode").value;if(!id)return showToast("Selecione um conceito.",true);if(!confirm("Excluir o conceito e TODAS as ligações dele?"))return;try{await api("delete_node",{id});currentSelection="";$("editNode").value="";$("editLabel").value="";triggerRefresh();await load();showToast("Conceito excluído.")}catch(e){showToast(errorText(e),true)}});
- $("layoutBtn").addEventListener("click",()=>{if(!cy||!nodes.length)return;cy.layout({name:"cose",animate:true,animationDuration:700,fit:true,padding:60,nodeRepulsion:900000,idealEdgeLength:160}).run();showToast("Posições reorganizadas nesta tela.")});
- $("fitBtn").addEventListener("click",()=>{if(cy)cy.fit(55)});
- $("fullscreenBtn").addEventListener("click",()=>{const elem=document.querySelector(".workspace");if(document.fullscreenElement)document.exitFullscreen();else if(elem.requestFullscreen)elem.requestFullscreen().catch(()=>showToast("Tela cheia indisponível.",true))});
- function openDialog(id){$(id).showModal()}
+
+ /* navigation */
+ function switchView(name){
+  document.querySelectorAll(".nav [role=tab]").forEach(t=>{const on=t.dataset.view===name;t.setAttribute("aria-selected",on?"true":"false");t.tabIndex=on?0:-1});
+  document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id===name));
+  hideNodePop();
+  if(name==="rede"&&cy)setTimeout(()=>{cy.resize();fitView(false)},50);
+ }
+ const tabs=[...document.querySelectorAll(".nav [role=tab]")];
+ tabs.forEach((btn,i)=>{btn.addEventListener("click",()=>switchView(btn.dataset.view));btn.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const j=(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[j].focus();switchView(tabs[j].dataset.view)}})});
+
+ /* actions */
+ $("newNodeBtn").addEventListener("click",()=>openNewNode());
+ $("dpsirNewNode").addEventListener("click",()=>openNewNode());
+ $("newEdgeBtn").addEventListener("click",()=>{if(nodes.length<2)return toast("Adicione pelo menos dois conceitos.",true);openEdgePanel(selectedNode||"","")});
+ $("panelClose").addEventListener("click",closePanel);
+ $("popEdit").addEventListener("click",()=>openEditNode(selectedNode));
+ $("popLink").addEventListener("click",()=>{if(nodes.length<2)return toast("Adicione outro conceito para ligar.",true);startLink(selectedNode)});
+ $("popDelete").addEventListener("click",()=>deleteNode(selectedNode));
+ $("nodeDeleteBtn").addEventListener("click",()=>deleteNode(editingNode));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(linkFrom)endLink();else if(!$("nodePop").hidden)hideNodePop();else if(panelMode)closePanel()}});
+
+ $("nodeForm").addEventListener("submit",async e=>{e.preventDefault();const label=$("nodeLabel").value.trim(),category=$("nodeCategory").value;if(label.length<2)return msg("nodeMsg","Escreva pelo menos duas letras.",true);
+  $("nodeSaveBtn").disabled=true;msg("nodeMsg","Salvando…");
+  try{
+   if(editingNode){await api("update_node",{id:editingNode,label,category});triggerRefresh();await load();toast("Conceito atualizado.");closePanel()}
+   else{await api("add_node",{label,category});$("nodeLabel").value="";triggerRefresh();await load();msg("nodeMsg","Adicionado. Pode inserir outro.");$("nodeLabel").focus()}
+  }catch(err){msg("nodeMsg",errorText(err),true)}finally{$("nodeSaveBtn").disabled=!canEdit()}});
+ async function deleteNode(id){const n=getNode(id);if(!n)return;if(!await confirmDialog("Excluir conceito","Excluir \""+n.label+"\" e todas as ligações dele?"))return;
+  try{await api("delete_node",{id});hideNodePop();closePanel();triggerRefresh();await load();toast("Conceito excluído.")}catch(e){toast(errorText(e),true)}}
+
+ $("edgeForm").addEventListener("submit",async e=>{e.preventDefault();const s=$("source").value,t=$("target").value;
+  if(!s||!t)return msg("edgeMsg","Escolha origem e destino.",true);if(s===t)return msg("edgeMsg","Origem e destino devem ser diferentes.",true);
+  $("saveEdgeBtn").disabled=true;msg("edgeMsg","Salvando…");
+  try{await api("upsert_edge",{source:s,target:t,weight:clamp100($("weightNumber").value)/100,sign:Number($("sign").value),note:$("edgeNote").value.trim()});triggerRefresh();await load();syncEdgeFields();msg("edgeMsg","Ligação salva.");toast("Ligação salva.")}
+  catch(err){msg("edgeMsg",errorText(err),true)}finally{$("saveEdgeBtn").disabled=!canEdit()}});
+ $("deleteEdgeBtn").addEventListener("click",async()=>{const s=$("source").value,t=$("target").value,a=getNode(s),b=getNode(t);if(!a||!b)return;
+  if(!await confirmDialog("Excluir ligação","Remover a ligação "+a.label+" → "+b.label+"?"))return;
+  try{await api("delete_edge",{source:s,target:t});triggerRefresh();await load();closePanel();toast("Ligação removida.")}catch(e){toast(errorText(e),true)}});
+ $("weight").addEventListener("input",()=>setWeight($("weight").value));
+ $("weightNumber").addEventListener("input",()=>{if($("weightNumber").value!=="")$("weight").value=clamp100($("weightNumber").value)});
+ $("weightNumber").addEventListener("change",()=>setWeight($("weightNumber").value));
+ $("signPos").addEventListener("click",()=>setSign(1));$("signNeg").addEventListener("click",()=>setSign(-1));
+ ["source","target"].forEach(id=>$(id).addEventListener("change",syncEdgeFields));
+
+ $("zoomIn").addEventListener("click",()=>{if(cy)cy.animate({zoom:cy.zoom()*1.25,duration:160})});
+ $("zoomOut").addEventListener("click",()=>{if(cy)cy.animate({zoom:cy.zoom()/1.25,duration:160})});
+ $("fitBtn").addEventListener("click",()=>fitView());
+ $("layoutBtn").addEventListener("click",()=>{if(!cy||!nodes.length)return;cy.layout({name:"cose",animate:true,animationDuration:650,fit:true,padding:70,nodeRepulsion:()=>900000,idealEdgeLength:()=>170,stop:clampZoom}).run();toast("Rede reorganizada nesta tela. Arraste um conceito para fixar a posição para todos.")});
+ $("fullscreenBtn").addEventListener("click",()=>{if(document.fullscreenElement)document.exitFullscreen();else if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>toast("Tela cheia indisponível neste navegador.",true));else toast("Tela cheia indisponível neste navegador.",true)});
+ document.addEventListener("fullscreenchange",()=>{document.body.classList.toggle("present",!!document.fullscreenElement);if(document.fullscreenElement)closePanel();setTimeout(()=>{if(cy){cy.resize();fitView(false)}},120)});
  document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>$(b.dataset.close).close()));
- $("qrBtn").addEventListener("click",()=>{openDialog("qrDialog");$("joinLink").textContent=joinUrl;const target=$("qrcode");target.replaceChildren();if(window.QRCode){new QRCode(target,{text:joinUrl,width:270,height:270,colorDark:"#102b39",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M})}else{target.textContent="QR não disponível. Copie o link abaixo."}});
- $("copyJoin").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(joinUrl);showToast("Link dos alunos copiado.")}catch(e){showToast("Selecione e copie o link exibido.",true)}});
- $("downloadBtn").addEventListener("click",()=>openDialog("exportDialog"));
- $("adminBtn").addEventListener("click",()=>openDialog("adminDialog"));
- $("lockBtn").addEventListener("click",async()=>{try{await api("lock",{locked:!locked});triggerRefresh();await load();showToast(locked?"Turma pausada.":"Turma liberada.")}catch(e){showToast(errorText(e),true)}});
- $("clearBtn").addEventListener("click",async()=>{if(!confirm("ATENÇÃO: apagar TODOS os conceitos e TODAS as ligações? Exporte antes."))return;if(!confirm("Confirmar reinício permanente desta oficina?"))return;try{await api("clear");triggerRefresh();await load();$("adminDialog").close();showToast("Sala reiniciada.")}catch(e){showToast(errorText(e),true)}});
+ $("qrBtn").addEventListener("click",()=>{$("qrDialog").showModal();$("joinLink").textContent=joinUrl;const t=$("qrcode");t.replaceChildren();if(window.QRCode)new QRCode(t,{text:joinUrl,width:240,height:240,colorDark:"#102B39",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});else t.textContent="QR indisponível. Copie o link."});
+ $("copyJoin").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(joinUrl);toast("Link copiado.")}catch(e){toast("Selecione e copie o link exibido.",true)}});
+ $("downloadBtn").addEventListener("click",()=>$("exportDialog").showModal());
+ $("adminBtn").addEventListener("click",()=>$("adminDialog").showModal());
+ $("lockBtn").addEventListener("click",async()=>{try{await api("lock",{locked:!locked});triggerRefresh();await load();toast(locked?"Edições pausadas.":"Edições liberadas.")}catch(e){toast(errorText(e),true)}});
+ $("clearBtn").addEventListener("click",async()=>{if(!await confirmDialog("Reiniciar a sala","Apagar todos os conceitos e ligações? Exporte antes.","Apagar tudo"))return;if(!await confirmDialog("Confirmar","Esta ação é permanente. Continuar?","Reiniciar"))return;
+  try{await api("clear");triggerRefresh();await load();$("adminDialog").close();toast("Sala reiniciada.")}catch(e){toast(errorText(e),true)}});
+
+ /* export */
  function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}
- function csv(rows){return "\ufeff"+rows.map(r=>r.map(csvCell).join(";")).join("\r\n")}
+ function csv(rows){return "﻿"+rows.map(r=>r.map(csvCell).join(";")).join("\r\n")}
  function download(filename,contents,type){const blob=new Blob([contents],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
  function exportKind(kind){
   if(kind==="nodes")download("pantanal-conceitos.csv",csv([["ID","Conceito","Categoria","Autor","Última edição por"],...nodes.map(n=>[n.id,n.label,n.category,n.created_by,n.updated_by])]),"text/csv;charset=utf-8");
-  if(kind==="edges")download("pantanal-ligacoes.csv",csv([["Origem","Origem DPSIR","Destino","Destino DPSIR","Sinal","Força de 0 a 100","Peso assinado de -100 a +100","Peso normalizado de -1 a +1","Justificativa","Editado por"],...edges.map(e=>[getNode(e.source_id)?.label,getNode(e.source_id)?.category,getNode(e.target_id)?.label,getNode(e.target_id)?.category,e.sign,Math.round(Number(e.weight)*100),Math.round(Number(e.sign)*Number(e.weight)*100),(Number(e.sign)*Number(e.weight)).toFixed(2),e.note,e.updated_by])]),"text/csv;charset=utf-8");
-  if(kind==="matrix")download("pantanal-matriz-assinada.csv",csv([["Origem \\ Destino (escala assinada -100 a +100)",...nodes.map(n=>n.label)],...nodes.map(a=>[a.label,...nodes.map(b=>{const e=getEdge(a.id,b.id);return e?String(Math.round(Number(e.sign)*Number(e.weight)*100)):"0"})])]),"text/csv;charset=utf-8");
-  if(kind==="json")download("pantanal-dpsir-projeto.json",JSON.stringify({title:"Pantanal Vivo / DPSIR",exported_at:new Date().toISOString(),method:"Mapa cognitivo causal fuzzy não calibrado",nodes,edges},null,2),"application/json");
-  if(kind==="png"){if(!cy||!nodes.length)return showToast("Adicione conceitos à rede primeiro.",true);const a=document.createElement("a");a.href=cy.png({output:"base64uri",bg:"#ffffff",scale:2,full:true});a.download="pantanal-rede.png";a.click()}
-  showToast("Exportação preparada.");
+  if(kind==="edges")download("pantanal-ligacoes.csv",csv([["Origem","Origem DPSIR","Destino","Destino DPSIR","Sinal","Intensidade de 0 a 100","Peso assinado de -100 a +100","Peso fuzzy de -1 a +1","Justificativa","Editado por"],...edges.map(e=>[getNode(e.source_id)?.label,getNode(e.source_id)?.category,getNode(e.target_id)?.label,getNode(e.target_id)?.category,e.sign,Math.round(Number(e.weight)*100),signedValue(e),(Number(e.sign)*Number(e.weight)).toFixed(2),e.note,e.updated_by])]),"text/csv;charset=utf-8");
+  if(kind==="matrix")download("pantanal-matriz-assinada.csv",csv([["Origem \\ Destino (escala assinada -100 a +100)",...nodes.map(n=>n.label)],...nodes.map(a=>[a.label,...nodes.map(b=>{const e=getEdge(a.id,b.id);return e?String(signedValue(e)):""})])]),"text/csv;charset=utf-8");
+  if(kind==="json")download("pantanal-dpsir-projeto.json",JSON.stringify({title:"Pantanal Vivo / DPSIR",exported_at:new Date().toISOString(),method:"Mapa cognitivo causal fuzzy não calibrado; peso fuzzy = sinal x intensidade / 100",nodes,edges},null,2),"application/json");
+  if(kind==="png"){if(!cy||!nodes.length)return toast("Adicione conceitos à rede primeiro.",true);const a=document.createElement("a");a.href=cy.png({output:"base64uri",bg:"#ffffff",scale:2,full:true});a.download="pantanal-rede.png";a.click()}
+  toast("Exportação preparada.");
  }
  document.querySelectorAll("[data-export]").forEach(b=>b.addEventListener("click",()=>exportKind(b.dataset.export)));
+
+ /* live */
  function live(){
-  if(!window.supabase){$("connStatus").title="Atualizações por verificação periódica";return}
-  try{
-   const sb=window.supabase.createClient(SUPA,PUB,{auth:{persistSession:false}});
-   channel=sb.channel("pantdpsir-"+ROOM).on("broadcast",{event:"update"},()=>queueLoad(250)).subscribe();
-  }catch(e){console.warn("Realtime indisponível",e)}
+  if(!window.supabase){$("connStatus").title="Atualização por verificação periódica";return}
+  try{const sb=window.supabase.createClient(SUPA,PUB,{auth:{persistSession:false}});channel=sb.channel("pantdpsir-"+ROOM).on("broadcast",{event:"update"},()=>queueLoad(250)).subscribe()}catch(e){console.warn("Realtime indisponível",e)}
  }
- if(!ROOM||!KEY){$("connStatus").textContent="● link incompleto";showToast("Abra pelo link de convite ou QR Code fornecido pelo facilitador.",true);$("cy").innerHTML='<div class="empty-state"><span class="icon-ring">✳</span><b>Bem-vindo ao Pantanal Vivo</b>Use o link ou QR Code compartilhado pelo facilitador para participar da construção coletiva.</div>';}
- else{window.addEventListener("DOMContentLoaded",()=>{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000);});}
+ if(isFacilitator)$("adminBtn").hidden=false;
+ if(!ROOM||!KEY){setConn("off","link incompleto");$("welcome").hidden=false;["newNodeBtn","newEdgeBtn","dpsirNewNode"].forEach(id=>$(id).disabled=true)}
+ else{window.addEventListener("DOMContentLoaded",()=>{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000)})}
 })();
-</script></body></html>
+</script>
+</body>
+</html>
