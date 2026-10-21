@@ -9,8 +9,8 @@ Parte independente do repositório [curso-carbono](https://github.com/ernandes-s
 1. Facilitador abre seu link exclusivo com `admin` na projeção. Clica em **Mostrar QR Code**.
 2. Cada participante lê o QR pelo celular e entra na mesma sala. Não precisa criar conta.
 3. Cada pessoa introduz conceitos do Pantanal, associados a D, P, S, I ou R. Todos podem editar.
-4. Toque em **dois nós**, na ordem **causa → efeito**, ou escolha origem e destino nos menus. Defina sinal (+/−), intensidade **de 0 a 100** (régua ou valor digitado) e justificativa. **Clicar numa seta** carrega os valores para editar ou excluir a relação. **Selecionar um conceito** permite corrigir o nome, a categoria ou removê-lo.
-5. Mostre a aba **Matriz fuzzy** para discutir a matriz de adjacência assinada e a aba **DPSIR** para discutir interpretações e feedbacks.
+4. Use **+ Conceito** (palavra e categoria) e **+ Ligação** (origem, destino, intensidade **de 0 a 100** por régua ou valor digitado, sinal +/− e justificativa opcional). Na rede, toque num conceito e use **Ligar a**, depois toque no destino. **Tocar numa seta** abre o painel contextual para editar ou excluir a ligação; tocar num conceito permite editar, ligar ou excluir. Na matriz, cada célula abre a ligação correspondente.
+5. Mostre a aba **Matriz** para discutir a matriz de adjacência assinada, a aba **DPSIR** para discutir interpretações e feedbacks, e a aba **Sobre** para o método, as limitações e os créditos.
 6. Exporte os arquivos CSV (nós, ligações e matriz), JSON ou a imagem PNG. O facilitador pode **pausar edições** e **reiniciar** após confirmar.
 
 ## Marco científico
