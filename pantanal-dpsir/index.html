@@ -188,6 +188,36 @@ table.matrix td.self{background:#F3F5F4}
 .credits b{color:#fff;font-weight:600}
 .credits a{color:#BFE3D5}
 
+/* Results: compact scientific dashboards */
+.res-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.res-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 0}
+.result-box{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:18px;min-width:0}
+.result-box h2{margin:0;font-weight:600;font-size:15px;color:var(--navy)}
+.small-note{font-size:12px;color:var(--muted);margin:2px 0 16px}
+.res-metrics{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:10px}
+.res-metric{background:var(--surface);border:1px solid var(--line);padding:14px 16px;border-radius:var(--radius)}
+.res-metric strong{font-size:24px;color:var(--navy);font-variant-numeric:tabular-nums;display:block;font-weight:600}
+.res-metric span{font-size:12px;color:var(--muted)}
+.res-filter{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:17px 0 0;font-size:12px;color:var(--ink-2)}
+.res-filter select{border:1px solid var(--line-2);border-radius:8px;background:#fff;padding:7px 8px}
+.muted{color:var(--muted);font-size:12px}
+.preview-banner{background:var(--sage-soft);border:1px solid #C8DECF;padding:12px 15px;border-radius:var(--radius);display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 15px}
+.preview-banner[hidden]{display:none}
+.strength-row{width:100%;margin:11px 0;display:block}
+.strength-label{display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:12px}
+.strength-label .edge-name{flex:1;overflow-wrap:anywhere;line-height:1.3}
+.strength-label .edge-val{font-weight:700;flex:none;font-variant-numeric:tabular-nums}
+.strength-track{margin-top:5px;height:9px;border-radius:4px;background:var(--bg);overflow:hidden}
+.strength-fill{height:100%;border-radius:4px}
+.strength-rowbutton{display:block;text-align:left;width:100%;border-radius:7px;padding:5px;margin:0 -5px}
+.strength-rowbutton:hover{background:var(--sage-soft)}
+.snapshot-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.snapshot-item:first-child{border-top:0}
+.snapshot-item .name{min-width:0;flex:1;overflow-wrap:anywhere}
+.snapshot-item .name b{font-size:12px;color:var(--navy);display:block}
+.snapshot-item .name small{font-size:11px;color:var(--muted)}
+.res-empty{font-size:13px;color:var(--muted);padding:12px 0}
+@media(max-width:720px){.nav button{font-size:11px;padding:7px 2px}.res-grid{grid-template-columns:1fr}.res-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.result-box{padding:13px}.preview-banner{align-items:flex-start;flex-direction:column}.res-actions .btn{font-size:12px;padding:0 8px}.res-filter .muted{width:100%}}
 /* Welcome */
 .welcome{position:absolute;inset:0;display:grid;place-items:center;padding:24px}
 .welcome div{max-width:420px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-1)}
@@ -273,6 +303,7 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
     <button role="tab" aria-selected="true" data-view="rede" id="tab-rede">Rede</button>
     <button role="tab" aria-selected="false" data-view="matriz" id="tab-matriz">Matriz</button>
     <button role="tab" aria-selected="false" data-view="dpsir" id="tab-dpsir">DPSIR</button>
+    <button role="tab" aria-selected="false" data-view="resultados" id="tab-resultados">Resultados</button>
     <button role="tab" aria-selected="false" data-view="sobre" id="tab-sobre">Sobre</button>
   </nav>
   <div class="actions">
@@ -343,6 +374,41 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
       </div>
       <div class="lanes" id="lanes"></div>
       <div class="rels"><h2>Ligações</h2><div class="rel-list" id="paths"></div></div>
+    </div></div>
+  </section>
+
+  <!-- RESULTADOS DA OFICINA -->
+  <section class="view" id="resultados" role="tabpanel" aria-labelledby="tab-resultados">
+    <div class="page"><div class="page-in">
+      <div class="page-head">
+        <div><h1>Resultados da rede</h1><p class="lead">Intensidade, direção e relações mais fortes ou mais fracas.</p></div>
+        <div class="res-actions">
+          <button class="btn" id="downloadJsonBtn" title="Baixar para reabrir depois">↓ JSON</button>
+          <button class="btn" id="uploadJsonBtn" title="Abrir um projeto salvo no computador ou celular">↑ Importar JSON</button>
+          <button class="btn primary" id="saveSnapshotBtn" title="Guardar uma versão na plataforma">Salvar versão</button>
+          <input type="file" id="importFile" accept=".json,application/json" hidden>
+        </div>
+      </div>
+      <div id="previewBanner" class="preview-banner" hidden>
+        <div><strong id="previewTitle">Arquivo aberto</strong><div class="muted">Visualização temporária, sem alterar a sala atual.</div></div>
+        <div class="res-actions">
+          <button class="btn" id="returnLiveBtn">Voltar ao vivo</button>
+          <button class="btn teal" id="restorePreviewBtn">Restaurar na sala</button>
+        </div>
+      </div>
+      <div class="res-metrics" id="resultMetrics"></div>
+      <div class="res-filter"><label for="forceFilter">Relações</label>
+        <select id="forceFilter"><option value="all">Todas</option><option value="positive">Positivas (+)</option><option value="negative">Negativas (−)</option><option value="zero">Intensidade zero</option></select>
+        <span class="muted">Escala de 0 a 100 · peso fuzzy = sinal × intensidade / 100</span>
+      </div>
+      <div class="res-grid">
+        <section class="result-box"><h2>Maiores forças</h2><p class="small-note">Ligações de maior intensidade absoluta</p><div id="strongLinks"></div></section>
+        <section class="result-box"><h2>Menores forças</h2><p class="small-note">Ligações de menor intensidade absoluta</p><div id="weakLinks"></div></section>
+      </div>
+      <div class="res-grid">
+        <section class="result-box"><h2>Conceitos centrais</h2><p class="small-note">Soma das intensidades das ligações incidentes</p><div id="centralNodes"></div></section>
+        <section class="result-box"><h2>Versões arquivadas</h2><p class="small-note">Abra uma versão salva sem modificar a rede ao vivo</p><div id="savedSnapshots"><p class="muted">Buscando versões…</p></div></section>
+      </div>
     </div></div>
   </section>
 
@@ -490,6 +556,8 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
  const COLOR={pos:"#2B8C76",neg:"#C4674D",zero:"#A9B6BB",sel:"#102B39"};
  let nodes=[],edges=[],cy=null,channel=null,locked=false,loading=false,loaded=false,renderSignature="",toastTimer=null,hintTimer=null,pendingRefresh=null;
  let selectedNode="",editingNode="",linkFrom="",panelMode="";
+ let reviewedSnapshot=null,reviewLabel="",savedSnapshots=[],latestSnapshotFile=null;
+ const resultCount=10;
  const isMobile=()=>window.matchMedia("(max-width:720px)").matches;
 
  /* utilities */
@@ -553,7 +621,7 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
   ["source","target"].forEach(id=>{const sel=$(id),cur=sel.value;sel.replaceChildren();const o=document.createElement("option");o.value="";o.textContent="Escolher";sel.appendChild(o);
    nodes.forEach(n=>{const op=document.createElement("option");op.value=n.id;op.textContent=n.category+" · "+n.label;sel.appendChild(op)});
    if(nodes.some(n=>n.id===cur))sel.value=cur});
-  renderGraph();renderMatrix();renderDpsir();
+  renderGraph();renderMatrix();renderDpsir();renderResults();
   if(selectedNode&&!getNode(selectedNode))hideNodePop();
   if(selectedNode)positionNodePop();
   if(editingNode&&panelMode==="node-edit"&&!getNode(editingNode))closePanel();
@@ -703,12 +771,128 @@ dialog::backdrop{background:rgba(16,43,57,.38);backdrop-filter:blur(2px)}
    paths.appendChild(btn)});
  }
 
+ /* charts, snapshots and import */
+ function resultData(){return reviewedSnapshot||{nodes,edges}}
+ function sortedLinks(ascending=false){
+   const o=resultData(),byId=new Map(o.nodes.map(n=>[n.id,n])),filter=$("forceFilter").value;
+   return o.edges.filter(e=>{
+     const w=Number(e.weight),sg=Number(e.sign);
+     return byId.has(e.source_id)&&byId.has(e.target_id)&&(filter==="all"||(filter==="positive"&&sg>0&&w>0)||(filter==="negative"&&sg<0&&w>0)||(filter==="zero"&&w===0));
+   }).map(e=>({a:byId.get(e.source_id),b:byId.get(e.target_id),w:Math.round(Number(e.weight)*100),sign:Number(e.sign)}))
+   .sort((a,b)=>ascending?(a.w-b.w)||(a.a.label.localeCompare(b.a.label)):(b.w-a.w)||(a.a.label.localeCompare(b.a.label)));
+ }
+ function strengthChart(el,links,central=false){
+   const root=$(el);root.replaceChildren();
+   if(!links.length){const div=document.createElement("div");div.className="res-empty";div.textContent="Nenhuma ligação nesta seleção.";root.appendChild(div);return}
+   links.slice(0,resultCount).forEach(e=>{
+      const line=document.createElement(central?"div":"button");
+      line.className="strength-row"+(central?"":" strength-rowbutton");if(!central)line.type="button";
+      const label=document.createElement("div");label.className="strength-label";
+      const name=document.createElement("span");name.className="edge-name";name.textContent=central?e.label:e.a.label+" → "+e.b.label;
+      const val=document.createElement("span");val.className="edge-val";
+      const sign=central?"":(e.w===0?"":(e.sign<0?"−":"+"));
+      val.textContent=sign+(central?Math.round(e.w):e.w);
+      val.style.color=central?"var(--navy)":(e.w===0?"var(--muted)":e.sign<0?"var(--terra)":"var(--teal)");
+      label.append(name,val);line.appendChild(label);
+      const track=document.createElement("div");track.className="strength-track";
+      const fill=document.createElement("div");fill.className="strength-fill";
+      fill.style.width=(central?Math.min(100,100*e.w/(links[0].w||1)):e.w)+"%";
+      fill.style.background=central?"var(--sage)":(e.w===0?"#a9b6bb":e.sign<0?"var(--terra)":"var(--teal)");
+      track.appendChild(fill);line.appendChild(track);
+      if(!central){line.title="Abrir ligação na matriz/rede";line.addEventListener("click",()=>{
+        if(reviewedSnapshot){toast("Arquivo em pré-visualização. Restaure-o para editar suas relações.");return}
+        if(!canEdit())return toast("Edições pausadas pelo facilitador.",true);
+        switchView("rede");openEdgePanel(e.a.id,e.b.id);
+      })}
+      root.appendChild(line);
+   })
+ }
+ function renderResults(){
+   const o=resultData(); const ns=Array.isArray(o.nodes)?o.nodes:[],es=Array.isArray(o.edges)?o.edges:[];
+   $("previewBanner").hidden=!reviewedSnapshot;
+   $("previewTitle").textContent=reviewLabel||"Arquivo em análise";
+   $("restorePreviewBtn").hidden=!reviewedSnapshot;
+   const positive=es.filter(e=>Number(e.sign)>0&&Number(e.weight)>0).length;
+   const negative=es.filter(e=>Number(e.sign)<0&&Number(e.weight)>0).length;
+   const average=es.length?Math.round(es.reduce((a,e)=>a+Number(e.weight)*100,0)/es.length):0;
+   const metrics=[["Conceitos",ns.length],["Ligações",es.length],["Positivas / Negativas",positive+" / "+negative],["Força média",average]];
+   const root=$("resultMetrics");root.replaceChildren();
+   metrics.forEach(([label,value])=>{const item=document.createElement("div");item.className="res-metric";const v=document.createElement("strong");v.textContent=String(value);const l=document.createElement("span");l.textContent=label;item.append(v,l);root.appendChild(item)});
+   strengthChart("strongLinks",sortedLinks(false));strengthChart("weakLinks",sortedLinks(true));
+   const central=ns.map(n=>({label:n.label,w:es.filter(e=>e.source_id===n.id||e.target_id===n.id).reduce((t,e)=>t+100*Math.abs(Number(e.weight)),0)}))
+    .sort((a,b)=>b.w-a.w||a.label.localeCompare(b.label));
+   strengthChart("centralNodes",central,true);
+ }
+ function validSnapshotFile(value){
+   if(!value||!Array.isArray(value.nodes)||!Array.isArray(value.edges)||value.nodes.length>250||value.edges.length>1500)
+     throw new Error("JSON inválido ou acima do limite de 250 conceitos e 1500 ligações.");
+   const uu=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+   const ids=new Set(value.nodes.map(n=>n.id));
+   if(ids.size!==value.nodes.length||value.nodes.some(n=>!uu.test(n.id)||typeof n.label!=="string"||n.label.trim().length<2||n.label.length>72||!["D","P","S","I","R"].includes(n.category)))throw new Error("IDs, nomes ou categorias DPSIR inválidos no JSON.");
+   if(value.edges.some(e=>!uu.test(e.id)||!ids.has(e.source_id)||!ids.has(e.target_id)||e.source_id===e.target_id||!Number.isFinite(Number(e.weight))||Number(e.weight)<0||Number(e.weight)>1||![-1,1].includes(Number(e.sign))))throw new Error("Há ligações inválidas no arquivo.");
+   return {nodes:value.nodes,edges:value.edges}
+ }
+ function showReview(payload,title){
+   reviewedSnapshot=validSnapshotFile(payload);reviewLabel=title;
+   switchView("resultados");renderResults();
+   $("previewBanner").hidden=false;window.scrollTo?.(0,0);
+ }
+ async function loadSnapshots(){
+   const root=$("savedSnapshots");if(!root)return;
+   try{
+     const data=await api("list_snapshots");
+     savedSnapshots=data.snapshots||[];root.replaceChildren();
+     if(!savedSnapshots.length){const p=document.createElement("div");p.className="res-empty";p.textContent="Nenhuma versão arquivada ainda. Use Salvar versão como facilitador.";root.appendChild(p);return}
+     savedSnapshots.forEach(info=>{
+       const row=document.createElement("div");row.className="snapshot-item";
+       const name=document.createElement("div");name.className="name";
+       const bold=document.createElement("b");bold.textContent=info.title;const meta=document.createElement("small");
+       meta.textContent=new Date(info.created_at).toLocaleString("pt-BR")+" · "+(info.created_by||"Facilitador");
+       name.append(bold,meta);const btn=document.createElement("button");btn.className="btn";btn.textContent="Ver";
+       btn.addEventListener("click",async()=>{btn.disabled=true;try{
+         const snap=(await api("get_snapshot",{id:info.id})).snapshot;
+         latestSnapshotFile=snap;
+         showReview(snap.payload,snap.title+" · "+new Date(snap.created_at).toLocaleString("pt-BR"));
+         toast("Versão arquivada aberta para análise.");
+       }catch(err){toast(errorText(err),true)}finally{btn.disabled=false}});
+       row.append(name,btn);root.appendChild(row);
+     });
+   }catch(err){root.replaceChildren();const p=document.createElement("div");p.className="res-empty";p.textContent="Não foi possível consultar arquivos: "+errorText(err);root.appendChild(p)}
+ }
+ $("forceFilter").addEventListener("change",renderResults);
+ $("downloadJsonBtn").addEventListener("click",()=>{if(reviewedSnapshot)download("pantanal-versao-salva.json",JSON.stringify({...reviewedSnapshot,exported_at:new Date().toISOString()},null,2),"application/json");else exportKind("json")});
+ $("uploadJsonBtn").addEventListener("click",()=>{$("importFile").value="";$("importFile").click()});
+ $("importFile").addEventListener("change",async(e)=>{
+   const file=e.target.files?.[0];if(!file)return;
+   if(file.size>900000)return toast("O JSON precisa ter menos de 900 KB.",true);
+   try{const json=JSON.parse(await file.text());latestSnapshotFile=null;showReview(json,file.name);toast("Arquivo carregado. Nada foi alterado na sala.")}catch(err){toast("Não foi possível abrir: "+errorText(err),true)}
+ });
+ $("returnLiveBtn").addEventListener("click",()=>{reviewedSnapshot=null;reviewLabel="";latestSnapshotFile=null;renderResults();toast("Exibindo a rede ao vivo.")});
+ $("saveSnapshotBtn").addEventListener("click",async()=>{
+   if(!isFacilitator){updateAdminState();$("adminDialog").showModal();return toast("Ative o modo facilitador para arquivar.",true)}
+   const name=prompt("Nome da versão da oficina:","Oficina Pantanal · "+new Date().toLocaleDateString("pt-BR"));
+   if(name===null)return;
+   try{await api("save_snapshot",{title:name.trim().slice(0,90)||"Oficina Pantanal"});await loadSnapshots();toast("Versão arquivada na plataforma.")}catch(err){toast(errorText(err),true)}
+ });
+ $("restorePreviewBtn").addEventListener("click",async()=>{
+   if(!reviewedSnapshot)return;
+   if(!isFacilitator){updateAdminState();$("adminDialog").showModal();return toast("Ative o modo facilitador para restaurar.",true)}
+   if(!await confirmDialog("Restaurar arquivo","Substituir os conceitos e ligações atuais pelo arquivo selecionado? Uma cópia de segurança da rede atual será salva automaticamente.","Restaurar"))return;
+   const button=$("restorePreviewBtn");button.disabled=true;
+   try{
+     await api("import_snapshot",{payload:reviewedSnapshot});
+     reviewedSnapshot=null;reviewLabel="";latestSnapshotFile=null;
+     triggerRefresh();await load();await loadSnapshots();renderResults();
+     toast("Projeto restaurado na sala coletiva.");switchView("rede");
+   }catch(err){toast(errorText(err),true)}finally{button.disabled=false}
+ });
  /* navigation */
  function switchView(name){
   document.querySelectorAll(".nav [role=tab]").forEach(t=>{const on=t.dataset.view===name;t.setAttribute("aria-selected",on?"true":"false");t.tabIndex=on?0:-1});
   document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id===name));
   hideNodePop();
   if(name==="rede"&&cy)setTimeout(()=>{cy.resize();fitView(false)},50);
+   if(name==="resultados"){renderResults();loadSnapshots()}
  }
  const tabs=[...document.querySelectorAll(".nav [role=tab]")];
  tabs.forEach((btn,i)=>{btn.addEventListener("click",()=>switchView(btn.dataset.view));btn.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const j=(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[j].focus();switchView(tabs[j].dataset.view)}})});
