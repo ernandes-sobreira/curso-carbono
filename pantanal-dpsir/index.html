@@ -230,6 +230,6 @@ aside{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{background:
   }catch(e){console.warn("Realtime indisponível",e)}
  }
  if(!ROOM||!KEY){$("connStatus").textContent="● link incompleto";showToast("Abra pelo link de convite ou QR Code fornecido pelo facilitador.",true);$("cy").innerHTML='<div class="empty-state"><span class="icon-ring">✳</span><b>Bem-vindo ao Pantanal Vivo</b>Use o link ou QR Code compartilhado pelo facilitador para participar da construção coletiva.</div>';}
- else{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000);}
+ else{window.addEventListener("DOMContentLoaded",()=>{initGraph();live();load();setInterval(()=>{if(!document.hidden)load()},7000);});}
 })();
 </script></body></html>
