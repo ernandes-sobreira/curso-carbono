@@ -4,6 +4,8 @@ Apresentação interativa em português sobre carbono, do átomo ao clima, às c
 
 **Curso publicado:** https://ernandes-sobreira.github.io/curso-carbono/
 
+**Laboratório interativo do efeito estufa:** https://ernandes-sobreira.github.io/curso-carbono/laboratorio-efeito-estufa/ — exploração de radiação solar, albedo, atmosfera, gases, nuvens, transporte, indústria, queima de biomassa e carbono em florestas/solos, com visualizações científicas e artigos.
+
 ## Começo rápido
 
 1. Abra `index.html` no navegador. Para modo 3D, prefira HTTPS GitHub Pages a arquivos recebidos por mensageiro (`content://`).
